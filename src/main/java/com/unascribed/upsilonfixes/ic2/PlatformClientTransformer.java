@@ -1,21 +1,12 @@
 package com.unascribed.upsilonfixes.ic2;
 
-import com.unascribed.ears.common.agent.mini.MiniTransformer;
-import com.unascribed.ears.common.agent.mini.PatchContext;
 import com.unascribed.ears.common.agent.mini.annotation.Patch;
-import cpw.mods.fml.relauncher.IClassTransformer;
+import com.unascribed.upsilonfixes.ThreadDisableTransformer;
 
 @Patch.Class("ic2.core.PlatformClient")
-public class PlatformClientTransformer extends MiniTransformer implements IClassTransformer {
+public class PlatformClientTransformer extends ThreadDisableTransformer {
 
-	@Patch.Method("run()V")
-	public void patchRun(PatchContext ctx) {
-		// downloads a cape list from an obfuscated URL (https://rg.dl.je/jzYcbjmOP2Y947yVCOX37EFnlxuXhj.txt)
-		// doesn't work anymore
-		ctx.jumpToStart();
-		ctx.add(
-				RETURN()
-		);
-	}
+	// Downloads a cape list from an obfuscated URL (https://rg.dl.je/jzYcbjmOP2Y947yVCOX37EFnlxuXhj.txt)
+	// Doesn't work anymore
 	
 }
