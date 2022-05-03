@@ -1,0 +1,10 @@
+[
+{
+  "modid": "upsilonfixes",
+  "name": "Upsilon Fixes",
+  "description": "1.4 for 2022",
+  "version": "${version}",
+  "mcversion": "1.4.7",
+  "authorList": ["unascribed"]
+}
+]
