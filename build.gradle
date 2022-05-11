@@ -1,92 +1,44 @@
-buildscript {
-	repositories {
-		mavenCentral()
-		gradlePluginPortal()
-		maven { url 'https://maven.fabricmc.net' }
-		maven { url 'https://jitpack.io' }
-		maven { url 'https://maven.minecraftforge.net/' }
-	}
-	dependencies {
-		classpath 'com.github.unascribed.voldeloom:fabric-loom:1.4.7-SNAPSHOT'
-		classpath 'com.github.jengelman.gradle.plugins:shadow:4.0.4'
-		classpath 'me.tatarka:gradle-retrolambda:3.7.1'
-	}
+plugins {
+	id 'com.unascribed.nilgradle' version '1.1'
 }
 
-apply plugin: 'com.github.johnrengelman.shadow'
-apply plugin: 'java'
-apply plugin: 'fabric-loom'
+sourceCompatibility = 8
+targetCompatibility = 8
 
-sourceCompatibility = 7
-targetCompatibility = 7
-
-def mcp = "mcp726a.zip";
-
-if (!file(mcp).exists()) {
-	println "Downloading ${mcp} from archive.org..."
-	file(mcp).withOutputStream {
-		it << new URL("https://archive.org/download/minecraftcoderpack/minecraftcoderpack.zip/minecraftcoderpack%2F${project.minecraft_version}%2F${mcp}").openStream()
-	}
-}
-
-archivesBaseName = project.archives_base_name
-version = project.version
-group = project.maven_group
+group = 'com.unascribed'
+archivesBaseName = 'UpsilonFixes'
+version = '1.0'
 
 repositories {
 	maven {
-		name = 'jitpack'
-		url = 'https://jitpack.io/'
+		url 'https://repo.sleeping.town'
+		content {
+			includeGroup 'com.unascribed'
+		}
 	}
 	maven {
-		name = 'Fabric'
-		url = 'https://maven.fabricmc.net/'
+		url 'https://maven.minecraftforge.net'
+		metadataSources {
+			artifact()
+		}
+		content {
+			includeGroup 'net.minecraftforge'
+		}
 	}
-//	maven { url = 'https://files.minecraftforge.net/maven' }
-	maven { url = 'https://repo.spongepowered.org/maven' }
 }
 
-configurations {
-	shade
+nil {
+	id "upsilonfixes"
+	standalone false
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	forge "net.minecraftforge:forge:1.4.7-6.6.2.534:universal@zip"
-	mappings files(mcp)
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	compile files("ears-forge-1.4-1.4.5_01.jar")
+	loader 'com.unascribed:nilloader:1.0'
+
+	game nil.minecraft('1.4.7', 'client')
+	mod 'net.minecraftforge:forge:1.4.7-6.6.2.534:universal@zip'
 }
 
-processResources {
-	inputs.property "version", project.version
-
-	from(sourceSets.main.resources.srcDirs) {
-		include "mcmod.info"
-		expand "version": project.version
-	}
-
-	from(sourceSets.main.resources.srcDirs) {
-		exclude "mcmod.info"
-	}
-}
-
-// ensure that the encoding is set to UTF-8, no matter what the system default is
-// this fixes some edge cases with special characters not displaying correctly
-// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-tasks.withType(JavaCompile) {
-	options.encoding = "UTF-8"
-}
-
-jar {
-	from "LICENSE"
-	manifest {
-		attributes (
-			'FMLCorePlugin': 'com.unascribed.upsilonfixes.UpsilonFixesCorePlugin'
-		)
-	}
-}
-
-build.doLast {
-	file(shadowJar.archivePath).delete()
+mappings {
+	work nil.mcpArchive('1.4.7', '726a')
 }

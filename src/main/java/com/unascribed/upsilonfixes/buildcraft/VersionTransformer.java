@@ -1,7 +1,8 @@
 package com.unascribed.upsilonfixes.buildcraft;
 
-import com.unascribed.ears.common.agent.mini.annotation.Patch;
 import com.unascribed.upsilonfixes.ThreadDisableTransformer;
+
+import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("buildcraft.core.Version")
 public class VersionTransformer extends ThreadDisableTransformer {

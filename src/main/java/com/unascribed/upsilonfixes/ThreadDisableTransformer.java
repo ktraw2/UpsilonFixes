@@ -1,12 +1,10 @@
 package com.unascribed.upsilonfixes;
 
-import com.unascribed.ears.common.agent.mini.MiniTransformer;
-import com.unascribed.ears.common.agent.mini.PatchContext;
-import com.unascribed.ears.common.agent.mini.annotation.Patch;
+import nilloader.api.lib.mini.MiniTransformer;
+import nilloader.api.lib.mini.PatchContext;
+import nilloader.api.lib.mini.annotation.Patch;
 
-import cpw.mods.fml.relauncher.IClassTransformer;
-
-public abstract class ThreadDisableTransformer extends MiniTransformer implements IClassTransformer {
+public abstract class ThreadDisableTransformer extends MiniTransformer {
 
 	@Patch.Method("run()V")
 	public void patchRun(PatchContext ctx) {

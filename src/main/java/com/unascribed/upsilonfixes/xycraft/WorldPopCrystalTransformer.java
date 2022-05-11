@@ -1,13 +1,11 @@
 package com.unascribed.upsilonfixes.xycraft;
 
-import com.unascribed.ears.common.agent.mini.MiniTransformer;
-import com.unascribed.ears.common.agent.mini.PatchContext;
-import com.unascribed.ears.common.agent.mini.annotation.Patch;
-
-import cpw.mods.fml.relauncher.IClassTransformer;
+import nilloader.api.lib.mini.MiniTransformer;
+import nilloader.api.lib.mini.PatchContext;
+import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("soaryn.xycraft.world.gen.WorldPopCrystal")
-public class WorldPopCrystalTransformer extends MiniTransformer implements IClassTransformer {
+public class WorldPopCrystalTransformer extends MiniTransformer {
 
 	@Patch.Method("a(Lyc;Ljava/util/Random;III)Z")
 	public void patchGenerate(PatchContext ctx) {

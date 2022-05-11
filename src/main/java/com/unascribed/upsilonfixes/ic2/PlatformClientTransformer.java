@@ -1,7 +1,8 @@
 package com.unascribed.upsilonfixes.ic2;
 
-import com.unascribed.ears.common.agent.mini.annotation.Patch;
 import com.unascribed.upsilonfixes.ThreadDisableTransformer;
+
+import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("ic2.core.PlatformClient")
 public class PlatformClientTransformer extends ThreadDisableTransformer {

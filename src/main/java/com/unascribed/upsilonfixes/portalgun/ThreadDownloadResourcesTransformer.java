@@ -1,12 +1,11 @@
 package com.unascribed.upsilonfixes.portalgun;
 
-import com.unascribed.ears.common.agent.mini.MiniTransformer;
-import com.unascribed.ears.common.agent.mini.PatchContext;
-import com.unascribed.ears.common.agent.mini.annotation.Patch;
-import cpw.mods.fml.relauncher.IClassTransformer;
+import nilloader.api.lib.mini.MiniTransformer;
+import nilloader.api.lib.mini.PatchContext;
+import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("portalgun.client.thread.ThreadDownloadResources")
-public class ThreadDownloadResourcesTransformer extends MiniTransformer implements IClassTransformer {
+public class ThreadDownloadResourcesTransformer extends MiniTransformer {
 
 	@Patch.Method("run()V")
 	public void patchRun(PatchContext ctx) {

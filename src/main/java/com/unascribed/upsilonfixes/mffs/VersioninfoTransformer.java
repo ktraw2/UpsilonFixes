@@ -1,12 +1,11 @@
 package com.unascribed.upsilonfixes.mffs;
 
-import com.unascribed.ears.common.agent.mini.MiniTransformer;
-import com.unascribed.ears.common.agent.mini.PatchContext;
-import com.unascribed.ears.common.agent.mini.annotation.Patch;
-import cpw.mods.fml.relauncher.IClassTransformer;
+import nilloader.api.lib.mini.MiniTransformer;
+import nilloader.api.lib.mini.PatchContext;
+import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("chb.mods.mffs.common.Versioninfo")
-public class VersioninfoTransformer extends MiniTransformer implements IClassTransformer {
+public class VersioninfoTransformer extends MiniTransformer {
 
 	@Patch.Method("newestversion()Ljava/lang/String;")
 	public void patchNewestversion(PatchContext ctx) {

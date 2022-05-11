@@ -1,7 +1,8 @@
 package com.unascribed.upsilonfixes.stevescarts;
 
-import com.unascribed.ears.common.agent.mini.annotation.Patch;
 import com.unascribed.upsilonfixes.ThreadDisableTransformer;
+
+import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("vswe.stevescarts.CapeHandler")
 public class CapeHandlerTransformer extends ThreadDisableTransformer {

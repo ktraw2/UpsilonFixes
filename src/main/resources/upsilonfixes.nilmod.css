@@ -1,0 +1,10 @@
+@nilmod {
+	name: "UpsilonFixes";
+	description: "1.4 for 2022";
+	authors: "unascribed";
+	version: "${version}";
+}
+
+entrypoints {
+	premain: "com.unascribed.upsilonfixes.UpsilonFixesPremain";
+}

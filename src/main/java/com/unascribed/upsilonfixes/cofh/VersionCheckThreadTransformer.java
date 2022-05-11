@@ -1,7 +1,8 @@
 package com.unascribed.upsilonfixes.cofh;
 
-import com.unascribed.ears.common.agent.mini.annotation.Patch;
 import com.unascribed.upsilonfixes.ThreadDisableTransformer;
+
+import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("cofh.version.VersionInfo$VersionCheckThread")
 public class VersionCheckThreadTransformer extends ThreadDisableTransformer {

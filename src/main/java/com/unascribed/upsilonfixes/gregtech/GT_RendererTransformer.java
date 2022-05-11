@@ -1,12 +1,11 @@
 package com.unascribed.upsilonfixes.gregtech;
 
-import com.unascribed.ears.common.agent.mini.MiniTransformer;
-import com.unascribed.ears.common.agent.mini.PatchContext;
-import com.unascribed.ears.common.agent.mini.annotation.Patch;
-import cpw.mods.fml.relauncher.IClassTransformer;
+import nilloader.api.lib.mini.MiniTransformer;
+import nilloader.api.lib.mini.PatchContext;
+import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("gregtechmod.common.render.GT_Renderer")
-public class GT_RendererTransformer extends MiniTransformer implements IClassTransformer {
+public class GT_RendererTransformer extends MiniTransformer {
 
 	@Patch.Method("a(Lqx;F)V")
 	public void patchRender(PatchContext ctx) {
