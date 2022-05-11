@@ -1,5 +1,5 @@
 plugins {
-	id 'com.unascribed.nilgradle' version '1.2'
+	id 'com.unascribed.nilgradle' version '1.2.1'
 }
 
 sourceCompatibility = 8
@@ -10,6 +10,11 @@ archivesBaseName = 'UpsilonFixes'
 version = '1.0'
 
 repositories {
+	mavenCentral {
+		content {
+			includeGroup 'org.lwjgl.lwjgl'
+		}
+	}
 	maven {
 		url 'https://repo.sleeping.town'
 		content {
@@ -25,6 +30,12 @@ repositories {
 			includeGroup 'net.minecraftforge'
 		}
 	}
+	flatDir {
+		dirs 'libs'
+		content {
+			includeGroup 'libs'
+		}
+	}
 }
 
 nil {
@@ -33,10 +44,15 @@ nil {
 }
 
 dependencies {
-	loader 'com.unascribed:nilloader:1.0'
+	loader 'com.unascribed:nilloader:1.0.1'
+
+	implementation('org.lwjgl.lwjgl:lwjgl:2.9.3') {
+		transitive = false
+	}
 
 	game nil.minecraft('1.4.7', 'client')
 	mod 'net.minecraftforge:forge:1.4.7-6.6.2.534:universal@zip'
+	mod 'libs:VoxelMenu'
 }
 
 mappings {

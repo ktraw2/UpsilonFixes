@@ -11,13 +11,22 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import nilloader.api.ClassTransformer;
+import nilloader.api.NilLogger;
 
 public class UpsilonFixesPremain implements Runnable {
 	
+	public static final NilLogger log = NilLogger.get("UpsilonFixes");
+	
+	@Comment("Enables the Rewind Upsilon modpack branding.")
+	private static boolean cfg_enableUpsilonBranding = true;
+	
 	@Comment("Backports the 1.5 'water source blocks fill in above water' fix.")
 	private static boolean cfg_enableWhirlpoolFix = true;
+	@Comment("Fixes the attacker yaw not syncing from server to client, preventing the camera tilt animation from working when damaged.")
+	private static boolean cfg_enableAttackerYawSyncing = true;
 	@Comment("Prevents XyCraft's quartz crystals from generating. They're a huge performance hit and nobody likes them.")
 	private static boolean cfg_disableXycraftQuartzCrystalWorldgen = true;
 	@Comment("Fixes sounds and music for Portal Gun by replacing the asset index.")
@@ -26,6 +35,8 @@ public class UpsilonFixesPremain implements Runnable {
 	private static boolean cfg_enableEE3TransmuteRecipesFix = true;
 	@Comment("Fixes misuse of the ASM API by MiscPeripherals breaking with newer ASM libraries.")
 	private static boolean cfg_enableMiscPeripheralsAsmFix = true;
+	@Comment("Attaches the LiteLoader logger to the FML logger, making it look less ugly.")
+	private static boolean cfg_enableLiteLoaderLogFix = true;
 	
 	@Comment("1.4.7 mods don't really get updates anymore, and many version checkers try to contact dead servers.")
 	private static boolean cfg_disableVersionCheckers = true;
@@ -75,6 +86,11 @@ public class UpsilonFixesPremain implements Runnable {
 			System.err.println("Failed to save UpsilonFixes config");
 		}
 		
+		register("branding.GuiMainMenuVoxelBox", cfg_enableUpsilonBranding);
+		register("branding.GuiMainMenu", cfg_enableUpsilonBranding);
+		register("branding.MinecraftForge", cfg_enableUpsilonBranding);
+		register("branding.RelaunchClassLoader", cfg_enableUpsilonBranding);
+		
 		register("appeng.VersionChecker", cfg_disableVersionCheckers);
 		register("buildcraft.Version", cfg_disableVersionCheckers);
 		register("cofh.VersionCheckThread", cfg_disableVersionCheckers);
@@ -91,10 +107,18 @@ public class UpsilonFixesPremain implements Runnable {
 
 		register("ee3.ItemMiniumStone", cfg_enableEE3TransmuteRecipesFix);
 		register("ee3.ItemPhilosopherStone", cfg_enableEE3TransmuteRecipesFix);
+
+		register("vanilla.EntityLiving", cfg_enableAttackerYawSyncing);
+		register("vanilla.Packet250CustomPayload", cfg_enableAttackerYawSyncing);
 		
 		register("portalgun.ThreadDownloadResources", cfg_enablePortalGunResourcesFix);
 		register("vanilla.BlockFlowing", cfg_enableWhirlpoolFix);
 		register("xycraft.WorldPopCrystal", cfg_disableXycraftQuartzCrystalWorldgen);
+		
+		if (cfg_enableLiteLoaderLogFix) {
+			// at this point, NilLoader has initialized the FML logging framework already
+			Logger.getLogger("liteloader").setParent(Logger.getLogger("ForgeModLoader"));
+		}
 	}
 	
 	private void register(String str, boolean doIt) {
@@ -102,7 +126,7 @@ public class UpsilonFixesPremain implements Runnable {
 			try {
 				ClassTransformer.register((ClassTransformer)Class.forName("com.unascribed.upsilonfixes."+str+"Transformer").newInstance());
 			} catch (Exception e) {
-				throw new AssertionError(e);
+				log.error("Failed to register class transformer {}", str, e);
 			}
 		}
 	}

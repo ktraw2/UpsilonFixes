@@ -7,4 +7,5 @@
 
 entrypoints {
 	premain: "com.unascribed.upsilonfixes.UpsilonFixesPremain";
+	forge-init: "com.unascribed.upsilonfixes.UpsilonFixesForgeInit";
 }
