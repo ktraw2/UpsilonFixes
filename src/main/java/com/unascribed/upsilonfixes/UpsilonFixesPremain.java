@@ -21,27 +21,27 @@ public class UpsilonFixesPremain implements Runnable {
 	public static final NilLogger log = NilLogger.get("UpsilonFixes");
 	
 	@Comment("Enables the Rewind Upsilon modpack branding.")
-	private static boolean cfg_enableUpsilonBranding = true;
+	public static boolean cfg_enableUpsilonBranding = true;
 	
 	@Comment("Backports the 1.5 'water source blocks fill in above water' fix.")
-	private static boolean cfg_enableWhirlpoolFix = true;
+	public static boolean cfg_enableWhirlpoolFix = true;
 	@Comment("Fixes the attacker yaw not syncing from server to client, preventing the camera tilt animation from working when damaged.")
-	private static boolean cfg_enableAttackerYawSyncing = true;
+	public static boolean cfg_enableAttackerYawSyncing = true;
 	@Comment("Prevents XyCraft's quartz crystals from generating. They're a huge performance hit and nobody likes them.")
-	private static boolean cfg_disableXycraftQuartzCrystalWorldgen = true;
+	public static boolean cfg_disableXycraftQuartzCrystalWorldgen = true;
 	@Comment("Fixes sounds and music for Portal Gun by replacing the asset index.")
-	private static boolean cfg_enablePortalGunResourcesFix = true;
+	public static boolean cfg_enablePortalGunResourcesFix = true;
 	@Comment("Fixes transmutation crafting recipes in EE3 only working once, and being broken by NEI.")
-	private static boolean cfg_enableEE3TransmuteRecipesFix = true;
+	public static boolean cfg_enableEE3TransmuteRecipesFix = true;
 	@Comment("Fixes misuse of the ASM API by MiscPeripherals breaking with newer ASM libraries.")
-	private static boolean cfg_enableMiscPeripheralsAsmFix = true;
+	public static boolean cfg_enableMiscPeripheralsAsmFix = true;
 	@Comment("Attaches the LiteLoader logger to the FML logger, making it look less ugly.")
-	private static boolean cfg_enableLiteLoaderLogFix = true;
+	public static boolean cfg_enableLiteLoaderLogFix = true;
 	
 	@Comment("1.4.7 mods don't really get updates anymore, and many version checkers try to contact dead servers.")
-	private static boolean cfg_disableVersionCheckers = true;
+	public static boolean cfg_disableVersionCheckers = true;
 	@Comment("Some mods add cosmetics (usually capes) that try to contact dead servers.")
-	private static boolean cfg_disableDeadCosmetics = true;
+	public static boolean cfg_disableDeadCosmetics = true;
 	
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
@@ -85,9 +85,9 @@ public class UpsilonFixesPremain implements Runnable {
 			e.printStackTrace();
 			System.err.println("Failed to save UpsilonFixes config");
 		}
-		
+
+		register("branding.GuiMainMenu", true);
 		register("branding.GuiMainMenuVoxelBox", cfg_enableUpsilonBranding);
-		register("branding.GuiMainMenu", cfg_enableUpsilonBranding);
 		register("branding.MinecraftForge", cfg_enableUpsilonBranding);
 		register("branding.RelaunchClassLoader", cfg_enableUpsilonBranding);
 		
