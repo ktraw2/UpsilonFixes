@@ -1,18 +1,5 @@
 package com.unascribed.upsilonfixes;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import java.lang.reflect.Field;
-import java.util.Properties;
-import java.util.logging.Logger;
-
 import nilloader.api.ClassTransformer;
 import nilloader.api.NilLogger;
 
@@ -20,105 +7,39 @@ public class UpsilonFixesPremain implements Runnable {
 	
 	public static final NilLogger log = NilLogger.get("UpsilonFixes");
 	
-	@Comment("Enables the Rewind Upsilon modpack branding.")
-	public static boolean cfg_enableUpsilonBranding = true;
-	
-	@Comment("Backports the 1.5 'water source blocks fill in above water' fix.")
-	public static boolean cfg_enableWhirlpoolFix = true;
-	@Comment("Fixes the attacker yaw not syncing from server to client, preventing the camera tilt animation from working when damaged.")
-	public static boolean cfg_enableAttackerYawSyncing = true;
-	@Comment("Prevents XyCraft's quartz crystals from generating. They're a huge performance hit and nobody likes them.")
-	public static boolean cfg_disableXycraftQuartzCrystalWorldgen = true;
-	@Comment("Fixes sounds and music for Portal Gun by replacing the asset index.")
-	public static boolean cfg_enablePortalGunResourcesFix = true;
-	@Comment("Fixes transmutation crafting recipes in EE3 only working once, and being broken by NEI.")
-	public static boolean cfg_enableEE3TransmuteRecipesFix = true;
-	@Comment("Fixes misuse of the ASM API by MiscPeripherals breaking with newer ASM libraries.")
-	public static boolean cfg_enableMiscPeripheralsAsmFix = true;
-	@Comment("Attaches the LiteLoader logger to the FML logger, making it look less ugly.")
-	public static boolean cfg_enableLiteLoaderLogFix = true;
-	
-	@Comment("1.4.7 mods don't really get updates anymore, and many version checkers try to contact dead servers.")
-	public static boolean cfg_disableVersionCheckers = true;
-	@Comment("Some mods add cosmetics (usually capes) that try to contact dead servers.")
-	public static boolean cfg_disableDeadCosmetics = true;
-	
-	@Retention(RetentionPolicy.RUNTIME)
-	@Target(ElementType.FIELD)
-	private @interface Comment {
-		String value();
-	}
-	
 	@Override
 	public void run() {
-		Properties props = new Properties();
-		File cfg = new File("config/upsilonfixes.ini");
-		try (FileInputStream fis = new FileInputStream(cfg)) {
-			props.load(fis);
-		} catch (FileNotFoundException e) {
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("Failed to load UpsilonFixes config");
-		}
-		StringBuilder out = new StringBuilder("# UpsilonFixes configuration file\r\n# Any unrecognized keys or comments you add will be lost!\r\n\r\n\r\n");
-		try {
-			for (Field f : UpsilonFixesPremain.class.getDeclaredFields()) {
-				if (f.getName().startsWith("cfg_")) {
-					String k = f.getName().substring(4);
-					if (!props.containsKey(k)) {
-						props.setProperty(k, Boolean.toString(f.getBoolean(null)));
-					} else {
-						f.set(null, Boolean.parseBoolean(props.getProperty(k)));
-					}
-					Comment comment = f.getAnnotation(Comment.class);
-					if (comment != null) out.append("# "+comment.value()+"\r\n");
-					out.append(k+"="+Boolean.toString(f.getBoolean(null))+"\r\n\r\n");
-				}
-			}
-		} catch (IllegalAccessException e) {
-			throw new AssertionError(e);
-		}
-		try (FileOutputStream fos = new FileOutputStream(cfg)) {
-			cfg.getParentFile().mkdirs();
-			fos.write(out.toString().getBytes("UTF-8"));
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("Failed to save UpsilonFixes config");
-		}
-
+		
+		register("entrypoints.MinecraftForge", true);
+		register("entrypoints.LiteLoader", true);
 		register("branding.GuiMainMenu", true);
-		register("branding.GuiMainMenuVoxelBox", cfg_enableUpsilonBranding);
-		register("branding.MinecraftForge", cfg_enableUpsilonBranding);
-		register("branding.RelaunchClassLoader", cfg_enableUpsilonBranding);
 		
-		register("appeng.VersionChecker", cfg_disableVersionCheckers);
-		register("buildcraft.Version", cfg_disableVersionCheckers);
-		register("cofh.VersionCheckThread", cfg_disableVersionCheckers);
-		register("mffs.Versioninfo", cfg_disableVersionCheckers);
-		register("neiplugins.VersionCheckThread", cfg_disableVersionCheckers);
+		register("branding.GuiMainMenuVoxelBox", UpsilonFixesConfig.enableUpsilonBranding);
+		register("branding.RelaunchClassLoader", UpsilonFixesConfig.enableUpsilonBranding);
 		
-		register("ic2.PlatformClient", cfg_disableDeadCosmetics);
-		register("gregtech.GT_ClientAnon1", cfg_disableDeadCosmetics);
-		register("gregtech.GT_Renderer", cfg_disableDeadCosmetics);
-		register("stevescarts.CapeHandler", cfg_disableDeadCosmetics);
+		register("appeng.VersionChecker", UpsilonFixesConfig.disableVersionCheckers);
+		register("buildcraft.Version", UpsilonFixesConfig.disableVersionCheckers);
+		register("cofh.VersionCheckThread", UpsilonFixesConfig.disableVersionCheckers);
+		register("mffs.Versioninfo", UpsilonFixesConfig.disableVersionCheckers);
+		register("neiplugins.VersionCheckThread", UpsilonFixesConfig.disableVersionCheckers);
 		
-		register("miscperipherals.BlockTurtleTransformer", cfg_enableMiscPeripheralsAsmFix);
-		register("miscperipherals.TileEntityTurtleTransformer", cfg_enableMiscPeripheralsAsmFix);
+		register("ic2.PlatformClient", UpsilonFixesConfig.disableDeadCosmetics);
+		register("gregtech.GT_ClientAnon1", UpsilonFixesConfig.disableDeadCosmetics);
+		register("gregtech.GT_Renderer", UpsilonFixesConfig.disableDeadCosmetics);
+		register("stevescarts.CapeHandler", UpsilonFixesConfig.disableDeadCosmetics);
+		
+		register("miscperipherals.BlockTurtleTransformer", UpsilonFixesConfig.enableMiscPeripheralsAsmFix);
+		register("miscperipherals.TileEntityTurtleTransformer", UpsilonFixesConfig.enableMiscPeripheralsAsmFix);
 
-		register("ee3.ItemMiniumStone", cfg_enableEE3TransmuteRecipesFix);
-		register("ee3.ItemPhilosopherStone", cfg_enableEE3TransmuteRecipesFix);
+		register("ee3.ItemMiniumStone", UpsilonFixesConfig.enableEE3TransmuteRecipesFix);
+		register("ee3.ItemPhilosopherStone", UpsilonFixesConfig.enableEE3TransmuteRecipesFix);
 
-		register("vanilla.EntityLiving", cfg_enableAttackerYawSyncing);
-		register("vanilla.Packet250CustomPayload", cfg_enableAttackerYawSyncing);
+		register("vanilla.EntityLiving", UpsilonFixesConfig.enableAttackerYawSyncing);
+		register("vanilla.Packet250CustomPayload", UpsilonFixesConfig.enableAttackerYawSyncing);
 		
-		register("portalgun.ThreadDownloadResources", cfg_enablePortalGunResourcesFix);
-		register("vanilla.BlockFlowing", cfg_enableWhirlpoolFix);
-		register("xycraft.WorldPopCrystal", cfg_disableXycraftQuartzCrystalWorldgen);
-		
-		if (cfg_enableLiteLoaderLogFix) {
-			// at this point, NilLoader has initialized the FML logging framework already
-			Logger.getLogger("liteloader").setParent(Logger.getLogger("ForgeModLoader"));
-		}
+		register("portalgun.ThreadDownloadResources", UpsilonFixesConfig.enablePortalGunResourcesFix);
+		register("vanilla.BlockFlowing", UpsilonFixesConfig.enableWhirlpoolFix);
+		register("xycraft.WorldPopCrystal", UpsilonFixesConfig.disableXycraftQuartzCrystalWorldgen);
 	}
 	
 	private void register(String str, boolean doIt) {

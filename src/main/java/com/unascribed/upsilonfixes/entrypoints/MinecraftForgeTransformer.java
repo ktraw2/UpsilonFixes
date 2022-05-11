@@ -1,4 +1,4 @@
-package com.unascribed.upsilonfixes.branding;
+package com.unascribed.upsilonfixes.entrypoints;
 
 import nilloader.api.lib.mini.MiniTransformer;
 import nilloader.api.lib.mini.PatchContext;

@@ -1,0 +1,16 @@
+package com.unascribed.upsilonfixes.entrypoints;
+
+import nilloader.api.lib.mini.MiniTransformer;
+import nilloader.api.lib.mini.PatchContext;
+import nilloader.api.lib.mini.annotation.Patch;
+
+@Patch.Class("com.mumfrey.liteloader.core.LiteLoader")
+public class LiteLoaderTransformer extends MiniTransformer {
+	
+	@Patch.Method("prepareLoader()Z")
+	public void prepareLoader(PatchContext ctx) {
+		ctx.jumpToLastReturn();
+		ctx.addFireEntrypoint("liteloader-preinit");
+	}
+	
+}

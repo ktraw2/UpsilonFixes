@@ -2,7 +2,7 @@ package com.unascribed.upsilonfixes.branding;
 
 import java.util.Collections;
 
-import com.unascribed.upsilonfixes.UpsilonFixesPremain;
+import com.unascribed.upsilonfixes.UpsilonFixesConfig;
 
 import nilloader.api.lib.asm.tree.AbstractInsnNode;
 import nilloader.api.lib.mini.MiniTransformer;
@@ -70,7 +70,7 @@ public class GuiMainMenuTransformer extends MiniTransformer {
 			INVOKESPECIAL("java/util/ArrayList", "<init>", "()V")
 		).jumpAfter();
 		injectCalls(ctx, DUP(), newSplashes, "add");
-		if (UpsilonFixesPremain.cfg_enableUpsilonBranding)
+		if (UpsilonFixesConfig.enableUpsilonBranding)
 			injectCalls(ctx, DUP(), newSplashesBrand, "add");
 		
 		ctx.search(
@@ -80,7 +80,7 @@ public class GuiMainMenuTransformer extends MiniTransformer {
 		).jumpBefore();
 
 		injectCalls(ctx, ALOAD(2), badSplashes, "remove");
-		if (UpsilonFixesPremain.cfg_enableUpsilonBranding)
+		if (UpsilonFixesConfig.enableUpsilonBranding)
 			injectCalls(ctx, ALOAD(2), badSplashesBrand, "remove");
 		
 		if (Boolean.getBoolean("upsilonfixes.debugSplashes")) {
