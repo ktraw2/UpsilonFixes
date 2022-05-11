@@ -9,13 +9,11 @@ public class UpsilonFixesPremain implements Runnable {
 	
 	@Override
 	public void run() {
-		
 		register("entrypoints.MinecraftForge", true);
 		register("entrypoints.LiteLoader", true);
 		register("branding.GuiMainMenu", true);
 		
 		register("branding.GuiMainMenuVoxelBox", UpsilonFixesConfig.enableUpsilonBranding);
-		register("branding.RelaunchClassLoader", UpsilonFixesConfig.enableUpsilonBranding);
 		
 		register("appeng.VersionChecker", UpsilonFixesConfig.disableVersionCheckers);
 		register("buildcraft.Version", UpsilonFixesConfig.disableVersionCheckers);
