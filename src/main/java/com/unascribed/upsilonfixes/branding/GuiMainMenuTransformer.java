@@ -13,7 +13,7 @@ import nilloader.api.lib.mini.annotation.Patch;
 @Patch.Class("net.minecraft.src.GuiMainMenu")
 public class GuiMainMenuTransformer extends MiniTransformer {
 
-	private static final String[] newSplashes = {
+	private static final String[] addSplashes = {
 		"Trans rights!",
 		"The work of many people!",
 		
@@ -28,7 +28,7 @@ public class GuiMainMenuTransformer extends MiniTransformer {
 		"Stand up for equality in your community!",
 	};
 
-	private static final String[] newSplashesBrand = {
+	private static final String[] addSplashesBrand = {
 		"Just like you misremember!",
 		"From the future, to the past!",
 		"Yesterday's tomorrow, today!",
@@ -41,17 +41,33 @@ public class GuiMainMenuTransformer extends MiniTransformer {
 		"Fits on a VHS!",
 		"§bCo§dlo§frm§dat§bic",
 		"Vertical!",
+		"You hear about video games?",
+		"Powered by complementary colors!",
+		"Automatically updating!",
+		"Perfect is the enemy of good!",
+		"Composed of blobs!",
+		"Optionally difficult!",
+		"Could have been interesting!",
+		"Treatment for your burn!",
+		"1.18?",
+		"1.19?",
+		"Order-dependent transparency!",
+		"Now with additional biomes!",
+		"Contains a variety of nuts!",
+		"Sleepypack didn't go far enough",
+		"This is not an Error, it's just an Information.",
 
 		"Try the clones!",
 		"Also try Minetest!",
 		"Also try Terasology!",
 		"Also try Vintage Story!",
 		"Also try ZZT!",
+		"Also try Aloe!",
 
 		"#minecraftfarms",
 	};
 
-	private static final String[] badSplashes = {
+	private static final String[] rmSplashes = {
 		"Notch <3 ez!",
 		"Made by Notch!",
 		"The Work of Notch!",
@@ -63,8 +79,9 @@ public class GuiMainMenuTransformer extends MiniTransformer {
 		// "Switches and ores!" gets to stay because it's an actually funny subversion, and on its own it's thematic
 	};
 
-	private static final String[] badSplashesBrand = {
+	private static final String[] rmSplashesBrand = {
 		"Don't bother with the clones!",
+		"May contain nuts!", // Forestry adds a variety of nuts
 	};
 
 	@Patch.Method("<init>()V")
@@ -72,9 +89,9 @@ public class GuiMainMenuTransformer extends MiniTransformer {
 		ctx.search(
 			INVOKESPECIAL("java/util/ArrayList", "<init>", "()V")
 		).jumpAfter();
-		injectCalls(ctx, DUP(), newSplashes, "add");
+		injectCalls(ctx, DUP(), addSplashes, "add");
 		if (UpsilonFixesConfig.enableUpsilonBranding)
-			injectCalls(ctx, DUP(), newSplashesBrand, "add");
+			injectCalls(ctx, DUP(), addSplashesBrand, "add");
 		
 		ctx.search(
 			ALOAD(0),
@@ -82,9 +99,9 @@ public class GuiMainMenuTransformer extends MiniTransformer {
 		    GETSTATIC("net/minecraft/src/GuiMainMenu", "rand", "Ljava/util/Random;")
 		).jumpBefore();
 
-		injectCalls(ctx, ALOAD(2), badSplashes, "remove");
+		injectCalls(ctx, ALOAD(2), rmSplashes, "remove");
 		if (UpsilonFixesConfig.enableUpsilonBranding)
-			injectCalls(ctx, ALOAD(2), badSplashesBrand, "remove");
+			injectCalls(ctx, ALOAD(2), rmSplashesBrand, "remove");
 		
 		if (Boolean.getBoolean("upsilonfixes.debugSplashes")) {
 			ctx.add(
