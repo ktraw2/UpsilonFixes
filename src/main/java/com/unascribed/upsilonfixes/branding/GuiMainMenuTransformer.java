@@ -5,6 +5,7 @@ import java.util.Collections;
 import com.unascribed.upsilonfixes.UpsilonFixesConfig;
 
 import nilloader.api.lib.asm.tree.AbstractInsnNode;
+import nilloader.api.lib.asm.tree.LabelNode;
 import nilloader.api.lib.mini.MiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
@@ -38,6 +39,8 @@ public class GuiMainMenuTransformer extends MiniTransformer {
 		"Not one, not two, but THREE mod loaders!",
 		"Now understands Java 8!",
 		"Fits on a VHS!",
+		"§bCo§dlo§frm§dat§bic",
+		"Vertical!",
 
 		"Try the clones!",
 		"Also try Minetest!",
@@ -57,7 +60,7 @@ public class GuiMainMenuTransformer extends MiniTransformer {
 		"Привет Россия!",
 		"Hobo humping slobo babe!",
 		"Lewd with two dudes with food!",
-		// "Switches and ores!" gets to stay because it's actually good
+		// "Switches and ores!" gets to stay because it's an actually funny subversion, and on its own it's thematic
 	};
 
 	private static final String[] badSplashesBrand = {
@@ -121,6 +124,27 @@ public class GuiMainMenuTransformer extends MiniTransformer {
 			POP(),
 			ALOAD(0),
 			GETFIELD("net/minecraft/src/GuiMainMenu", "splashText", "Ljava/lang/String;")
+		);
+	}
+	
+	@Patch.Method("drawScreen(IIF)V")
+	@Patch.Method.AffectsControlFlow
+	public void patchDrawScreen(PatchContext ctx) {
+		ctx.search(
+			LDC(-20f)
+		).jumpAfter();
+		
+		LabelNode L1 = new LabelNode();
+		
+		ctx.add(
+			LDC("Vertical!"),
+			ALOAD(0),
+			GETFIELD("net/minecraft/src/GuiMainMenu", "splashText", "Ljava/lang/String;"),
+			INVOKEVIRTUAL("java/lang/String", "equals", "(Ljava/lang/Object;)Z"),
+			IFEQ(L1),
+			POP(),
+			LDC(70f),
+			L1
 		);
 	}
 

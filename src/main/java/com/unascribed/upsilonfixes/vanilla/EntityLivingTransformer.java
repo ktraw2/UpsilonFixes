@@ -1,6 +1,5 @@
 package com.unascribed.upsilonfixes.vanilla;
 
-import nilloader.api.lib.asm.Opcodes;
 import nilloader.api.lib.asm.tree.LabelNode;
 import nilloader.api.lib.mini.MiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
@@ -30,7 +29,7 @@ public class EntityLivingTransformer extends MiniTransformer {
 				DUP(),
 				LDC("atkyaw"),
 				LDC(4),
-				NEWARRAY(Opcodes.T_BYTE),
+				NEWARRAY(T_BYTE),
 				DUP(),
 				LDC(0),
 				ILOAD(2),
