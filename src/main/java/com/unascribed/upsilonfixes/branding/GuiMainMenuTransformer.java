@@ -1,10 +1,10 @@
 package com.unascribed.upsilonfixes.branding;
 
-import java.util.Collections;
+import java.util.List;
 
 import com.unascribed.upsilonfixes.UpsilonFixesConfig;
 
-import nilloader.api.lib.asm.tree.AbstractInsnNode;
+import net.minecraft.src.GuiMainMenu;
 import nilloader.api.lib.asm.tree.LabelNode;
 import nilloader.api.lib.mini.MiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
@@ -56,6 +56,9 @@ public class GuiMainMenuTransformer extends MiniTransformer {
 		"Contains a variety of nuts!",
 		"Sleepypack didn't go far enough",
 		"This is not an Error, it's just an Information.",
+		"Ain't nothin' like a funky beat!",
+		"Take us back!",
+		"Keep steppin' at your own pace!",
 
 		"Try the clones!",
 		"Also try Minetest!",
@@ -87,40 +90,16 @@ public class GuiMainMenuTransformer extends MiniTransformer {
 	@Patch.Method("<init>()V")
 	public void patchInit(PatchContext ctx) {
 		ctx.search(
-			INVOKESPECIAL("java/util/ArrayList", "<init>", "()V")
-		).jumpAfter();
-		injectCalls(ctx, DUP(), addSplashes, "add");
-		if (UpsilonFixesConfig.enableUpsilonBranding)
-			injectCalls(ctx, DUP(), addSplashesBrand, "add");
-		
-		ctx.search(
 			ALOAD(0),
 		    ALOAD(2),
 		    GETSTATIC("net/minecraft/src/GuiMainMenu", "rand", "Ljava/util/Random;")
 		).jumpBefore();
-
-		injectCalls(ctx, ALOAD(2), rmSplashes, "remove");
-		if (UpsilonFixesConfig.enableUpsilonBranding)
-			injectCalls(ctx, ALOAD(2), rmSplashesBrand, "remove");
 		
-		if (Boolean.getBoolean("upsilonfixes.debugSplashes")) {
-			ctx.add(
-				GETSTATIC("java/lang/System", "out", "Ljava/io/PrintStream;"),
-				ALOAD(2),
-				INVOKEVIRTUAL("java/io/PrintStream", "println", "(Ljava/lang/Object;)V")
-			);
-		}
-	}
-	
-	private void injectCalls(PatchContext ctx, AbstractInsnNode load, String[] arr, String method) {
-		for (String splash : arr) {
-			ctx.add(
-				load.clone(Collections.emptyMap()),
-				LDC(splash),
-				INVOKEINTERFACE("java/util/List", method, "(Ljava/lang/Object;)Z"),
-				POP()
-			);
-		}
+		ctx.add(
+			ALOAD(0),
+			ALOAD(2),
+			INVOKESTATIC("com/unascribed/upsilonfixes/branding/GuiMainMenuTransformer$Hooks", "contributeSplashes", "(Lnet/minecraft/src/GuiMainMenu;Ljava/util/List;)V")
+		);
 	}
 
 	@Patch.Method("initGui()V")
@@ -163,6 +142,34 @@ public class GuiMainMenuTransformer extends MiniTransformer {
 			LDC(70f),
 			L1
 		);
+	}
+	
+	public static final class Hooks {
+		private Hooks() {}
+		
+		public static void contributeSplashes(GuiMainMenu gui, List<String> splashes) {
+			for (String s : addSplashes) {
+				splashes.add(s);
+			}
+			for (String s : rmSplashes) {
+				splashes.remove(s);
+			}
+			
+			if (UpsilonFixesConfig.enableUpsilonBranding) {
+				for (String s : addSplashesBrand) {
+					splashes.add(s);
+				}
+				for (String s : rmSplashesBrand) {
+					splashes.remove(s);
+				}
+			}
+			
+			if (Boolean.getBoolean("upsilonfixes.debugSplashes")) {
+				for (String s : splashes) {
+					System.out.println(s);
+				}
+			}
+		}
 	}
 
 }
