@@ -13,6 +13,7 @@ public class UpsilonFixesPremain implements Runnable {
 		register("entrypoints.LiteLoader", true);
 		register("branding.GuiMainMenu", true);
 		
+		register("branding.GuiButtonMainMenu", UpsilonFixesConfig.enableUpsilonBranding);
 		register("branding.GuiMainMenuVoxelBox", UpsilonFixesConfig.enableUpsilonBranding);
 		
 		register("appeng.VersionChecker", UpsilonFixesConfig.disableVersionCheckers);
