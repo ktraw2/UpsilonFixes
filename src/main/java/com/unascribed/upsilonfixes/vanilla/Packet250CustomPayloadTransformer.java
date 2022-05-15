@@ -1,5 +1,9 @@
 package com.unascribed.upsilonfixes.vanilla;
 
+import java.nio.ByteBuffer;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.src.Packet250CustomPayload;
 import nilloader.api.lib.asm.tree.LabelNode;
 import nilloader.api.lib.mini.MiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
@@ -15,50 +19,23 @@ public class Packet250CustomPayloadTransformer extends MiniTransformer {
 		LabelNode Lexit = new LabelNode();
 		ctx.add(
 			ALOAD(0),
-			GETFIELD("net/minecraft/src/Packet250CustomPayload", "channel", "Ljava/lang/String;"),
-			LDC("atkyaw"),
-			INVOKEVIRTUAL("java/lang/String", "equals", "(Ljava/lang/Object;)Z"),
+			INVOKESTATIC("com/unascribed/upsilonfixes/vanilla/Packet250CustomPayloadTransformer$Hooks", "interceptPacket", "(Lnet/minecraft/src/Packet250CustomPayload;)Z"),
 			IFEQ(Lexit),
-			INVOKESTATIC("net/minecraft/client/Minecraft", "getMinecraft", "()Lnet/minecraft/client/Minecraft;"),
-			GETFIELD("net/minecraft/client/Minecraft", "thePlayer", "Lnet/minecraft/src/EntityClientPlayerMP;"),
-			ALOAD(0),
-			GETFIELD("net/minecraft/src/Packet250CustomPayload", "data", "[B"),
-			LDC(0),
-			BALOAD(),
-			SIPUSH(255),
-			IAND(),
-			BIPUSH(24),
-			ISHL(),
-			ALOAD(0),
-			GETFIELD("net/minecraft/src/Packet250CustomPayload", "data", "[B"),
-			LDC(1),
-			BALOAD(),
-			SIPUSH(255),
-			IAND(),
-			BIPUSH(16),
-			ISHL(),
-			IOR(),
-			ALOAD(0),
-			GETFIELD("net/minecraft/src/Packet250CustomPayload", "data", "[B"),
-			LDC(2),
-			BALOAD(),
-			SIPUSH(255),
-			IAND(),
-			BIPUSH(8),
-			ISHL(),
-			IOR(),
-			ALOAD(0),
-			GETFIELD("net/minecraft/src/Packet250CustomPayload", "data", "[B"),
-			LDC(3),
-			BALOAD(),
-			SIPUSH(255),
-			IAND(),
-			IOR(),
-			INVOKESTATIC("java/lang/Float", "intBitsToFloat", "(I)F"),
-			PUTFIELD("net/minecraft/src/EntityClientPlayerMP", "attackedAtYaw", "F"),
 			RETURN(),
 			Lexit
 		);
+	}
+	
+	public static class Hooks {
+		
+		public static boolean interceptPacket(Packet250CustomPayload pkt) {
+			if (pkt.channel.equals("atkyaw")) {
+				Minecraft.getMinecraft().thePlayer.attackedAtYaw = ByteBuffer.wrap(pkt.data).getFloat();
+				return true;
+			}
+			return false;
+		}
+		
 	}
 
 }
