@@ -6,7 +6,7 @@
 }
 
 entrypoints {
-	premain: "com.unascribed.upsilonfixes.UpsilonFixesPremain";
-	forge-init: "com.unascribed.upsilonfixes.UpsilonFixesForgeInit";
-	liteloader-preinit: "com.unascribed.upsilonfixes.UpsilonFixesLiteLoaderPreInit";
+	premain: "com.rewindmc.upsilonfixes.UpsilonFixesPremain";
+	forge-init: "com.rewindmc.upsilonfixes.UpsilonFixesForgeInit";
+	liteloader-preinit: "com.rewindmc.upsilonfixes.UpsilonFixesLiteLoaderPreInit";
 }
