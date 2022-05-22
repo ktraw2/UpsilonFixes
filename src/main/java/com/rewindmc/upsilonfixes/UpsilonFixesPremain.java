@@ -46,6 +46,9 @@ public class UpsilonFixesPremain implements Runnable {
 		register("vanilla.FontRenderer", UpsilonFixesConfig.enableFontTexturePackFix);
 		register("vanilla.RenderEngine", UpsilonFixesConfig.enableFontTexturePackFix);
 		
+		register("voxelmenu.GuiMainMenuVoxelBox", UpsilonFixesConfig.enableNilmodsInVoxelMenu);
+		register("voxelmenu.GuiModInfo", UpsilonFixesConfig.enableNilmodsInVoxelMenu);
+		
 		register("codechicken.ClassHeirachyManager", UpsilonFixesConfig.enableCodeChickenCoreHierarchyFix);
 		register("portalgun.ThreadDownloadResources", UpsilonFixesConfig.enablePortalGunResourcesFix);
 		register("vanilla.BlockFlowing", UpsilonFixesConfig.enableWhirlpoolFix);

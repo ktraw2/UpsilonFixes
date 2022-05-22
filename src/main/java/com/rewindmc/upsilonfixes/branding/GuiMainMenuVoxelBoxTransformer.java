@@ -12,7 +12,6 @@ import javax.imageio.ImageIO;
 import org.lwjgl.BufferUtils;
 
 import com.rewindmc.upsilonfixes.UpsilonFixesPremain;
-
 import net.minecraft.src.GuiMainMenu;
 import net.minecraft.src.Tessellator;
 import nilloader.api.lib.mini.MiniTransformer;
@@ -21,7 +20,7 @@ import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("com.thevoxelbox.voxelmenu.GuiMainMenuVoxelBox")
 public class GuiMainMenuVoxelBoxTransformer extends MiniTransformer {
-
+	
 	@Patch.Method("a(IIF)V")
 	public void patchDrawScreen(PatchContext ctx) {
 		ctx.jumpToLastReturn();

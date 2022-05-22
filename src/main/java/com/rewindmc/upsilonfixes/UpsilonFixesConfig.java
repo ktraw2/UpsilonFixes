@@ -79,6 +79,10 @@ public class UpsilonFixesConfig {
 	@Comment("Allows using multiple texture packs at once if they're marked as layerable.")
 	public static boolean enableLayeredTexturePacks = true;
 	
+	@Key("nilmods-in-voxelmenu")
+	@Comment("Show nilmods in Voxel Menu's Mod Information screen.")
+	public static boolean enableNilmodsInVoxelMenu = true;
+	
 	static {
 		File cfg = new File("config/upsilonfixes.css");
 		QDCSS css = QDCSS.load("", "");
