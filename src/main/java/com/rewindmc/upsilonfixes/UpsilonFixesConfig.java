@@ -55,9 +55,17 @@ public class UpsilonFixesConfig {
 	@Comment("Fixes misuse of the ASM API by MiscPeripherals breaking with newer ASM libraries.")
 	public static boolean enableMiscPeripheralsAsmFix = true;
 	
+	@Key("fix-fonts-in-texture-packs")
+	@Comment("Allow texture packs to override the font.")
+	public static boolean enableFontTexturePackFix = true;
+	
 	@Key("fix-liteloader-log")
 	@Comment("Attaches the LiteLoader logger to the FML logger, making it look less ugly.")
 	public static boolean enableLiteLoaderLogFix = true;
+	
+	@Key("fix-codechickencore-hierarchy-check")
+	@Comment("Prevents CodeChickenCore from exploding when prematurely reading classes.")
+	public static boolean enableCodeChickenCoreHierarchyFix = true;
 	
 	@Key("remove-version-checkers")
 	@Comment("1.4.7 mods don't really get updates anymore, and many version checkers try to contact\ndead servers.")
@@ -66,6 +74,10 @@ public class UpsilonFixesConfig {
 	@Key("remove-dead-cosmetics")
 	@Comment("Some mods add cosmetics (usually capes) that try to contact dead servers.")
 	public static boolean disableDeadCosmetics = true;
+	
+	@Key("layered-texture-packs")
+	@Comment("Allows using multiple texture packs at once if they're marked as layerable.")
+	public static boolean enableLayeredTexturePacks = true;
 	
 	static {
 		File cfg = new File("config/upsilonfixes.css");
@@ -76,7 +88,6 @@ public class UpsilonFixesConfig {
 		} catch (IOException e) {
 			UpsilonFixesPremain.log.error("Failed to load upsilonfixes.css", e);
 		}
-		System.out.println(css);
 		StringBuilder out = new StringBuilder("/*\r\n * UpsilonFixes configuration file\r\n * Any unrecognized keys or comments you add will be lost!\r\n */\r\n\r\nfeatures {\r\n");
 		try {
 			for (Field f : UpsilonFixesConfig.class.getDeclaredFields()) {

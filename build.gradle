@@ -44,7 +44,7 @@ nil {
 }
 
 dependencies {
-	loader 'com.unascribed:nilloader:1.1.1'
+	loader 'com.unascribed:nilloader:1.1.5'
 
 	implementation('org.lwjgl.lwjgl:lwjgl:2.9.3') {
 		transitive = false

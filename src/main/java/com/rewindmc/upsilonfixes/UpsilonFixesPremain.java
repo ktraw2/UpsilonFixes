@@ -16,6 +16,13 @@ public class UpsilonFixesPremain implements Runnable {
 		register("branding.GuiButtonMainMenu", UpsilonFixesConfig.enableUpsilonBranding);
 		register("branding.GuiMainMenuVoxelBox", UpsilonFixesConfig.enableUpsilonBranding);
 		
+		register("layering.GuiMainMenuVoxelBox", UpsilonFixesConfig.enableLayeredTexturePacks);
+		register("layering.GuiMainMenu", UpsilonFixesConfig.enableLayeredTexturePacks);
+		register("layering.TexturePackCustom", UpsilonFixesConfig.enableLayeredTexturePacks);
+		register("layering.TexturePackFolder", UpsilonFixesConfig.enableLayeredTexturePacks);
+		register("layering.TexturePackImplementation", UpsilonFixesConfig.enableLayeredTexturePacks);
+		register("layering.TexturePackList", UpsilonFixesConfig.enableLayeredTexturePacks);
+		
 		register("appeng.VersionChecker", UpsilonFixesConfig.disableVersionCheckers);
 		register("buildcraft.Version", UpsilonFixesConfig.disableVersionCheckers);
 		register("cofh.VersionCheckThread", UpsilonFixesConfig.disableVersionCheckers);
@@ -35,7 +42,11 @@ public class UpsilonFixesPremain implements Runnable {
 
 		register("vanilla.EntityLiving", UpsilonFixesConfig.enableAttackerYawSyncing);
 		register("vanilla.Packet250CustomPayload", UpsilonFixesConfig.enableAttackerYawSyncing);
+
+		register("vanilla.FontRenderer", UpsilonFixesConfig.enableFontTexturePackFix);
+		register("vanilla.RenderEngine", UpsilonFixesConfig.enableFontTexturePackFix);
 		
+		register("codechicken.ClassHeirachyManager", UpsilonFixesConfig.enableCodeChickenCoreHierarchyFix);
 		register("portalgun.ThreadDownloadResources", UpsilonFixesConfig.enablePortalGunResourcesFix);
 		register("vanilla.BlockFlowing", UpsilonFixesConfig.enableWhirlpoolFix);
 		register("xycraft.WorldPopCrystal", UpsilonFixesConfig.disableXycraftQuartzCrystalWorldgen);
