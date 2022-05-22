@@ -49,6 +49,9 @@ public class UpsilonFixesPremain implements Runnable {
 		register("voxelmenu.GuiMainMenuVoxelBox", UpsilonFixesConfig.enableNilmodsInVoxelMenu);
 		register("voxelmenu.GuiModInfo", UpsilonFixesConfig.enableNilmodsInVoxelMenu);
 		
+		register("buildcraft.BlockUtil", UpsilonFixesConfig.enableBuildCraftFillerFix);
+		register("buildcraft.FillerPattern", UpsilonFixesConfig.enableBuildCraftFillerFix);
+		
 		register("codechicken.ClassHeirachyManager", UpsilonFixesConfig.enableCodeChickenCoreHierarchyFix);
 		register("portalgun.ThreadDownloadResources", UpsilonFixesConfig.enablePortalGunResourcesFix);
 		register("vanilla.BlockFlowing", UpsilonFixesConfig.enableWhirlpoolFix);

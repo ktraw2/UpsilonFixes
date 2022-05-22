@@ -67,6 +67,10 @@ public class UpsilonFixesConfig {
 	@Comment("Prevents CodeChickenCore from exploding when prematurely reading classes.")
 	public static boolean enableCodeChickenCoreHierarchyFix = true;
 	
+	@Key("fix-buildcraft-filler")
+	@Comment("A few different fixes for the BuildCraft filler, to make it more reliable and less\nweirdly afraid of perfectly normal blocks, like mushrooms.")
+	public static boolean enableBuildCraftFillerFix = true;
+	
 	@Key("remove-version-checkers")
 	@Comment("1.4.7 mods don't really get updates anymore, and many version checkers try to contact\ndead servers.")
 	public static boolean disableVersionCheckers = true;
