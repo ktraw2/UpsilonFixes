@@ -24,7 +24,6 @@ public class UpsilonFixesPremain implements Runnable {
 		register("layering.TexturePackList", UpsilonFixesConfig.enableLayeredTexturePacks);
 		
 		register("appeng.VersionChecker", UpsilonFixesConfig.disableVersionCheckers);
-		register("buildcraft.Version", UpsilonFixesConfig.disableVersionCheckers);
 		register("cofh.VersionCheckThread", UpsilonFixesConfig.disableVersionCheckers);
 		register("mffs.Versioninfo", UpsilonFixesConfig.disableVersionCheckers);
 		register("neiplugins.VersionCheckThread", UpsilonFixesConfig.disableVersionCheckers);
@@ -48,9 +47,6 @@ public class UpsilonFixesPremain implements Runnable {
 		
 		register("voxelmenu.GuiMainMenuVoxelBox", UpsilonFixesConfig.enableNilmodsInVoxelMenu);
 		register("voxelmenu.GuiModInfo", UpsilonFixesConfig.enableNilmodsInVoxelMenu);
-		
-		register("buildcraft.BlockUtil", UpsilonFixesConfig.enableBuildCraftFillerFix);
-		register("buildcraft.FillerPattern", UpsilonFixesConfig.enableBuildCraftFillerFix);
 		
 		register("codechicken.ClassHeirachyManager", UpsilonFixesConfig.enableCodeChickenCoreHierarchyFix);
 		register("portalgun.ThreadDownloadResources", UpsilonFixesConfig.enablePortalGunResourcesFix);

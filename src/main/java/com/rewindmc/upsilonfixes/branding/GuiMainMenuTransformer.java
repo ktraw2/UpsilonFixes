@@ -59,13 +59,22 @@ public class GuiMainMenuTransformer extends MiniTransformer {
 		"Ain't nothin' like a funky beat!",
 		"Take us back!",
 		"Keep steppin' at your own pace!",
+		"Made of parts!",
+		"Absolutely comparator-free!",
+		"Vanilla hoppers? You mean from BuildCraft?",
+		"Overengineered!",
+		"Why? Why not!",
+		"Official NilLoader proof of concept!",
+		"Here is there!",
 
 		"Try the clones!",
 		"Also try Minetest!",
 		"Also try Terasology!",
 		"Also try Vintage Story!",
 		"Also try ZZT!",
+		"Also try MegaZeux!",
 		"Also try Aloe!",
+		"Also try Xonotic!",
 
 		"#minecraftfarms",
 	};
