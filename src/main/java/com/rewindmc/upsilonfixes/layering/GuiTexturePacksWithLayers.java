@@ -2,7 +2,6 @@ package com.rewindmc.upsilonfixes.layering;
 
 import java.awt.Desktop;
 import java.io.File;
-import java.lang.reflect.Field;
 import java.util.List;
 
 import org.lwjgl.Sys;
@@ -51,7 +50,7 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton btn) {
+	public void actionPerformed(GuiButton btn) {
 		if (btn.enabled) {
 			if (btn.id == 5) {
 				try {
@@ -116,7 +115,7 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 		protected void a(int a, int b, int c, int d, Tessellator e) { drawSlot(a, b, c, d, e); }
 		
 		@Override
-		protected int getSize() {
+		public int getSize() {
 			int i = 0;
 			for (ITexturePack pack : (List<ITexturePack>)mc.texturePackList.availableTexturePacks()) {
 				if (Layering.isLayerPack(pack) == wantLayerPacks()) {
@@ -127,27 +126,27 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 		}
 		
 		@Override
-		protected void elementClicked(int var1, boolean var2) {
+		public void elementClicked(int var1, boolean var2) {
 			
 		}
 		
 		@Override
-		protected boolean isSelected(int var1) {
+		public boolean isSelected(int var1) {
 			return false;
 		}
 		
 		@Override
-		protected int getContentHeight() {
+		public int getContentHeight() {
 			return 0;
 		}
 		
 		@Override
-		protected void drawBackground() {
+		public void drawBackground() {
 			
 		}
 
 		@Override
-		protected void drawSlot(int i, int x, int y, int cellSize, Tessellator tess) {
+		public void drawSlot(int i, int x, int y, int cellSize, Tessellator tess) {
 			ITexturePack pack = get(i);
 			mc.renderEngine.blurTexture = true;
 			pack.bindThumbnailTexture(mc.renderEngine);
@@ -195,7 +194,7 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 		}
 
 		@Override
-		protected void elementClicked(int i, boolean selected) {
+		public void elementClicked(int i, boolean selected) {
 			List<ITexturePack> avail = mc.texturePackList.availableTexturePacks();
 			try {
 				mc.texturePackList.setTexturePack(get(i));
@@ -208,12 +207,12 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 		}
 
 		@Override
-		protected boolean isSelected(int i) {
+		public boolean isSelected(int i) {
 			return mc.texturePackList.getSelectedTexturePack() == get(i);
 		}
 
 		@Override
-		protected int getContentHeight() {
+		public int getContentHeight() {
 			return getSize() * 36;
 		}
 		
@@ -222,13 +221,10 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 	public class GuiTexturePackLayerSlot extends GuiTexturePackSlotBase {
 		
 		private final int width;
-		private final Field amountScrolled;
 		
 		public GuiTexturePackLayerSlot() {
 			super(GuiTexturePacksWithLayers.super.mc, GuiTexturePacksWithLayers.super.width/3, GuiTexturePacksWithLayers.super.height, 32, GuiTexturePacksWithLayers.super.height - 55 + 4, 36);
 			this.width = GuiTexturePacksWithLayers.super.width/3;
-			this.amountScrolled = GuiSlot.class.getDeclaredFields()[14];
-			this.amountScrolled.setAccessible(true);
 		}
 		
 		@Override
@@ -237,7 +233,7 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 		}
 
 		@Override
-		protected void elementClicked(int i, boolean selected) {
+		public void elementClicked(int i, boolean selected) {
 			ITexturePack pack = get(i);
 			if (Layering.enabledLayerPacks.contains(pack)) {
 				Layering.enabledLayerPacks.remove(pack);
@@ -250,17 +246,17 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 		}
 
 		@Override
-		protected boolean isSelected(int i) {
+		public boolean isSelected(int i) {
 			return false;
 		}
 
 		@Override
-		protected int getContentHeight() {
-			return getSize() * 36;
+		public int getContentHeight() {
+			return getSize() * 37;
 		}
 		
 		@Override
-		protected void drawSlot(int i, int x, int y, int cellSize, Tessellator tess) {
+		public void drawSlot(int i, int x, int y, int cellSize, Tessellator tess) {
 			if (Layering.enabledLayerPacks.contains(get(i))) {
 				int left = this.width / 2 - 70;
 				int right = this.width / 2 + 70;
@@ -268,13 +264,13 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 				tess.startDrawingQuads();
 				tess.setColorOpaque_I(0x808080);
-				tess.addVertexWithUV(left, y + cellSize + 2, 0, 0, 1);
-				tess.addVertexWithUV(right, y + cellSize + 2, 0, 1, 1);
+				tess.addVertexWithUV(left, y + cellSize + 1, 0, 0, 1);
+				tess.addVertexWithUV(right, y + cellSize + 1, 0, 1, 1);
 				tess.addVertexWithUV(right, y - 2, 0, 1, 0);
 				tess.addVertexWithUV(left, y - 2, 0, 0, 0);
 				tess.setColorOpaque_I(0x000000);
-				tess.addVertexWithUV(left + 1, y + cellSize + 1, 0, 0, 1);
-				tess.addVertexWithUV(right - 1, y + cellSize + 1, 0, 1, 1);
+				tess.addVertexWithUV(left + 1, y + cellSize, 0, 0, 1);
+				tess.addVertexWithUV(right - 1, y + cellSize, 0, 1, 1);
 				tess.addVertexWithUV(right - 1, y - 1, 0, 1, 0);
 				tess.addVertexWithUV(left + 1, y - 1, 0, 0, 0);
 				tess.draw();
