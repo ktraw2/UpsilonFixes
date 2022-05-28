@@ -21,32 +21,24 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 	protected GuiScreen parent;
 	private int refreshTimer = -1;
 	private String fileLocation = "";
-	private GuiSlot texturePacks;
-	private GuiSlot layers;
+	private GuiTexturePackSlot texturePacks;
+	private GuiTexturePackLayerSlot layers;
 
 	public GuiTexturePacksWithLayers(GuiScreen parent) {
 		this.parent = parent;
 	}
-
-	// Lorenz isn't picking up subclass methods and I'm not sure why, so we need these bridge methods
-	// for this reason we also need to reference fields with "super" and our scroll field needs to be GuiSlot rather than our subclass
-	
-	public void A_() { initGui(); }
-	protected void a(GuiButton a) { actionPerformed(a); }
-	public void a(int a, int b, float c) { drawScreen(a, b, c); }
-	public void c() { updateScreen(); }
 	
 	@Override
 	public void initGui() {
 		StringTranslate tr = StringTranslate.getInstance();
-		super.controlList.add(new GuiSmallButton(5, super.width / 2 - 154, super.height - 48, tr.translateKey("texturePack.openFolder")));
-		super.controlList.add(new GuiSmallButton(6, super.width / 2 + 4, super.height - 48, tr.translateKey("gui.done")));
-		super.mc.texturePackList.updateAvaliableTexturePacks();
+		controlList.add(new GuiSmallButton(5, width / 2 - 154, height - 48, tr.translateKey("texturePack.openFolder")));
+		controlList.add(new GuiSmallButton(6, width / 2 + 4, height - 48, tr.translateKey("gui.done")));
+		mc.texturePackList.updateAvaliableTexturePacks();
 		fileLocation = new File(Minecraft.getMinecraftDir(), "texturepacks").getAbsolutePath();
 		texturePacks = new GuiTexturePackSlot();
-		texturePacks.registerScrollButtons(super.controlList, 7, 8);
+		texturePacks.registerScrollButtons(controlList, 7, 8);
 		layers = new GuiTexturePackLayerSlot();
-		layers.registerScrollButtons(super.controlList, 9, 10);
+		layers.registerScrollButtons(controlList, 9, 10);
 	}
 
 	@Override
@@ -61,8 +53,8 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 					Sys.openURL("file://" + fileLocation);
 				}
 			} else if (btn.id == 6) {
-				super.mc.renderEngine.refreshTextures();
-				super.mc.displayGuiScreen(parent);
+				mc.renderEngine.refreshTextures();
+				mc.displayGuiScreen(parent);
 			} else {
 				texturePacks.actionPerformed(btn);
 				layers.actionPerformed(btn);
@@ -72,22 +64,22 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float tickDelta) {
-		super.drawDefaultBackground();
+		drawDefaultBackground();
 		texturePacks.drawScreen(mouseX, mouseY, tickDelta);
 		GL11.glPushMatrix();
-			GL11.glTranslatef(super.width*2/3, 0, 0);
-			layers.drawScreen(mouseX-(super.width*2/3), mouseY, tickDelta);
+			GL11.glTranslatef(width*2/3, 0, 0);
+			layers.drawScreen(mouseX-(width*2/3), mouseY, tickDelta);
 		GL11.glPopMatrix();
 		if (refreshTimer <= 0) {
-			super.mc.texturePackList.updateAvaliableTexturePacks();
+			mc.texturePackList.updateAvaliableTexturePacks();
 			refreshTimer += 20;
 		}
 
 		StringTranslate tr = StringTranslate.getInstance();
-		super.drawCenteredString(super.fontRenderer, tr.translateKey("texturePack.title"), super.width / 3, 16, 0xFFFFFF);
-		super.drawCenteredString(super.fontRenderer, tr.translateKey("texturePack.folderInfo"), super.width / 2 - 77, super.height - 26, 0x808080);
+		drawCenteredString(fontRenderer, tr.translateKey("texturePack.title"), width / 3, 16, 0xFFFFFF);
+		drawCenteredString(fontRenderer, tr.translateKey("texturePack.folderInfo"), width / 2 - 77, height - 26, 0x808080);
 
-		super.drawCenteredString(super.fontRenderer, "Layers", super.width * 5 / 6, 16, 0xEB6E32);
+		drawCenteredString(fontRenderer, "Layers", width * 5 / 6, 16, 0xEB6E32);
 		
 		super.drawScreen(mouseX, mouseY, tickDelta);
 	}
@@ -104,15 +96,8 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 		
 		public GuiTexturePackSlotBase(Minecraft mc, int width, int height, int top, int bottom, int cellSize) {
 			super(mc, width, height, top, bottom, cellSize);
-			this.mc = GuiTexturePacksWithLayers.super.mc;
+			this.mc = mc;
 		}
-		
-		protected int a() { return getSize(); }
-		protected void a(int a, boolean b) { elementClicked(a, b); }
-		protected boolean a(int a) { return isSelected(a); }
-		protected int d() { return getContentHeight(); }
-		protected void b() { drawBackground(); }
-		protected void a(int a, int b, int c, int d, Tessellator e) { drawSlot(a, b, c, d, e); }
 		
 		@Override
 		public int getSize() {
@@ -159,7 +144,7 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 			tess.addVertexWithUV(x + 32, y     , 0, 1, 0);
 			tess.addVertexWithUV(x     , y     , 0, 0, 0);
 			tess.draw();
-			FontRenderer fr = GuiTexturePacksWithLayers.super.fontRenderer;
+			FontRenderer fr = fontRenderer;
 			fr.drawStringWithShadow(pack.getTexturePackFileName(), x + 32 + 2, y + 1, 0xFFFFFF);
 			fr.drawStringWithShadow(pack.getFirstDescriptionLine(), x + 32 + 2, y + 12, 0x808080);
 			fr.drawStringWithShadow(pack.getSecondDescriptionLine(), x + 32 + 2, y + 12 + 10, 0x808080);
@@ -185,7 +170,7 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 	public class GuiTexturePackSlot extends GuiTexturePackSlotBase {
 		
 		public GuiTexturePackSlot() {
-			super(GuiTexturePacksWithLayers.super.mc, (GuiTexturePacksWithLayers.super.width*2/3)-4, GuiTexturePacksWithLayers.super.height, 32, GuiTexturePacksWithLayers.super.height - 55 + 4, 36);
+			super(GuiTexturePacksWithLayers.this.mc, (GuiTexturePacksWithLayers.this.width*2/3)-4, GuiTexturePacksWithLayers.this.height, 32, GuiTexturePacksWithLayers.this.height - 55 + 4, 36);
 		}
 		
 		@Override
@@ -203,7 +188,7 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 				mc.texturePackList.setTexturePack(avail.get(0));
 				mc.renderEngine.refreshTextures();
 			}
-			GuiTexturePacksWithLayers.super.fontRenderer = mc.fontRenderer;
+			fontRenderer = mc.fontRenderer;
 		}
 
 		@Override
@@ -220,11 +205,8 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 	
 	public class GuiTexturePackLayerSlot extends GuiTexturePackSlotBase {
 		
-		private final int width;
-		
 		public GuiTexturePackLayerSlot() {
-			super(GuiTexturePacksWithLayers.super.mc, GuiTexturePacksWithLayers.super.width/3, GuiTexturePacksWithLayers.super.height, 32, GuiTexturePacksWithLayers.super.height - 55 + 4, 36);
-			this.width = GuiTexturePacksWithLayers.super.width/3;
+			super(GuiTexturePacksWithLayers.this.mc, GuiTexturePacksWithLayers.this.width/3, GuiTexturePacksWithLayers.this.height, 32, GuiTexturePacksWithLayers.this.height - 55 + 4, 36);
 		}
 		
 		@Override
@@ -242,7 +224,7 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 			}
 			Layering.saveEnabledLayers();
 			mc.renderEngine.refreshTextures();
-			GuiTexturePacksWithLayers.super.fontRenderer = mc.fontRenderer;
+			fontRenderer = mc.fontRenderer;
 		}
 
 		@Override
