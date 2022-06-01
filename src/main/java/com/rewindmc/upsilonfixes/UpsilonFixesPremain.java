@@ -11,6 +11,7 @@ public class UpsilonFixesPremain implements Runnable {
 	public void run() {
 		register("entrypoints.MinecraftForge", true);
 		register("entrypoints.LiteLoader", true);
+		register("entrypoints.FMLPostInitializationEvent", true);
 		register("branding.GuiMainMenu", true);
 		
 		register("branding.GuiButtonMainMenu", UpsilonFixesConfig.enableUpsilonBranding);
@@ -48,9 +49,13 @@ public class UpsilonFixesPremain implements Runnable {
 		register("voxelmenu.GuiMainMenuVoxelBox", UpsilonFixesConfig.enableNilmodsInVoxelMenu);
 		register("voxelmenu.GuiModInfo", UpsilonFixesConfig.enableNilmodsInVoxelMenu);
 		
+		register("rp2.BlockShapedLamp", UpsilonFixesConfig.enableRp2HitboxFix);
+		
+		register("thaumicbees.AlleleEffectAuraNodeFlux", UpsilonFixesConfig.enableAerFromFluxBee);
 		register("codechicken.ClassHeirachyManager", UpsilonFixesConfig.enableCodeChickenCoreHierarchyFix);
 		register("portalgun.ThreadDownloadResources", UpsilonFixesConfig.enablePortalGunResourcesFix);
 		register("vanilla.BlockFlowing", UpsilonFixesConfig.enableWhirlpoolFix);
+		register("vanilla.EntityPlayerSP", UpsilonFixesConfig.enableSprintKey);
 		register("xycraft.WorldPopCrystal", UpsilonFixesConfig.disableXycraftQuartzCrystalWorldgen);
 	}
 	

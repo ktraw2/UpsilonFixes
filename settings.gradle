@@ -6,5 +6,6 @@ pluginManagement {
 				includeGroup 'com.unascribed.nilgradle'
 			}
 		}
+		mavenLocal()
 	}
 }

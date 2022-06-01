@@ -10,7 +10,7 @@ public class MinecraftForgeTransformer extends MiniTransformer {
 	@Patch.Method("initialize()V")
 	public void patchInitialize(PatchContext ctx) {
 		ctx.jumpToLastReturn();
-		ctx.addFireEntrypoint("forge-init");
+		ctx.addFireEntrypoint("forge-earlyinit");
 	}
 	
 }

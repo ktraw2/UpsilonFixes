@@ -47,7 +47,7 @@ public class UpsilonFixesConfig {
 	@Comment("Fixes sounds and music for Portal Gun by replacing the asset index.")
 	public static boolean enablePortalGunResourcesFix = true;
 	
-	@Key("fix-ee3-transmute-recipes")
+	@Key("fix-ee-transmute-recipes")
 	@Comment("Fixes transmutation crafting recipes in EE3 only working once, and being broken by\nNEI.")
 	public static boolean enableEE3TransmuteRecipesFix = true;
 	
@@ -79,9 +79,25 @@ public class UpsilonFixesConfig {
 	@Comment("Allows using multiple texture packs at once if they're marked as layerable.")
 	public static boolean enableLayeredTexturePacks = true;
 	
+	@Key("sprint-key")
+	@Comment("Enables holding the IC2 boost key causing you to sprint.")
+	public static boolean enableSprintKey = true;
+	
 	@Key("nilmods-in-voxelmenu")
 	@Comment("Show nilmods in Voxel Menu's Mod Information screen.")
 	public static boolean enableNilmodsInVoxelMenu = true;
+	
+	@Key("fix-redpower-hitboxes")
+	@Comment("Fixes RedPower2 non-full-block hitboxes.")
+	public static boolean enableRp2HitboxFix = true;
+	
+	@Key("aer-from-flux-bee")
+	@Comment("Allows the Flux bee from Thaumic Bees to provide Aer-type flux. The Aer effect is often\nthought to be unused, but there are some obscure ways to get it in Thaumcraft, so the\nFlux bee should be able to provide it.")
+	public static boolean enableAerFromFluxBee = true;
+	
+	@Key("localize-rejuvenating-effect")
+	@Comment("Adds a missing lang entry for the Rejuvenating bee's effect.")
+	public static boolean enableRejuvenatingEffectLocalization = true;
 	
 	static {
 		File cfg = new File("config/upsilonfixes.css");
