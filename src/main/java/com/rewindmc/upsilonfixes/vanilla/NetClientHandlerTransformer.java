@@ -3,23 +3,25 @@ package com.rewindmc.upsilonfixes.vanilla;
 import java.nio.ByteBuffer;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.src.NetClientHandler;
 import net.minecraft.src.Packet250CustomPayload;
 import nilloader.api.lib.asm.tree.LabelNode;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
-@Patch.Class("net.minecraft.src.Packet250CustomPayload")
-public class Packet250CustomPayloadTransformer extends UpsilonMiniTransformer {
+@Patch.Class("net.minecraft.src.NetClientHandler")
+public class NetClientHandlerTransformer extends UpsilonMiniTransformer {
 
-	@Patch.Method("processPacket(Lnet/minecraft/src/NetHandler;)V")
+	@Patch.Method("handleCustomPayload(Lnet/minecraft/src/Packet250CustomPayload;)V")
 	@Patch.Method.AffectsControlFlow
-	public void patchProcessPacket(PatchContext ctx) {
+	public void patchHandleCustomPayload(PatchContext ctx) {
 		ctx.jumpToStart();
 		LabelNode Lexit = new LabelNode();
 		ctx.add(
 			ALOAD(0),
-			INVOKESTATIC(hooks(), "interceptPacket", "(Lnet/minecraft/src/Packet250CustomPayload;)Z"),
+			ALOAD(1),
+			INVOKESTATIC(hooks(), "interceptPacket", "(Lnet/minecraft/src/NetClientHandler;Lnet/minecraft/src/Packet250CustomPayload;)Z"),
 			IFEQ(Lexit),
 			RETURN(),
 			Lexit
@@ -28,8 +30,8 @@ public class Packet250CustomPayloadTransformer extends UpsilonMiniTransformer {
 	
 	public static class Hooks {
 		
-		public static boolean interceptPacket(Packet250CustomPayload pkt) {
-			if (pkt.channel.equals("atkyaw")) {
+		public static boolean interceptPacket(NetClientHandler handler, Packet250CustomPayload pkt) {
+			if (pkt.channel.equals("υatkyaw")) {
 				Minecraft.getMinecraft().thePlayer.attackedAtYaw = ByteBuffer.wrap(pkt.data).getFloat();
 				return true;
 			}

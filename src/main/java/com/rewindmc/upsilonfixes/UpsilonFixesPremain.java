@@ -14,49 +14,52 @@ public class UpsilonFixesPremain implements Runnable {
 		register("entrypoints.FMLPostInitializationEvent", true);
 		register("branding.GuiMainMenu", true);
 		
-		register("branding.GuiButtonMainMenu", UpsilonFixesConfig.enableUpsilonBranding);
-		register("branding.GuiMainMenuVoxelBox", UpsilonFixesConfig.enableUpsilonBranding);
+		register("branding.GuiButtonMainMenu", UpsilonFixesConfig.upsilonBranding);
+		register("branding.GuiMainMenuVoxelBox", UpsilonFixesConfig.upsilonBranding);
 		
-		register("layering.GuiMainMenuVoxelBox", UpsilonFixesConfig.enableLayeredTexturePacks);
-		register("layering.GuiMainMenu", UpsilonFixesConfig.enableLayeredTexturePacks);
-		register("layering.TexturePackCustom", UpsilonFixesConfig.enableLayeredTexturePacks);
-		register("layering.TexturePackFolder", UpsilonFixesConfig.enableLayeredTexturePacks);
-		register("layering.TexturePackImplementation", UpsilonFixesConfig.enableLayeredTexturePacks);
-		register("layering.TexturePackList", UpsilonFixesConfig.enableLayeredTexturePacks);
+		register("layering.GuiMainMenuVoxelBox", UpsilonFixesConfig.layeredTexturePacks);
+		register("layering.GuiMainMenu", UpsilonFixesConfig.layeredTexturePacks);
+		register("layering.TexturePackCustom", UpsilonFixesConfig.layeredTexturePacks);
+		register("layering.TexturePackFolder", UpsilonFixesConfig.layeredTexturePacks);
+		register("layering.TexturePackImplementation", UpsilonFixesConfig.layeredTexturePacks);
+		register("layering.TexturePackList", UpsilonFixesConfig.layeredTexturePacks);
 		
-		register("appeng.VersionChecker", UpsilonFixesConfig.disableVersionCheckers);
-		register("cofh.VersionCheckThread", UpsilonFixesConfig.disableVersionCheckers);
-		register("mffs.Versioninfo", UpsilonFixesConfig.disableVersionCheckers);
-		register("neiplugins.VersionCheckThread", UpsilonFixesConfig.disableVersionCheckers);
+		register("appeng.VersionChecker", UpsilonFixesConfig.removeVersionCheckers);
+		register("cofh.VersionCheckThread", UpsilonFixesConfig.removeVersionCheckers);
+		register("mffs.Versioninfo", UpsilonFixesConfig.removeVersionCheckers);
+		register("neiplugins.VersionCheckThread", UpsilonFixesConfig.removeVersionCheckers);
 		
-		register("ic2.PlatformClient", UpsilonFixesConfig.disableDeadCosmetics);
-		register("gregtech.GT_ClientAnon1", UpsilonFixesConfig.disableDeadCosmetics);
-		register("gregtech.GT_Renderer", UpsilonFixesConfig.disableDeadCosmetics);
-		register("stevescarts.CapeHandler", UpsilonFixesConfig.disableDeadCosmetics);
+		register("ic2.PlatformClient", UpsilonFixesConfig.removeDeadCosmetics);
+		register("gregtech.GT_ClientAnon1", UpsilonFixesConfig.removeDeadCosmetics);
+		register("gregtech.GT_Renderer", UpsilonFixesConfig.removeDeadCosmetics);
+		register("stevescarts.CapeHandler", UpsilonFixesConfig.removeDeadCosmetics);
 		
-		register("miscperipherals.BlockTurtleTransformer", UpsilonFixesConfig.enableMiscPeripheralsAsmFix);
-		register("miscperipherals.TileEntityTurtleTransformer", UpsilonFixesConfig.enableMiscPeripheralsAsmFix);
+		register("miscperipherals.BlockTurtleTransformer", UpsilonFixesConfig.fixMiscPeripheralsASM);
+		register("miscperipherals.TileEntityTurtleTransformer", UpsilonFixesConfig.fixMiscPeripheralsASM);
 
-		register("ee3.ItemMiniumStone", UpsilonFixesConfig.enableEE3TransmuteRecipesFix);
-		register("ee3.ItemPhilosopherStone", UpsilonFixesConfig.enableEE3TransmuteRecipesFix);
+		register("ee3.ItemMiniumStone", UpsilonFixesConfig.fixEETransmuteRecipes);
+		register("ee3.ItemPhilosopherStone", UpsilonFixesConfig.fixEETransmuteRecipes);
 
-		register("vanilla.EntityLiving", UpsilonFixesConfig.enableAttackerYawSyncing);
-		register("vanilla.Packet250CustomPayload", UpsilonFixesConfig.enableAttackerYawSyncing);
+		register("vanilla.EntityLiving", UpsilonFixesConfig.attackerYawSyncing);
 
-		register("vanilla.FontRenderer", UpsilonFixesConfig.enableFontTexturePackFix);
-		register("vanilla.RenderEngine", UpsilonFixesConfig.enableFontTexturePackFix);
+		register("vanilla.FontRenderer", UpsilonFixesConfig.fixFontsInTexturePacks);
+		register("vanilla.RenderEngine", UpsilonFixesConfig.fixFontsInTexturePacks);
 		
-		register("voxelmenu.GuiMainMenuVoxelBox", UpsilonFixesConfig.enableNilmodsInVoxelMenu);
-		register("voxelmenu.GuiModInfo", UpsilonFixesConfig.enableNilmodsInVoxelMenu);
+		register("voxelmenu.GuiMainMenuVoxelBox", UpsilonFixesConfig.nilmodsInVoxelMenu);
+		register("voxelmenu.GuiModInfo", UpsilonFixesConfig.nilmodsInVoxelMenu);
 		
-		register("rp2.BlockShapedLamp", UpsilonFixesConfig.enableRp2HitboxFix);
+		register("rp2.BlockShapedLamp", UpsilonFixesConfig.fixRedPowerHitboxes);
 		
-		register("thaumicbees.AlleleEffectAuraNodeFlux", UpsilonFixesConfig.enableAerFromFluxBee);
-		register("codechicken.ClassHeirachyManager", UpsilonFixesConfig.enableCodeChickenCoreHierarchyFix);
-		register("portalgun.ThreadDownloadResources", UpsilonFixesConfig.enablePortalGunResourcesFix);
-		register("vanilla.BlockFlowing", UpsilonFixesConfig.enableWhirlpoolFix);
-		register("vanilla.EntityPlayerSP", UpsilonFixesConfig.enableSprintKey);
+		register("thaumicbees.AlleleEffectAuraNodeFlux", UpsilonFixesConfig.aerFromFluxBee);
+		register("codechicken.ClassHeirachyManager", UpsilonFixesConfig.fixCodeChickenCoreHierarchyCheck);
+		register("portalgun.ThreadDownloadResources", UpsilonFixesConfig.fixPortalGunResources);
+		register("vanilla.BlockFlowing", UpsilonFixesConfig.whirlpoolFix);
+		register("vanilla.EntityPlayerSP", UpsilonFixesConfig.sprintKey);
+		register("vanilla.GuiContainer", UpsilonFixesConfig.dropKeyInInventories);
 		register("xycraft.WorldPopCrystal", UpsilonFixesConfig.disableXycraftQuartzCrystalWorldgen);
+		
+		register("vanilla.NetClientHandler", UpsilonFixesConfig.attackerYawSyncing);
+		register("vanilla.NetServerHandler", UpsilonFixesConfig.dropKeyInInventories);
 	}
 	
 	private void register(String str, boolean doIt) {

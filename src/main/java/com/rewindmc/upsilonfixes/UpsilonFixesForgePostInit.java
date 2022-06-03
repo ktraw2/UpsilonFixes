@@ -22,7 +22,7 @@ public class UpsilonFixesForgePostInit implements Runnable {
 			if (IC2.keyboard.getClass().getSimpleName().equals("KeyboardClient")) {
 				Client.modifyKeyNames();
 			}
-			if (UpsilonFixesConfig.enableRejuvenatingEffectLocalization) {
+			if (UpsilonFixesConfig.localizeRejuvenatingEffect) {
 				LanguageRegistry.instance().addStringLocalization("thaumicbees.effectNodeCharge", "Aura Charge");
 			}
 		}

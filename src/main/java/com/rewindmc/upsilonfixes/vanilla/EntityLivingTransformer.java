@@ -29,7 +29,7 @@ public class EntityLivingTransformer extends UpsilonMiniTransformer {
 				EntityPlayerMP p = (EntityPlayerMP)entity;
 				byte[] bys = new byte[4];
 				ByteBuffer.wrap(bys).putFloat(entity.attackedAtYaw);
-				p.playerNetServerHandler.sendPacket(new Packet250CustomPayload("atkyaw", bys));
+				p.playerNetServerHandler.sendPacket(new Packet250CustomPayload("υatkyaw", bys));
 			}
 		}
 		

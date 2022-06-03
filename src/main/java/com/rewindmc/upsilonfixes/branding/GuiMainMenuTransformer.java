@@ -164,7 +164,7 @@ public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 				splashes.remove(s);
 			}
 			
-			if (UpsilonFixesConfig.enableUpsilonBranding) {
+			if (UpsilonFixesConfig.upsilonBranding) {
 				for (String s : addSplashesBrand) {
 					splashes.add(s);
 				}
