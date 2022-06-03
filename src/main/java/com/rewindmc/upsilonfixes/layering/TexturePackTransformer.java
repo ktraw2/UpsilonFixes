@@ -6,10 +6,10 @@ import com.rewindmc.upsilonfixes.UpsilonFixesPremain;
 
 import net.minecraft.src.ITexturePack;
 import nilloader.api.lib.asm.tree.LabelNode;
-import nilloader.api.lib.mini.MiniTransformer;
+import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 
-public abstract class TexturePackTransformer extends MiniTransformer {
+public abstract class TexturePackTransformer extends UpsilonMiniTransformer {
 
 	protected void patchGetResourceAsStream(PatchContext ctx) {
 		ctx.jumpToStart();

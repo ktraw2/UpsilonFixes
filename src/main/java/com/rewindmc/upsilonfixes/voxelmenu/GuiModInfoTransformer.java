@@ -1,16 +1,16 @@
 package com.rewindmc.upsilonfixes.voxelmenu;
 
+import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import com.thevoxelbox.voxelmenu.modinfo.GuiModInfo;
 import com.thevoxelbox.voxelmenu.modinfo.ModInterface;
 
 import nilloader.api.NilMetadata;
 import nilloader.api.NilModList;
-import nilloader.api.lib.mini.MiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("com.thevoxelbox.voxelmenu.modinfo.GuiModInfo")
-public class GuiModInfoTransformer extends MiniTransformer {
+public class GuiModInfoTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("<init>(Lcom/thevoxelbox/voxelmenu/GuiMainMenuVoxelBox;)V")
 	public void patchConstructor(PatchContext ctx) {
@@ -18,7 +18,7 @@ public class GuiModInfoTransformer extends MiniTransformer {
 		
 		ctx.add(
 			ALOAD(0),
-			INVOKESTATIC("com/rewindmc/upsilonfixes/voxelmenu/GuiModInfoTransformer$Hooks", "contributeMods", "(Lcom/thevoxelbox/voxelmenu/modinfo/GuiModInfo;)V")
+			INVOKESTATIC(hooks(), "contributeMods", "(Lcom/thevoxelbox/voxelmenu/modinfo/GuiModInfo;)V")
 		);
 	}
 	

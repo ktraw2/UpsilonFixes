@@ -1,12 +1,12 @@
 package com.rewindmc.upsilonfixes.miscperipherals;
 
 import nilloader.api.lib.asm.Opcodes;
-import nilloader.api.lib.mini.MiniTransformer;
+import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.PatchContext.SearchResult;
 import nilloader.api.lib.mini.annotation.Patch;
 
-public abstract class TurtleTransformerTransformer extends MiniTransformer {
+public abstract class TurtleTransformerTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("transform([B)[B")
 	public void patchTransform(PatchContext ctx) {

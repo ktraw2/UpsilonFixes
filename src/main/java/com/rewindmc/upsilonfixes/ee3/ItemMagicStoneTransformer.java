@@ -1,10 +1,10 @@
 package com.rewindmc.upsilonfixes.ee3;
 
-import nilloader.api.lib.mini.MiniTransformer;
+import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
-public abstract class ItemMagicStoneTransformer extends MiniTransformer {
+public abstract class ItemMagicStoneTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("getContainerItemStack(Lur;)Lur;")
 	public void patchGetContainerItemStack(PatchContext ctx) {

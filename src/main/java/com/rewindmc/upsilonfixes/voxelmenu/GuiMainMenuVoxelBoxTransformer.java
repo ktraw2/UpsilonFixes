@@ -1,11 +1,12 @@
 package com.rewindmc.upsilonfixes.voxelmenu;
 
-import nilloader.api.lib.mini.MiniTransformer;
+import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
+
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("com.thevoxelbox.voxelmenu.GuiMainMenuVoxelBox")
-public class GuiMainMenuVoxelBoxTransformer extends MiniTransformer {
+public class GuiMainMenuVoxelBoxTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("initPanelButtons()V")
 	public void patchInitPanelButtons(PatchContext ctx) {

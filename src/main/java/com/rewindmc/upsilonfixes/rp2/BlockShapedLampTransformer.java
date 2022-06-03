@@ -4,7 +4,7 @@ import nilloader.api.lib.asm.tree.AbstractInsnNode;
 import nilloader.api.lib.asm.tree.ClassNode;
 import nilloader.api.lib.asm.tree.InsnList;
 import nilloader.api.lib.asm.tree.MethodNode;
-import nilloader.api.lib.mini.MiniTransformer;
+import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.annotation.Patch;
 
 import static nilloader.api.lib.asm.Opcodes.*;
@@ -12,7 +12,7 @@ import static nilloader.api.lib.asm.Opcodes.*;
 import com.rewindmc.upsilonfixes.UpsilonFixesPremain;
 
 @Patch.Class("com.eloraam.redpower.lighting.BlockShapedLamp")
-public class BlockShapedLampTransformer extends MiniTransformer {
+public class BlockShapedLampTransformer extends UpsilonMiniTransformer {
 
 	@Override
 	protected boolean modifyClassStructure(ClassNode clazz) {

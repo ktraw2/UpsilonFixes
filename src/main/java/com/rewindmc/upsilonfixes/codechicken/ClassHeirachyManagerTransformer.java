@@ -1,11 +1,11 @@
 package com.rewindmc.upsilonfixes.codechicken;
 
-import nilloader.api.lib.mini.MiniTransformer;
+import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("codechicken.core.asm.ClassHeirachyManager")
-public class ClassHeirachyManagerTransformer extends MiniTransformer {
+public class ClassHeirachyManagerTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("classExtends(Ljava/lang/String;Ljava/lang/String;)Z")
 	public void patchClassExtends(PatchContext ctx) {

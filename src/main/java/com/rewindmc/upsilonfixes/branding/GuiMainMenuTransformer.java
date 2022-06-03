@@ -6,12 +6,12 @@ import com.rewindmc.upsilonfixes.UpsilonFixesConfig;
 
 import net.minecraft.src.GuiMainMenu;
 import nilloader.api.lib.asm.tree.LabelNode;
-import nilloader.api.lib.mini.MiniTransformer;
+import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("net.minecraft.src.GuiMainMenu")
-public class GuiMainMenuTransformer extends MiniTransformer {
+public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 
 	private static final String[] addSplashes = {
 		"Trans rights!",
@@ -107,7 +107,7 @@ public class GuiMainMenuTransformer extends MiniTransformer {
 		ctx.add(
 			ALOAD(0),
 			ALOAD(2),
-			INVOKESTATIC("com/rewindmc/upsilonfixes/branding/GuiMainMenuTransformer$Hooks", "contributeSplashes", "(Lnet/minecraft/src/GuiMainMenu;Ljava/util/List;)V")
+			INVOKESTATIC(hooks(), "contributeSplashes", "(Lnet/minecraft/src/GuiMainMenu;Ljava/util/List;)V")
 		);
 	}
 

@@ -5,12 +5,12 @@ import java.nio.ByteBuffer;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.Packet250CustomPayload;
-import nilloader.api.lib.mini.MiniTransformer;
+import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("net.minecraft.src.EntityLiving")
-public class EntityLivingTransformer extends MiniTransformer {
+public class EntityLivingTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("attackEntityFrom(Lnet/minecraft/src/DamageSource;I)Z")
 	public void patchAttackEntityFrom(PatchContext ctx) {
@@ -18,7 +18,7 @@ public class EntityLivingTransformer extends MiniTransformer {
 
 		ctx.add(
 			ALOAD(0),
-			INVOKESTATIC("com/rewindmc/upsilonfixes/vanilla/EntityLivingTransformer$Hooks", "sendPacket", "(Lnet/minecraft/src/EntityLiving;)V")
+			INVOKESTATIC(hooks(), "sendPacket", "(Lnet/minecraft/src/EntityLiving;)V")
 		);
 	}
 	

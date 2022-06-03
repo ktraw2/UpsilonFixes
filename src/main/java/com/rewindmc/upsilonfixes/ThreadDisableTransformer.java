@@ -1,10 +1,10 @@
 package com.rewindmc.upsilonfixes;
 
-import nilloader.api.lib.mini.MiniTransformer;
+import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
-public abstract class ThreadDisableTransformer extends MiniTransformer {
+public abstract class ThreadDisableTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("run()V")
 	public void patchRun(PatchContext ctx) {

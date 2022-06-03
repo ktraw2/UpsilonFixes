@@ -1,11 +1,11 @@
 package com.rewindmc.upsilonfixes.vanilla;
 
-import nilloader.api.lib.mini.MiniTransformer;
+import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;;
 
 @Patch.Class("net.minecraft.src.FontRenderer")
-public class FontRendererTransformer extends MiniTransformer {
+public class FontRendererTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("<init>(Lnet/minecraft/src/GameSettings;Ljava/lang/String;Lnet/minecraft/src/RenderEngine;Z)V")
 	public void patchConstructor(PatchContext ctx) {

@@ -1,11 +1,11 @@
 package com.rewindmc.upsilonfixes.layering;
 
-import nilloader.api.lib.mini.MiniTransformer;
+import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("net.minecraft.src.GuiMainMenu")
-public class GuiMainMenuTransformer extends MiniTransformer {
+public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("actionPerformed(Lnet/minecraft/src/GuiButton;)V")
 	public void patchActionPerformed(PatchContext ctx) {

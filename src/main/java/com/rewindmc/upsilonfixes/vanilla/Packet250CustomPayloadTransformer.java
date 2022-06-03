@@ -5,12 +5,12 @@ import java.nio.ByteBuffer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Packet250CustomPayload;
 import nilloader.api.lib.asm.tree.LabelNode;
-import nilloader.api.lib.mini.MiniTransformer;
+import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("net.minecraft.src.Packet250CustomPayload")
-public class Packet250CustomPayloadTransformer extends MiniTransformer {
+public class Packet250CustomPayloadTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("processPacket(Lnet/minecraft/src/NetHandler;)V")
 	@Patch.Method.AffectsControlFlow
@@ -19,7 +19,7 @@ public class Packet250CustomPayloadTransformer extends MiniTransformer {
 		LabelNode Lexit = new LabelNode();
 		ctx.add(
 			ALOAD(0),
-			INVOKESTATIC("com/rewindmc/upsilonfixes/vanilla/Packet250CustomPayloadTransformer$Hooks", "interceptPacket", "(Lnet/minecraft/src/Packet250CustomPayload;)Z"),
+			INVOKESTATIC(hooks(), "interceptPacket", "(Lnet/minecraft/src/Packet250CustomPayload;)Z"),
 			IFEQ(Lexit),
 			RETURN(),
 			Lexit

@@ -1,11 +1,11 @@
 package com.rewindmc.upsilonfixes.vanilla;
 
-import nilloader.api.lib.mini.MiniTransformer;
+import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("net/minecraft/src/BlockFlowing")
-public class BlockFlowingTransformer extends MiniTransformer {
+public class BlockFlowingTransformer extends UpsilonMiniTransformer {
 	
 	@Patch.Method("updateTick(Lnet/minecraft/src/World;IIILjava/util/Random;)V")
 	public void patchUpdateTick(PatchContext ctx) {

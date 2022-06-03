@@ -1,11 +1,11 @@
 package com.rewindmc.upsilonfixes.layering;
 
-import nilloader.api.lib.mini.MiniTransformer;
+import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("com.thevoxelbox.voxelmenu.GuiMainMenuVoxelBox")
-public class GuiMainMenuVoxelBoxTransformer extends MiniTransformer {
+public class GuiMainMenuVoxelBoxTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("a(Lnet/minecraft/src/GuiButton;)V")
 	public void patchActionPerformed(PatchContext ctx) {

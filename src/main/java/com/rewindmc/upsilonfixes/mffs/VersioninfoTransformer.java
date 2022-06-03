@@ -1,11 +1,11 @@
 package com.rewindmc.upsilonfixes.mffs;
 
-import nilloader.api.lib.mini.MiniTransformer;
+import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("chb.mods.mffs.common.Versioninfo")
-public class VersioninfoTransformer extends MiniTransformer {
+public class VersioninfoTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("newestversion()Ljava/lang/String;")
 	public void patchNewestversion(PatchContext ctx) {

@@ -1,11 +1,11 @@
 package com.rewindmc.upsilonfixes.branding;
 
-import nilloader.api.lib.mini.MiniTransformer;
+import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("com.thevoxelbox.voxelmenu.GuiButtonMainMenu")
-public class GuiButtonMainMenuTransformer extends MiniTransformer {
+public class GuiButtonMainMenuTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("drawButtonText(ZLnet/minecraft/client/Minecraft;)V")
 	public void patchDrawButtonText(PatchContext ctx) {
