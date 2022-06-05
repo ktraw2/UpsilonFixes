@@ -77,38 +77,23 @@ public class SmearingCompanion {
 			}
 		}
 		if (buttonDown == -1) {
-			buttonDown = btn;
+			if (gui.mc.thePlayer.inventory.getItemStack() == null) {
+				vanillaClick(x, y, btn);
+			} else {
+				buttonDown = btn;
+			}
 		}
 	}
 	
 	public void mouseUp(int x, int y, int btn) {
 		if (btn != 0 && btn != 1) return;
-		Slot slot = gui.getSlotAtPosition(x, y);
-		if (smearedSlots.size() <= 1) {
+		if (smearedSlots.size() <= 1 && buttonDown != -1) {
 			smearedSlots.clear();
 			if (btn == gui.mc.gameSettings.keyBindPickBlock.keyCode + 100) {
 				// already handled
 				return;
 			}
-			// vanilla logic follows (with pickblock and touchscreen stuff removed)
-			
-			int left = gui.guiLeft;
-			int top = gui.guiTop;
-			int right = left + gui.xSize;
-			int bottom = top + gui.ySize;
-			
-			boolean clickedOutside = x < left || y < top || x >= right || y >= bottom;
-			int slotNum;
-
-			if (clickedOutside) {
-				slotNum = -999;
-			} else if (slot != null) {
-				slotNum = slot.slotNumber;
-			} else {
-				return;
-			}
-			boolean quickMove = smearedSlots.isEmpty() && slotNum != -999 && GuiScreen.isShiftKeyDown();
-			gui.handleMouseClick(slot, slotNum, btn, quickMove ? 1 : 0);
+			vanillaClick(x, y, btn);
 		} else if (btn == buttonDown) {
 			ItemStack hand = gui.mc.thePlayer.inventory.getItemStack();
 			if (hand != null) {
@@ -128,6 +113,28 @@ public class SmearingCompanion {
 		}
 	}
 	
+	private void vanillaClick(int x, int y, int btn) {
+		Slot slot = gui.getSlotAtPosition(x, y);
+		
+		int left = gui.guiLeft;
+		int top = gui.guiTop;
+		int right = left + gui.xSize;
+		int bottom = top + gui.ySize;
+		
+		boolean clickedOutside = x < left || y < top || x >= right || y >= bottom;
+		int slotNum;
+
+		if (clickedOutside) {
+			slotNum = -999;
+		} else if (slot != null) {
+			slotNum = slot.slotNumber;
+		} else {
+			return;
+		}
+		boolean quickMove = smearedSlots.isEmpty() && slotNum != -999 && GuiScreen.isShiftKeyDown();
+		gui.handleMouseClick(slot, slotNum, btn, quickMove ? 1 : 0);
+	}
+
 	private int lastMouseX;
 	private int lastMouseY;
 	
@@ -138,16 +145,13 @@ public class SmearingCompanion {
 			if (mX != lastMouseX || mY != lastMouseY) {
 				int xD = lastMouseX-mX;
 				int yD = lastMouseY-mY;
-				System.out.println("from "+lastMouseX+", "+lastMouseY);
 				for (int i = 0; i < 8; i++) {
 					float a = i/8f;
-					System.out.println((int)(lastMouseX+(xD*a))+", "+(int)(lastMouseY+(yD*a)));
 					Slot slot = gui.getSlotAtPosition((int)(lastMouseX+(xD*a)), (int)(lastMouseY+(yD*a)));
 					if (slot != null) {
 						smearedSlots.add(slot);
 					}
 				}
-				System.out.println("to "+mX+", "+mY);
 			}
 		}
 		eligibleSlotsForDraw = determineEligibleSlots();
