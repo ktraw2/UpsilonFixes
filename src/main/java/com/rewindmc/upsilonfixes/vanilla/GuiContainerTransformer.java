@@ -14,6 +14,7 @@ import nilloader.api.lib.asm.tree.ClassNode;
 import nilloader.api.lib.asm.tree.FieldNode;
 import nilloader.api.lib.asm.tree.LabelNode;
 import nilloader.api.lib.mini.PatchContext;
+import nilloader.api.lib.mini.PatchContext.SearchResult;
 import nilloader.api.lib.mini.annotation.Patch;
 
 import static nilloader.api.lib.asm.Opcodes.*;
@@ -110,18 +111,22 @@ public class GuiContainerTransformer extends UpsilonMiniTransformer {
 			);
 			
 			ctx.jumpToStart();
-			ctx.search(
+			SearchResult checkCursorStack = ctx.search(
 				ALOAD(11),
 				IFNULL(new LabelNode())
-			).jumpBefore();
-			
-			ctx.add(
-				ALOAD(0),
-				GETFIELD("net/minecraft/src/GuiContainer", "smearingCompanion", "Lcom/rewindmc/upsilonfixes/SmearingCompanion;"),
-				ALOAD(11),
-				INVOKEVIRTUAL("com/rewindmc/upsilonfixes/SmearingCompanion", "modifyCursorStack", "(Lnet/minecraft/src/ItemStack;)Lnet/minecraft/src/ItemStack;"),
-				ASTORE(11)
 			);
+			
+			// for some reason, this class loads twice, and the first time it's not yet patched so the var indices are wrong
+			if (checkCursorStack.isSuccessful()) {
+				checkCursorStack.jumpBefore();
+				ctx.add(
+					ALOAD(0),
+					GETFIELD("net/minecraft/src/GuiContainer", "smearingCompanion", "Lcom/rewindmc/upsilonfixes/SmearingCompanion;"),
+					ALOAD(11),
+					INVOKEVIRTUAL("com/rewindmc/upsilonfixes/SmearingCompanion", "modifyCursorStack", "(Lnet/minecraft/src/ItemStack;)Lnet/minecraft/src/ItemStack;"),
+					ASTORE(11)
+				);
+			}
 			
 			ctx.jumpToStart();
 			ctx.search(
