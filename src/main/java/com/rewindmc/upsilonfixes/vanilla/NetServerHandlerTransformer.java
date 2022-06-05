@@ -9,7 +9,9 @@ import net.minecraft.src.Slot;
 import nilloader.api.lib.asm.tree.LabelNode;
 
 import java.nio.ByteBuffer;
+import java.util.List;
 
+import com.rewindmc.upsilonfixes.SmearingCompanion;
 import com.rewindmc.upsilonfixes.UpsilonFixesConfig;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
@@ -60,7 +62,43 @@ public class NetServerHandlerTransformer extends UpsilonMiniTransformer {
 					}
 				}
 				return true;
+			} else if (pkt.channel.equals("υcollect") && UpsilonFixesConfig.dropKeyInInventories) {
+				EntityPlayerMP player = handler.playerEntity;
+				Container container = player.openContainer;
+				ByteBuffer buf = ByteBuffer.wrap(pkt.data);
+				int sid = buf.getInt();
+				if (container != null && sid >= 0 && sid < container.inventorySlots.size() && player.inventory.getItemStack() == null) {
+					Slot slot = container.getSlot(sid);
+					ItemStack stack = slot.getStack();
+					if (stack != null) {
+						stack = stack.copy();
+						int amt = 0;
+						for (Slot s : (List<Slot>)container.inventorySlots) {
+							if (amt >= stack.getMaxStackSize()) break;
+							if (s.getHasStack() && SmearingCompanion.canStack(s.getStack(), stack)) {
+								ItemStack is = s.getStack();
+								int toTake = Math.min(stack.getMaxStackSize()-amt, is.stackSize);
+								if (toTake > 0) {
+									amt += toTake;
+									ItemStack decrd = s.getStack().copy();
+									decrd.stackSize -= toTake;
+									if (decrd.stackSize <= 0) {
+										s.putStack(null);
+									} else {
+										s.putStack(decrd);
+									}
+								}
+							}
+						}
+						if (amt > 0) {
+							stack.stackSize = amt;
+							player.inventory.setItemStack(stack);
+						}
+					}
+				}
+				return true;
 			}
+						
 			return false;
 		}
 		

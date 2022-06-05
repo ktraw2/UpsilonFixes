@@ -30,19 +30,19 @@ public class UpsilonFixesConfig {
 	}
 	
 	@Key("aer-from-flux-bee")
-	@Comment("Allows the Flux bee from Thaumic Bees to provide Aer-type flux. The Aer effect is often\nthought to be unused, but there are some obscure ways to get it in Thaumcraft, so the\nFlux bee should be able to provide it.")
+	@Comment("Allows the Flux bee from Thaumic Bees to provide Aer-type flux. The Aer\neffect is often thought to be unused, but there are some obscure ways to\nget it in Thaumcraft, so the Flux bee should be able to provide it.")
 	public static boolean aerFromFluxBee = true;
 	
 	@Key("attacker-yaw-syncing")
-	@Comment("Fixes the attacker yaw not syncing from server to client, preventing the camera tilt\nanimation from working when damaged.")
+	@Comment("Fixes the attacker yaw not syncing from server to client, preventing the\ncamera tilt animation from working when damaged.")
 	public static boolean attackerYawSyncing = true;
 	
 	@Key("disable-xycraft-quartz-crystal-worldgen")
-	@Comment("Prevents XyCraft's quartz crystals from generating. They're a huge performance hit and\nnobody likes them.")
+	@Comment("Prevents XyCraft's quartz crystals from generating. They're a huge\nperformance hit and nobody likes them.")
 	public static boolean disableXycraftQuartzCrystalWorldgen = true;
 	
 	@Key("drop-key-in-inventories")
-	@Comment("Allows pressing the drop key over a slot in an inventory to drop the contents of the slot on the ground. 1.5 backport.")
+	@Comment("Allows pressing the drop key over a slot in an inventory to drop the\ncontents of the slot on the ground. 1.5 backport.")
 	public static boolean dropKeyInInventories = true;
 	
 	@Key("fix-codechickencore-hierarchy-check")
@@ -50,7 +50,7 @@ public class UpsilonFixesConfig {
 	public static boolean fixCodeChickenCoreHierarchyCheck = true;
 	
 	@Key("fix-ee-transmute-recipes")
-	@Comment("Fixes transmutation crafting recipes in EE3 only working once, and being broken by\nNEI.")
+	@Comment("Fixes transmutation crafting recipes in EE3 only working once, and being\nbroken by NEI.")
 	public static boolean fixEETransmuteRecipes = true;
 	
 	@Key("fix-fonts-in-texture-packs")
@@ -58,11 +58,11 @@ public class UpsilonFixesConfig {
 	public static boolean fixFontsInTexturePacks = true;
 	
 	@Key("fix-liteloader-log")
-	@Comment("Attaches the LiteLoader logger to the FML logger, making it look less ugly.")
+	@Comment("Attaches the LiteLoader logger to the FML logger, making it look less\nugly.")
 	public static boolean fixLiteLoaderLog = true;
 	
 	@Key("fix-miscperipherals-asm")
-	@Comment("Fixes misuse of the ASM API by MiscPeripherals breaking with newer ASM libraries.")
+	@Comment("Fixes misuse of the ASM API by MiscPeripherals breaking with newer ASM\nlibraries.")
 	public static boolean fixMiscPeripheralsASM = true;
 	
 	@Key("fix-portal-gun-resources")
@@ -74,7 +74,7 @@ public class UpsilonFixesConfig {
 	public static boolean fixRedPowerHitboxes = true;
 	
 	@Key("layered-texture-packs")
-	@Comment("Allows using multiple texture packs at once if they're marked as layerable.")
+	@Comment("Allows using multiple texture packs at once if they're marked as\nlayerable.")
 	public static boolean layeredTexturePacks = true;
 	
 	@Key("localize-rejuvenating-effect")
@@ -88,10 +88,18 @@ public class UpsilonFixesConfig {
 	@Key("remove-dead-cosmetics")
 	@Comment("Some mods add cosmetics (usually capes) that try to contact dead servers.")
 	public static boolean removeDeadCosmetics = true;
+
+	@Key("remove-snooper")
+	@Comment("Removes the vanilla snooper. The server is gone anyway.")
+	public static boolean removeSnooper = true;
 	
 	@Key("remove-version-checkers")
-	@Comment("1.4.7 mods don't really get updates anymore, and many version checkers try to contact\ndead servers.")
+	@Comment("1.4.7 mods don't really get updates anymore, and many version checkers\ntry to contact dead servers.")
 	public static boolean removeVersionCheckers = true;
+	
+	@Key("smearing")
+	@Comment("Allows holding left/right click and dragging with an item on your cursor\nto spread it between all the passed slots. 1.5 backport.")
+	public static boolean smearing = true;
 	
 	@Key("sprint-key")
 	@Comment("Enables holding the IC2 boost key causing you to sprint.")

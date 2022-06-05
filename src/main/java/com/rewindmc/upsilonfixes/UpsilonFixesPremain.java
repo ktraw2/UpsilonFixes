@@ -14,6 +14,8 @@ public class UpsilonFixesPremain implements Runnable {
 		register("entrypoints.FMLPostInitializationEvent", true);
 		register("branding.GuiMainMenu", true);
 		
+		register("forge.FMLRelauncher", true);
+		
 		register("branding.GuiButtonMainMenu", UpsilonFixesConfig.upsilonBranding);
 		register("branding.GuiMainMenuVoxelBox", UpsilonFixesConfig.upsilonBranding);
 		
@@ -55,11 +57,15 @@ public class UpsilonFixesPremain implements Runnable {
 		register("portalgun.ThreadDownloadResources", UpsilonFixesConfig.fixPortalGunResources);
 		register("vanilla.BlockFlowing", UpsilonFixesConfig.whirlpoolFix);
 		register("vanilla.EntityPlayerSP", UpsilonFixesConfig.sprintKey);
-		register("vanilla.GuiContainer", UpsilonFixesConfig.dropKeyInInventories);
 		register("xycraft.WorldPopCrystal", UpsilonFixesConfig.disableXycraftQuartzCrystalWorldgen);
+
+		register("vanilla.GuiContainer", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing);
+		
+		register("vanilla.GameSettings", UpsilonFixesConfig.smearing);
+		register("vanilla.GuiOptions", UpsilonFixesConfig.smearing || UpsilonFixesConfig.removeSnooper);
 		
 		register("vanilla.NetClientHandler", UpsilonFixesConfig.attackerYawSyncing);
-		register("vanilla.NetServerHandler", UpsilonFixesConfig.dropKeyInInventories);
+		register("vanilla.NetServerHandler", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing);
 	}
 	
 	private void register(String str, boolean doIt) {
