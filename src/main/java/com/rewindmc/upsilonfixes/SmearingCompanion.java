@@ -128,13 +128,26 @@ public class SmearingCompanion {
 		}
 	}
 	
+	private int lastMouseX;
+	private int lastMouseY;
+	
 	private Set<Slot> eligibleSlotsForDraw;
 	
 	public void drawScreenBg(int mX, int mY, float tickDelta) {
 		if (buttonDown != -1) {
-			Slot slot = gui.getSlotAtPosition(mX, mY);
-			if (slot != null) {
-				smearedSlots.add(slot);
+			if (mX != lastMouseX || mY != lastMouseY) {
+				int xD = lastMouseX-mX;
+				int yD = lastMouseY-mY;
+				System.out.println("from "+lastMouseX+", "+lastMouseY);
+				for (int i = 0; i < 8; i++) {
+					float a = i/8f;
+					System.out.println((int)(lastMouseX+(xD*a))+", "+(int)(lastMouseY+(yD*a)));
+					Slot slot = gui.getSlotAtPosition((int)(lastMouseX+(xD*a)), (int)(lastMouseY+(yD*a)));
+					if (slot != null) {
+						smearedSlots.add(slot);
+					}
+				}
+				System.out.println("to "+mX+", "+mY);
 			}
 		}
 		eligibleSlotsForDraw = determineEligibleSlots();
@@ -148,6 +161,8 @@ public class SmearingCompanion {
 			gui.drawGradientRect(x, y, x + 16, y + 16, 0x80FFFFFF, 0x80FFFFFF);
 		}
 		glEnable(GL_DEPTH_TEST);
+		lastMouseX = mX;
+		lastMouseY = mY;
 	}
 	
 	public ItemStack modifySlotStack(Slot slot, ItemStack stack) {
