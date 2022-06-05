@@ -91,7 +91,7 @@ public class GuiContainerTransformer extends UpsilonMiniTransformer {
 				ILOAD(1),
 				ILOAD(2),
 				INVOKEVIRTUAL("net/minecraft/src/GuiContainer", "drawGuiContainerBackgroundLayer", "(FII)V")
-			).jumpBefore();
+			).jumpAfter();
 			
 			ctx.add(
 				ALOAD(0),
