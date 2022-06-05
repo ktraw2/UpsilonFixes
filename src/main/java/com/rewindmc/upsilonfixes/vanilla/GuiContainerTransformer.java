@@ -73,11 +73,18 @@ public class GuiContainerTransformer extends UpsilonMiniTransformer {
 				ILOAD(1),
 				ILOAD(2),
 				ILOAD(3),
-				INVOKEVIRTUAL("com/rewindmc/upsilonfixes/SmearingCompanion", "mouseDown", "(III)V"),
-				
-				// change mouse button to an invalid value to prevent most of the method from running
-				ICONST_M1(),
-				ISTORE(3)
+				INVOKEVIRTUAL("com/rewindmc/upsilonfixes/SmearingCompanion", "mouseDown", "(III)V")
+			);
+			
+			// prevent vanilla logic from running
+			
+			ctx.search(
+				GETFIELD("net/minecraft/src/Slot", "slotNumber", "I")
+			).jumpAfter();
+			
+			ctx.add(
+				POP(),
+				ICONST_M1()
 			);
 		}
 	}
