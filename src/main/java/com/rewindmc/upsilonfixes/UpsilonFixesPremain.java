@@ -42,8 +42,6 @@ public class UpsilonFixesPremain implements Runnable {
 		register("ee3.ItemMiniumStone", UpsilonFixesConfig.fixEETransmuteRecipes);
 		register("ee3.ItemPhilosopherStone", UpsilonFixesConfig.fixEETransmuteRecipes);
 
-		register("vanilla.EntityLiving", UpsilonFixesConfig.attackerYawSyncing);
-
 		register("vanilla.FontRenderer", UpsilonFixesConfig.fixFontsInTexturePacks);
 		register("vanilla.RenderEngine", UpsilonFixesConfig.fixFontsInTexturePacks);
 		
@@ -66,6 +64,8 @@ public class UpsilonFixesPremain implements Runnable {
 		
 		register("vanilla.NetClientHandler", UpsilonFixesConfig.attackerYawSyncing);
 		register("vanilla.NetServerHandler", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing);
+
+		register("vanilla.EntityLiving", UpsilonFixesConfig.attackerYawSyncing);
 	}
 	
 	private void register(String str, boolean doIt) {

@@ -34,7 +34,7 @@ public class UpsilonFixesConfig {
 	public static boolean aerFromFluxBee = true;
 	
 	@Key("attacker-yaw-syncing")
-	@Comment("Fixes the attacker yaw not syncing from server to client, preventing the\ncamera tilt animation from working when damaged.")
+	@Comment("Fixes the attacker yaw not syncing from server to client, to restore the\nproper camera tilt animation when damaged.")
 	public static boolean attackerYawSyncing = true;
 	
 	@Key("disable-xycraft-quartz-crystal-worldgen")
@@ -107,7 +107,7 @@ public class UpsilonFixesConfig {
 	
 	@Key("upsilon-branding")
 	@Comment("Enables the Rewind Upsilon modpack branding.")
-	public static boolean upsilonBranding = true;
+	public static boolean upsilonBranding = false;
 	
 	@Key("whirlpool-fix")
 	@Comment("Backports the 1.5 'water source blocks fill in above water' fix.")

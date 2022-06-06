@@ -15,6 +15,7 @@ public class EntityLivingTransformer extends UpsilonMiniTransformer {
 	@Patch.Method("attackEntityFrom(Lnet/minecraft/src/DamageSource;I)Z")
 	public void patchAttackEntityFrom(PatchContext ctx) {
 		ctx.jumpToLastReturn();
+		ctx.jumpBackward(1); // go behind the ICONST_1
 
 		ctx.add(
 			ALOAD(0),
