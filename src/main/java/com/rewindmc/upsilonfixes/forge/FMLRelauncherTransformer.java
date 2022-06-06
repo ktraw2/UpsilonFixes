@@ -19,7 +19,7 @@ public class FMLRelauncherTransformer extends UpsilonMiniTransformer {
 		
 		ctx.add(
 			INVOKESTATIC(hooks(), "shouldIgnore", "()Z"),
-			IFEQ(Lcontinue),
+			IFZ(Lcontinue),
 			RETURN(),
 			Lcontinue
 		);

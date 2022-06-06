@@ -146,7 +146,7 @@ public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 			ALOAD(0),
 			GETFIELD("net/minecraft/src/GuiMainMenu", "splashText", "Ljava/lang/String;"),
 			INVOKEVIRTUAL("java/lang/String", "equals", "(Ljava/lang/Object;)Z"),
-			IFEQ(L1),
+			IFZ(L1),
 			POP(),
 			LDC(70f),
 			L1

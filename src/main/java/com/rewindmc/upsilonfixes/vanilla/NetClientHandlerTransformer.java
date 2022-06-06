@@ -17,14 +17,14 @@ public class NetClientHandlerTransformer extends UpsilonMiniTransformer {
 	@Patch.Method.AffectsControlFlow
 	public void patchHandleCustomPayload(PatchContext ctx) {
 		ctx.jumpToStart();
-		LabelNode Lexit = new LabelNode();
+		LabelNode Lcontinue = new LabelNode();
 		ctx.add(
 			ALOAD(0),
 			ALOAD(1),
 			INVOKESTATIC(hooks(), "interceptPacket", "(Lnet/minecraft/src/NetClientHandler;Lnet/minecraft/src/Packet250CustomPayload;)Z"),
-			IFEQ(Lexit),
+			IFZ(Lcontinue),
 			RETURN(),
-			Lexit
+			Lcontinue
 		);
 	}
 	

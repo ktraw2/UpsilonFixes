@@ -29,7 +29,7 @@ public class NetServerHandlerTransformer extends UpsilonMiniTransformer {
 			ALOAD(0),
 			ALOAD(1),
 			INVOKESTATIC(hooks(), "interceptPacket", "(Lnet/minecraft/src/NetServerHandler;Lnet/minecraft/src/Packet250CustomPayload;)Z"),
-			IFEQ(Lexit),
+			IFZ(Lexit),
 			RETURN(),
 			Lexit
 		);
