@@ -32,6 +32,8 @@ public class GuiMainMenuVoxelBoxTransformer extends UpsilonMiniTransformer {
 	
 	public static class Hooks {
 		
+		private static String version = null;
+		
 		private static int textureId = -1;
 		
 		public static void drawLogo(GuiMainMenu gui) {
@@ -51,6 +53,14 @@ public class GuiMainMenuVoxelBoxTransformer extends UpsilonMiniTransformer {
 					UpsilonFixesPremain.log.error("Failed to load logo texture", e);
 				}
 			}
+			if (version == null) {
+				try {
+					Class<?> soup = Class.forName("com.unascribed.sup.Unsup", true, ClassLoader.getSystemClassLoader());
+					version = "v"+soup.getField("SOURCE_VERSION").get(null);
+				} catch (Throwable t) {
+					version = "";
+				}
+			}
 			glEnable(GL_TEXTURE_2D);
 			glColor3f(1, 1, 1);
 			int w = 160;
@@ -68,6 +78,8 @@ public class GuiMainMenuVoxelBoxTransformer extends UpsilonMiniTransformer {
 			tess.addVertexWithUV(x+w, y  , 0,   1, 0);
 			tess.addVertexWithUV(x  , y  , 0,   0, 0);
 			tess.draw();
+			
+			gui.fontRenderer.drawStringWithShadow(version, x+w+4, y+h-12, -1);
 		}
 		
 	}
