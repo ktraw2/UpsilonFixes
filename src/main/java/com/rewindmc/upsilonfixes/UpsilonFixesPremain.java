@@ -14,8 +14,6 @@ public class UpsilonFixesPremain implements Runnable {
 		register("entrypoints.FMLPostInitializationEvent", true);
 		register("branding.GuiMainMenu", true);
 		
-		register("forge.FMLRelauncher", true);
-		
 		register("branding.GuiButtonMainMenu", UpsilonFixesConfig.upsilonBranding);
 		register("branding.GuiMainMenuVoxelBox", UpsilonFixesConfig.upsilonBranding);
 		
