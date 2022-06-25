@@ -98,6 +98,7 @@ public class SmearingCompanion {
 			ItemStack hand = gui.mc.thePlayer.inventory.getItemStack();
 			if (hand != null) {
 				Set<Slot> eligibleSlots = determineEligibleSlots();
+				if (eligibleSlots.isEmpty()) return;
 				int amt = (btn == 1 ? 1 : hand.stackSize/eligibleSlots.size());
 				for (Slot s : eligibleSlots) {
 					for (int i = 0; i < amt; i++) {
