@@ -32,6 +32,8 @@ public abstract class TexturePackTransformer extends UpsilonMiniTransformer {
 		public static InputStream interceptGetResourceAsStream(ITexturePack pack, String path) {
 			if (reentering) return null;
 			if ("/upsilon-layerable".equals(path)) return null;
+			if ("/pack.png".equals(path)) return null;
+			if ("/pack.txt".equals(path)) return null;
 			try {
 				reentering = true;
 				for (ITexturePack layer : Layering.enabledLayerPacks) {
