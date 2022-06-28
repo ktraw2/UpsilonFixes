@@ -59,7 +59,11 @@ public class UpsilonFixesPremain implements Runnable {
 
 		register("vanilla.GuiContainer", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing);
 		
-		register("vanilla.GuiChatNew", UpsilonFixesConfig.increaseChatLimit);
+		register("vanilla.GuiChat", UpsilonFixesConfig.increaseChatLimit);
+
+		register("vanilla.Minecraft", UpsilonFixesConfig.fpsSlider);
+		register("vanilla.EntityRenderer", UpsilonFixesConfig.fpsSlider);
+		register("vanilla.GuiVideoSettings", UpsilonFixesConfig.fpsSlider);
 		
 		register("vanilla.GameSettings", UpsilonFixesConfig.smearing);
 		register("vanilla.GuiOptions", UpsilonFixesConfig.smearing || UpsilonFixesConfig.removeSnooper);

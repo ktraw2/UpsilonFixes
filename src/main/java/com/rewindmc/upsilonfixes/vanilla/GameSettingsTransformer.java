@@ -3,6 +3,7 @@ package com.rewindmc.upsilonfixes.vanilla;
 import com.rewindmc.upsilonfixes.UpsilonFixesConfig;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 
+import net.minecraft.src.GameSettings;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
@@ -13,21 +14,10 @@ public class GameSettingsTransformer extends UpsilonMiniTransformer {
 	public void patchLoadOptions(PatchContext ctx) {
 		ctx.jumpToLastReturn();
 		
-		if (UpsilonFixesConfig.smearing) {
-			ctx.add(
-				ALOAD(0),
-				ICONST_0(),
-				PUTFIELD("net/minecraft/src/GameSettings", "touchscreen", "Z")
-			);
-		}
-		
-		if (UpsilonFixesConfig.removeSnooper) {
-			ctx.add(
-				ALOAD(0),
-				ICONST_0(),
-				PUTFIELD("net/minecraft/src/GameSettings", "snooperEnabled", "Z")
-			);
-		}
+		ctx.add(
+			ALOAD(0),
+			INVOKESTATIC(hooks(), "postLoad", "(Lnet/minecraft/src/GameSettings;)V")
+		);
 	}
 	
 	@Patch.Method("setOptionValue(Lnet/minecraft/src/EnumOptions;I)V")
@@ -47,6 +37,24 @@ public class GameSettingsTransformer extends UpsilonMiniTransformer {
 				ICONST_0()
 			);
 		}
+	}
+	
+	public static class Hooks {
+		
+		public static void postLoad(GameSettings settings) {
+			if (UpsilonFixesConfig.smearing) {
+				settings.touchscreen = false;
+			}
+			if (UpsilonFixesConfig.removeSnooper) {
+				settings.snooperEnabled = false;
+			}
+			if (UpsilonFixesConfig.fpsSlider) {
+				if (settings.limitFramerate < 10) {
+					settings.limitFramerate = 60;
+				}
+			}
+		}
+		
 	}
 	
 }

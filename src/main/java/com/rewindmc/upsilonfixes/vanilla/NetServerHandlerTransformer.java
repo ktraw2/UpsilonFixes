@@ -20,27 +20,29 @@ public class NetServerHandlerTransformer extends UpsilonMiniTransformer {
 	@Patch.Method("handleCustomPayload(Lnet/minecraft/src/Packet250CustomPayload;)V")
 	@Patch.Method.AffectsControlFlow
 	public void patchHandleCustomPayload(PatchContext ctx) {
-		ctx.jumpToStart();
-		LabelNode Lexit = new LabelNode();
-		ctx.add(
-			ALOAD(0),
-			ALOAD(1),
-			INVOKESTATIC(hooks(), "interceptPacket", "(Lnet/minecraft/src/NetServerHandler;Lnet/minecraft/src/Packet250CustomPayload;)Z"),
-			IFZ(Lexit),
-			RETURN(),
-			Lexit
-		);
+		if (UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing) {
+			ctx.jumpToStart();
+			LabelNode Lexit = new LabelNode();
+			ctx.add(
+				ALOAD(0),
+				ALOAD(1),
+				INVOKESTATIC(hooks(), "interceptPacket", "(Lnet/minecraft/src/NetServerHandler;Lnet/minecraft/src/Packet250CustomPayload;)Z"),
+				IFZ(Lexit),
+				RETURN(),
+				Lexit
+			);
+		}
 	}
 	
 	@Patch.Method("handleChat(Lnet/minecraft/src/Packet3Chat;)V")
 	public void patchHandleChat(PatchContext ctx) {
 		if (UpsilonFixesConfig.increaseChatLimit) {
 			ctx.search(
-				LDC(100)
+				BIPUSH(100)
 			).jumpAfter();
 			ctx.add(
 				POP(),
-				LDC(256)
+				SIPUSH(256)
 			);
 		}
 	}
@@ -72,7 +74,7 @@ public class NetServerHandlerTransformer extends UpsilonMiniTransformer {
 					}
 				}
 				return true;
-			} else if (pkt.channel.equals("υcollect") && UpsilonFixesConfig.dropKeyInInventories) {
+			} else if (pkt.channel.equals("υcollect") && UpsilonFixesConfig.smearing) {
 //				EntityPlayerMP player = handler.playerEntity;
 //				Container container = player.openContainer;
 //				ByteBuffer buf = ByteBuffer.wrap(pkt.data);

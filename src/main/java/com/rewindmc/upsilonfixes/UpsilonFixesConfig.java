@@ -73,6 +73,10 @@ public class UpsilonFixesConfig {
 	@Comment("Fixes RedPower2 non-full-block hitboxes.")
 	public static boolean fixRedPowerHitboxes = true;
 	
+	@Key("fps-slider")
+	@Comment("Replace the \"Performance\" option with an FPS slider like modern\nversions.")
+	public static boolean fpsSlider = true;
+	
 	@Key("increase-chat-limit")
 	@Comment("Increase the chat length limit from 100 to 256 to match modern versions.")
 	public static boolean increaseChatLimit = true;
