@@ -1,0 +1,30 @@
+package com.rewindmc.upsilonfixes.vanilla;
+
+import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
+
+import net.minecraft.src.GuiChat;
+import nilloader.api.lib.mini.PatchContext;
+import nilloader.api.lib.mini.annotation.Patch;
+
+@Patch.Class("net.minecraft.src.GuiChat")
+public class GuiChatTransformer extends UpsilonMiniTransformer {
+
+	@Patch.Method("initGui()V")
+	public void patchInitGui(PatchContext ctx) {
+		ctx.jumpToLastReturn();
+		
+		ctx.add(
+			ALOAD(0),
+			INVOKESTATIC(hooks(), "modifyWidgets", "(Lnet/minecraft/src/GuiChat;)V")
+		);
+	}
+	
+	public static class Hooks {
+
+		public static void modifyWidgets(GuiChat gui) {
+			gui.inputField.setMaxStringLength(256);
+		}
+	
+	}
+	
+}

@@ -59,11 +59,13 @@ public class UpsilonFixesPremain implements Runnable {
 
 		register("vanilla.GuiContainer", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing);
 		
+		register("vanilla.GuiChatNew", UpsilonFixesConfig.increaseChatLimit);
+		
 		register("vanilla.GameSettings", UpsilonFixesConfig.smearing);
 		register("vanilla.GuiOptions", UpsilonFixesConfig.smearing || UpsilonFixesConfig.removeSnooper);
 		
 		register("vanilla.NetClientHandler", UpsilonFixesConfig.attackerYawSyncing);
-		register("vanilla.NetServerHandler", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing);
+		register("vanilla.NetServerHandler", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing || UpsilonFixesConfig.increaseChatLimit);
 	}
 	
 	private void register(String str, boolean doIt) {

@@ -73,6 +73,10 @@ public class UpsilonFixesConfig {
 	@Comment("Fixes RedPower2 non-full-block hitboxes.")
 	public static boolean fixRedPowerHitboxes = true;
 	
+	@Key("increase-chat-limit")
+	@Comment("Increase the chat length limit from 100 to 256 to match modern versions.")
+	public static boolean increaseChatLimit = true;
+	
 	@Key("layered-texture-packs")
 	@Comment("Allows using multiple texture packs at once if they're marked as\nlayerable.")
 	public static boolean layeredTexturePacks = true;

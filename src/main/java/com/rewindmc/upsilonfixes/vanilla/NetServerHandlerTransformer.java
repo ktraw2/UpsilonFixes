@@ -32,6 +32,19 @@ public class NetServerHandlerTransformer extends UpsilonMiniTransformer {
 		);
 	}
 	
+	@Patch.Method("handleChat(Lnet/minecraft/src/Packet3Chat;)V")
+	public void patchHandleChat(PatchContext ctx) {
+		if (UpsilonFixesConfig.increaseChatLimit) {
+			ctx.search(
+				LDC(100)
+			).jumpAfter();
+			ctx.add(
+				POP(),
+				LDC(256)
+			);
+		}
+	}
+	
 	public static class Hooks {
 		
 		public static boolean interceptPacket(NetServerHandler handler, Packet250CustomPayload pkt) {
