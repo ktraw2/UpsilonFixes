@@ -8,7 +8,7 @@ import nilloader.api.lib.mini.annotation.Patch;
 @Patch.Class("com.thevoxelbox.voxelmenu.ingame.GuiIngameMenu")
 public class GuiIngameMenuVoxelBoxTransformer extends UpsilonMiniTransformer {
 
-	@Patch.Method("actionPerformed(Lnet/minecraft/src/GuiButton;)V")
+	@Patch.Method("a(Lnet/minecraft/src/GuiButton;)V")
 	public void patchActionPerformed(PatchContext ctx) {
 		ctx.search(
 			NEW("net/minecraft/src/GuiTexturePacks"),

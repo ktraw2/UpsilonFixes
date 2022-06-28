@@ -55,7 +55,7 @@ public class UpsilonFixesPremain implements Runnable {
 		register("codechicken.ClassHeirachyManager", UpsilonFixesConfig.fixCodeChickenCoreHierarchyCheck);
 		register("portalgun.ThreadDownloadResources", UpsilonFixesConfig.fixPortalGunResources);
 		register("vanilla.BlockFlowing", UpsilonFixesConfig.whirlpoolFix);
-		register("vanilla.EntityPlayerSP", UpsilonFixesConfig.sprintKey);
+		register("vanilla.EntityPlayerSP", UpsilonFixesConfig.sprintKey || UpsilonFixesConfig.guisInPortals);
 		register("xycraft.WorldPopCrystal", UpsilonFixesConfig.disableXycraftQuartzCrystalWorldgen);
 
 		register("vanilla.GuiContainer", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing);

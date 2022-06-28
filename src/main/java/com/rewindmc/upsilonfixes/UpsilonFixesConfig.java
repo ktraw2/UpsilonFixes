@@ -77,6 +77,10 @@ public class UpsilonFixesConfig {
 	@Comment("Replace the \"Performance\" option with an FPS slider like modern\nversions.")
 	public static boolean fpsSlider = true;
 	
+	@Key("guis-in-portals")
+	@Comment("Allows opening GUIs in Nether portals. This was a fix for a\ndupe bug in Beta that is long gone.")
+	public static boolean guisInPortals = true;
+	
 	@Key("increase-chat-limit")
 	@Comment("Increase the chat length limit from 100 to 256 to match modern versions.")
 	public static boolean increaseChatLimit = true;
