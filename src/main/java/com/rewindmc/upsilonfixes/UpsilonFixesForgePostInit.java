@@ -6,6 +6,7 @@ import gregtechmod.common.items.GT_Jackhammer_Item;
 import ic2.core.IC2;
 import ic2.core.util.KeyboardClient;
 import info.jbcs.minecraft.chisel.Chisel;
+import net.minecraft.src.Packet3Chat;
 
 public class UpsilonFixesForgePostInit implements Runnable {
 
@@ -31,6 +32,9 @@ public class UpsilonFixesForgePostInit implements Runnable {
 				GT_Jackhammer_Item.mineableBlocks.add(Chisel.blockLimestone);
 				GT_Jackhammer_Item.mineableBlocks.add(Chisel.blockMarble);
 			} catch (Throwable t) {}
+			if (UpsilonFixesConfig.increaseChatLimit) {
+				Packet3Chat.maxChatLength = 275;
+			}
 		}
 		
 		public static class Client {
