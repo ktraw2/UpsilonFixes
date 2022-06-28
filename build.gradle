@@ -57,6 +57,8 @@ dependencies {
 	mod 'libs:IC2'
 	mod 'libs:RedPowerCore'
 	mod 'libs:RedPowerDigital'
+	mod 'libs:ChiselRetro'
+	mod 'libs:GregTech'
 }
 
 mappings {

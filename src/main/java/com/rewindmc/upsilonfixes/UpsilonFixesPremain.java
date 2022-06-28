@@ -30,6 +30,8 @@ public class UpsilonFixesPremain implements Runnable {
 		register("mffs.Versioninfo", UpsilonFixesConfig.removeVersionCheckers);
 		register("neiplugins.VersionCheckThread", UpsilonFixesConfig.removeVersionCheckers);
 		
+		register("gregtech.GT_Mod", UpsilonFixesConfig.buffGregTechJackHammers);
+		
 		register("ic2.PlatformClient", UpsilonFixesConfig.removeDeadCosmetics);
 		register("gregtech.GT_ClientAnon1", UpsilonFixesConfig.removeDeadCosmetics);
 		register("gregtech.GT_Renderer", UpsilonFixesConfig.removeDeadCosmetics);

@@ -2,8 +2,10 @@ package com.rewindmc.upsilonfixes;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.FMLRelauncher;
+import gregtechmod.common.items.GT_Jackhammer_Item;
 import ic2.core.IC2;
 import ic2.core.util.KeyboardClient;
+import info.jbcs.minecraft.chisel.Chisel;
 
 public class UpsilonFixesForgePostInit implements Runnable {
 
@@ -25,6 +27,10 @@ public class UpsilonFixesForgePostInit implements Runnable {
 			if (UpsilonFixesConfig.localizeRejuvenatingEffect) {
 				LanguageRegistry.instance().addStringLocalization("thaumicbees.effectNodeCharge", "Aura Charge");
 			}
+			try {
+				GT_Jackhammer_Item.mineableBlocks.add(Chisel.blockLimestone);
+				GT_Jackhammer_Item.mineableBlocks.add(Chisel.blockMarble);
+			} catch (Throwable t) {}
 		}
 		
 		public static class Client {

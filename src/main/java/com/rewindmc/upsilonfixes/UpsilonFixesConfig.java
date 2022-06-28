@@ -37,6 +37,10 @@ public class UpsilonFixesConfig {
 	@Comment("Fixes the attacker yaw not syncing from server to client, to restore the\nproper camera tilt animation when damaged.")
 	public static boolean attackerYawSyncing = true;
 	
+	@Key("buff-gregtech-jackhammers")
+	@Comment("Makes GregTech Jack Hammers a lot better.")
+	public static boolean buffGregTechJackHammers = true;
+	
 	@Key("disable-xycraft-quartz-crystal-worldgen")
 	@Comment("Prevents XyCraft's quartz crystals from generating. They're a huge\nperformance hit and nobody likes them.")
 	public static boolean disableXycraftQuartzCrystalWorldgen = true;
