@@ -23,6 +23,7 @@ public class UpsilonFixesPremain implements Runnable {
 		register("layering.TexturePackFolder", UpsilonFixesConfig.layeredTexturePacks);
 		register("layering.TexturePackImplementation", UpsilonFixesConfig.layeredTexturePacks);
 		register("layering.TexturePackList", UpsilonFixesConfig.layeredTexturePacks);
+		register("layering.GuiIngameMenuVoxelBox", UpsilonFixesConfig.layeredTexturePacks);
 		
 		register("appeng.VersionChecker", UpsilonFixesConfig.removeVersionCheckers);
 		register("cofh.VersionCheckThread", UpsilonFixesConfig.removeVersionCheckers);
