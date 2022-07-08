@@ -59,6 +59,8 @@ public class UpsilonFixesPremain implements Runnable {
 		register("vanilla.BlockFlowing", UpsilonFixesConfig.whirlpoolFix);
 		register("vanilla.EntityPlayerSP", UpsilonFixesConfig.sprintKey || UpsilonFixesConfig.guisInPortals);
 		register("xycraft.WorldPopCrystal", UpsilonFixesConfig.disableXycraftQuartzCrystalWorldgen);
+		register("factorization.TileEntityMixer", UpsilonFixesConfig.fixFzMixerInfiniteLoop);
+		register("xycraft.BlockOres", UpsilonFixesConfig.fixXycraftOreTextures);
 
 		register("vanilla.GuiContainer", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing);
 		

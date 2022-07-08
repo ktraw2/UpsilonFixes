@@ -57,9 +57,17 @@ public class UpsilonFixesConfig {
 	@Comment("Fixes transmutation crafting recipes in EE3 only working once, and being\nbroken by NEI.")
 	public static boolean fixEETransmuteRecipes = true;
 	
+	@Key("fix-fz-mixer-infinite-loop")
+	@Comment("Fixes an infinite loop with the Factorization mixer caused\nby a minor oversight.")
+	public static boolean fixFzMixerInfiniteLoop = true;
+	
 	@Key("fix-fonts-in-texture-packs")
 	@Comment("Allow texture packs to override the font.")
 	public static boolean fixFontsInTexturePacks = true;
+	
+	@Key("fix-gregtech-cell-remainder")
+	@Comment("Configures remainder items for GregTech cells.")
+	public static boolean fixGregTechCellRemainder = true;
 	
 	@Key("fix-liteloader-log")
 	@Comment("Attaches the LiteLoader logger to the FML logger, making it look less\nugly.")
@@ -76,6 +84,10 @@ public class UpsilonFixesConfig {
 	@Key("fix-redpower-hitboxes")
 	@Comment("Fixes RedPower2 non-full-block hitboxes.")
 	public static boolean fixRedPowerHitboxes = true;
+	
+	@Key("fix-xycraft-ore-textures")
+	@Comment("Fixes XyCraft ore textures to actually use the correct parts\nof the block atlas, instead of just recoloring the white one.")
+	public static boolean fixXycraftOreTextures = true;
 	
 	@Key("fps-slider")
 	@Comment("Replace the \"Performance\" option with an FPS slider like modern\nversions.")
