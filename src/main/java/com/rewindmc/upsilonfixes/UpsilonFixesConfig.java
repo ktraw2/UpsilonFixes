@@ -44,7 +44,11 @@ public class UpsilonFixesConfig {
 	@Key("disable-xycraft-quartz-crystal-worldgen")
 	@Comment("Prevents XyCraft's quartz crystals from generating. They're a huge\nperformance hit and nobody likes them.")
 	public static boolean disableXycraftQuartzCrystalWorldgen = true;
-	
+
+	@Key("logistics-pipes-fabricator-import")
+	@Comment("Adds XyCraft's Fabricator as an importable tile entity in crafting logistics pipes.")
+	public static boolean fabricatorLogisticsImport = true;
+
 	@Key("drop-key-in-inventories")
 	@Comment("Allows pressing the drop key over a slot in an inventory to drop the\ncontents of the slot on the ground. 1.5 backport.")
 	public static boolean dropKeyInInventories = true;

@@ -59,6 +59,9 @@ dependencies {
 	mod 'libs:RedPowerDigital'
 	mod 'libs:ChiselRetro'
 	mod 'libs:GregTech'
+	mod 'libs:LogisticsPipes'
+	mod 'libs:XyCraft'
+
 }
 
 mappings {
