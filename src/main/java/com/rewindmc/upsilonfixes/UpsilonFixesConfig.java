@@ -101,9 +101,17 @@ public class UpsilonFixesConfig {
 	@Comment("Increase the chat length limit from 100 to 256 to match modern versions.")
 	public static boolean increaseChatLimit = true;
 	
+	@Key("keep-tesseract-frequency-on-dismantle")
+	@Comment("Stores the frequency of a dismantled Tesseract in the resulting\nitem, and restores it on place.")
+	public static boolean keepTesseractFrequencyOnDismantle = true;
+	
 	@Key("layered-texture-packs")
 	@Comment("Allows using multiple texture packs at once if they're marked as\nlayerable.")
 	public static boolean layeredTexturePacks = true;
+	
+	@Key("localize-tradeomat-stock")
+	@Comment("Adds a missing lang entry for the Trade-O-Mat's stock.")
+	public static boolean localizeTradeOMatStock = true;
 	
 	@Key("localize-rejuvenating-effect")
 	@Comment("Adds a missing lang entry for the Rejuvenating bee's effect.")
@@ -116,11 +124,11 @@ public class UpsilonFixesConfig {
 	@Key("nilmods-in-voxelmenu")
 	@Comment("Show nilmods in Voxel Menu's Mod Information screen.")
 	public static boolean nilmodsInVoxelMenu = true;
-	
+
 	@Key("remove-dead-cosmetics")
 	@Comment("Some mods add cosmetics (usually capes) that try to contact dead servers.")
 	public static boolean removeDeadCosmetics = true;
-
+	
 	@Key("remove-snooper")
 	@Comment("Removes the vanilla snooper. The server is gone anyway.")
 	public static boolean removeSnooper = true;

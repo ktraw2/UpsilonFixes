@@ -53,8 +53,8 @@ public class UpsilonFixesPremain implements Runnable {
 		
 		register("rp2.BlockShapedLamp", UpsilonFixesConfig.fixRedPowerHitboxes);
 
-		register("thermalexpansion.BlockTeleport", true);
-		register("thermalexpansion.ItemBlock", true);
+		register("thermalexpansion.BlockTeleport", UpsilonFixesConfig.keepTesseractFrequencyOnDismantle);
+		register("thermalexpansion.ItemBlock", UpsilonFixesConfig.keepTesseractFrequencyOnDismantle);
 
 		register("thaumicbees.AlleleEffectAuraNodeFlux", UpsilonFixesConfig.aerFromFluxBee);
 		register("codechicken.ClassHeirachyManager", UpsilonFixesConfig.fixCodeChickenCoreHierarchyCheck);

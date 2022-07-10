@@ -13,26 +13,21 @@ public class FabricatorCraftingRecipeProvider implements ICraftingRecipeProvider
 
 	@Override
 	public boolean canOpenGui(TileEntity tile) {
-		System.out.println("Can open "+tile+"?");
 		return tile instanceof TileFabricator;
 	}
 
 	@Override
 	public boolean importRecipe(TileEntity tile, SimpleInventory sinventory) {
-		System.out.println("Import recipe from "+tile+" into "+sinventory);
 		IInventory inventory = sinventory;
 		if (!(tile instanceof TileFabricator)) {
 			return false;
 		} else {
 			TileFabricator fab = (TileFabricator) tile;
 			InventoryCrafting matrix = fab.getCraftMatrix();
-			System.out.println("Craft matrix "+matrix);
 			if (matrix == null) return false;
 			fab.loadRecipe();
-			System.out.println("Matching recipe "+fab.matchingRecipe);
 			if (fab.matchingRecipe == null) return false;
 			ItemStack result = fab.matchingRecipe.getRecipeOutput();
-			System.out.println("Result "+result);
 			if (result == null) return false;
 			inventory.setInventorySlotContents(9, result);
 
@@ -44,7 +39,6 @@ public class FabricatorCraftingRecipeProvider implements ICraftingRecipeProvider
 					stackInSlot.stackSize = 1;
 				}
 
-				System.out.println("Set "+i+" to "+stackInSlot);
 				inventory.setInventorySlotContents(i, stackInSlot);
 			}
 
@@ -57,7 +51,6 @@ public class FabricatorCraftingRecipeProvider implements ICraftingRecipeProvider
 						ItemStack stackInOtherSlot = inventory.getStackInSlot(j);
 						if (stackInOtherSlot != null && itemInSlot == ItemIdentifier.get(stackInOtherSlot)) {
 							stackInSlot.stackSize += stackInOtherSlot.stackSize;
-							System.out.println("Set "+j+" to null");
 							inventory.setInventorySlotContents(j, null);
 						}
 					}
@@ -68,9 +61,7 @@ public class FabricatorCraftingRecipeProvider implements ICraftingRecipeProvider
 				if (inventory.getStackInSlot(i) == null) {
 					for (int j = i + 1; j < inventory.getSizeInventory() - 1; ++j) {
 						if (inventory.getStackInSlot(j) != null) {
-							System.out.println("Set "+i+" to "+inventory.getStackInSlot(j));
 							inventory.setInventorySlotContents(i, inventory.getStackInSlot(j));
-							System.out.println("Set "+j+" to null");
 							inventory.setInventorySlotContents(j, null);
 							break;
 						}
@@ -78,7 +69,6 @@ public class FabricatorCraftingRecipeProvider implements ICraftingRecipeProvider
 				}
 			}
 
-			System.out.println("Done :)");
 			return true;
 		}
 	}

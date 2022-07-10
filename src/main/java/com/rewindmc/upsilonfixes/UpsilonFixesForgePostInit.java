@@ -35,6 +35,9 @@ public class UpsilonFixesForgePostInit implements Runnable {
 			if (UpsilonFixesConfig.localizeRejuvenatingEffect) {
 				LanguageRegistry.instance().addStringLocalization("thaumicbees.effectNodeCharge", "Aura Charge");
 			}
+			if (UpsilonFixesConfig.localizeTradeOMatStock) {
+				LanguageRegistry.instance().addStringLocalization("container.personalTrader.stock", "Stock");
+			}
 			try {
 				GT_Jackhammer_Item.mineableBlocks.add(Chisel.blockLimestone);
 				GT_Jackhammer_Item.mineableBlocks.add(Chisel.blockMarble);
