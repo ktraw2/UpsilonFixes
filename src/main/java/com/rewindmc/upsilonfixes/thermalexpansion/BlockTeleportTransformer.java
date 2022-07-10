@@ -24,6 +24,7 @@ public class BlockTeleportTransformer extends UpsilonMiniTransformer {
 		public static ItemStack addFreq(ItemStack stack, TileTeleportRoot tile) {
 			if (stack.stackTagCompound == null) stack.stackTagCompound = new NBTTagCompound();
 			stack.stackTagCompound.setInteger("TeleFreq", tile.frequency);
+			stack.stackTagCompound.setByte("TeleMode", tile.mode);
 			return stack;
 		}
 		

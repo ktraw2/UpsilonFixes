@@ -36,8 +36,14 @@ public class ItemBlockTransformer extends UpsilonMiniTransformer {
 	public static class Hooks {
 		public static void placeBlockAt(ItemStack stack, World world, int x, int y, int z) {
 			TileTeleportRoot tile = (TileTeleportRoot) world.getBlockTileEntity(x, y, z);
-			if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("TeleFreq")) {
-				tile.frequency = stack.stackTagCompound.getInteger("TeleFreq");
+			if (stack.stackTagCompound != null) {
+				if (stack.stackTagCompound.hasKey("TeleFreq")) {
+					tile.frequency = stack.stackTagCompound.getInteger("TeleFreq");
+					tile.isActive = true;
+				}
+				if (stack.stackTagCompound.hasKey("TeleMode")) {
+					tile.mode = stack.stackTagCompound.getByte("TeleMode");
+				}
 			}
 		}
 	}
