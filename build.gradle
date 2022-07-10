@@ -61,7 +61,7 @@ dependencies {
 	mod 'libs:GregTech'
 	mod 'libs:LogisticsPipes'
 	mod 'libs:XyCraft'
-
+	mod 'libs:ThermalExpansion'
 }
 
 mappings {

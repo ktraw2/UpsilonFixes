@@ -52,7 +52,10 @@ public class UpsilonFixesPremain implements Runnable {
 		register("voxelmenu.GuiModInfo", UpsilonFixesConfig.nilmodsInVoxelMenu);
 		
 		register("rp2.BlockShapedLamp", UpsilonFixesConfig.fixRedPowerHitboxes);
-		
+
+		register("thermalexpansion.BlockTeleport", true);
+		register("thermalexpansion.ItemBlock", true);
+
 		register("thaumicbees.AlleleEffectAuraNodeFlux", UpsilonFixesConfig.aerFromFluxBee);
 		register("codechicken.ClassHeirachyManager", UpsilonFixesConfig.fixCodeChickenCoreHierarchyCheck);
 		register("portalgun.ThreadDownloadResources", UpsilonFixesConfig.fixPortalGunResources);
