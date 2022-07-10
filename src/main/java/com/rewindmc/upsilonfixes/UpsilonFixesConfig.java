@@ -45,14 +45,10 @@ public class UpsilonFixesConfig {
 	@Comment("Prevents XyCraft's quartz crystals from generating. They're a huge\nperformance hit and nobody likes them.")
 	public static boolean disableXycraftQuartzCrystalWorldgen = true;
 
-	@Key("logistics-pipes-fabricator-import")
-	@Comment("Adds XyCraft's Fabricator as an importable tile entity in crafting logistics pipes.")
-	public static boolean fabricatorLogisticsImport = true;
-
 	@Key("drop-key-in-inventories")
 	@Comment("Allows pressing the drop key over a slot in an inventory to drop the\ncontents of the slot on the ground. 1.5 backport.")
 	public static boolean dropKeyInInventories = true;
-	
+
 	@Key("fix-codechickencore-hierarchy-check")
 	@Comment("Prevents CodeChickenCore from exploding when prematurely reading classes.")
 	public static boolean fixCodeChickenCoreHierarchyCheck = true;
@@ -61,13 +57,13 @@ public class UpsilonFixesConfig {
 	@Comment("Fixes transmutation crafting recipes in EE3 only working once, and being\nbroken by NEI.")
 	public static boolean fixEETransmuteRecipes = true;
 	
-	@Key("fix-fz-mixer-infinite-loop")
-	@Comment("Fixes an infinite loop with the Factorization mixer caused\nby a minor oversight.")
-	public static boolean fixFzMixerInfiniteLoop = true;
-	
 	@Key("fix-fonts-in-texture-packs")
 	@Comment("Allow texture packs to override the font.")
 	public static boolean fixFontsInTexturePacks = true;
+	
+	@Key("fix-fz-mixer-infinite-loop")
+	@Comment("Fixes an infinite loop with the Factorization mixer caused\nby a minor oversight.")
+	public static boolean fixFzMixerInfiniteLoop = true;
 	
 	@Key("fix-gregtech-cell-remainder")
 	@Comment("Configures remainder items for GregTech cells.")
@@ -112,6 +108,10 @@ public class UpsilonFixesConfig {
 	@Key("localize-rejuvenating-effect")
 	@Comment("Adds a missing lang entry for the Rejuvenating bee's effect.")
 	public static boolean localizeRejuvenatingEffect = true;
+	
+	@Key("logistics-pipes-fabricator-import")
+	@Comment("Adds XyCraft's Fabricator as an importable tile entity in crafting logistics pipes.")
+	public static boolean logisticsPipesFabricatorImport = true;
 	
 	@Key("nilmods-in-voxelmenu")
 	@Comment("Show nilmods in Voxel Menu's Mod Information screen.")

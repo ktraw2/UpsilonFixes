@@ -39,13 +39,5 @@ public class BlockShapedLampTransformer extends UpsilonMiniTransformer {
 		clazz.methods.add(selected);
 		return true;
 	}
-
-	private InsnList build(AbstractInsnNode... insns) {
-		InsnList li = new InsnList();
-		for (AbstractInsnNode ain : insns) {
-			li.add(ain);
-		}
-		return li;
-	}
 	
 }
