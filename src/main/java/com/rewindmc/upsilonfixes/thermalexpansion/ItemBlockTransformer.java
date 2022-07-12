@@ -37,15 +37,19 @@ public class ItemBlockTransformer extends UpsilonMiniTransformer {
 		public static void placeBlockAt(ItemStack stack, World world, int x, int y, int z) {
 			TileTeleportRoot tile = (TileTeleportRoot) world.getBlockTileEntity(x, y, z);
 			if (stack.stackTagCompound != null) {
+				tile.removeFromRegistry();
+				if (stack.stackTagCompound.hasKey("TeleMode")) {
+					tile.mode = stack.stackTagCompound.getByte("TeleMode");
+				}
 				if (stack.stackTagCompound.hasKey("TeleFreq")) {
 					tile.frequency = stack.stackTagCompound.getInteger("TeleFreq");
 					tile.isActive = true;
 				}
-				if (stack.stackTagCompound.hasKey("TeleMode")) {
-					tile.mode = stack.stackTagCompound.getByte("TeleMode");
-				}
+				tile.addToRegistry();
+				//world.markBlockForUpdate(x, y, z);
+				//world.notifyBlocksOfNeighborChange(x, y, z, ThermalExpansionTransport.blockTeleport.blockID);
 			}
 		}
 	}
-	
+
 }
