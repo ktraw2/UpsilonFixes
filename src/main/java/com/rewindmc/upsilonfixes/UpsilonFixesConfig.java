@@ -150,7 +150,11 @@ public class UpsilonFixesConfig {
 	@Key("remove-dead-cosmetics")
 	@Comment("Some mods add cosmetics (usually capes) that try to contact dead servers.")
 	public static boolean removeDeadCosmetics = true;
-	
+
+	@Key("ultimate-solar-helm-can-fix")
+	@Comment("Ultimate solar helmet will eat filled tin cans just like the quantum helmet normally would.")
+	public static boolean ultimateSolarHelmCans = true;
+
 	@Key("remove-snooper")
 	@Comment("Removes the vanilla snooper. The server is gone anyway.")
 	public static boolean removeSnooper = true;
