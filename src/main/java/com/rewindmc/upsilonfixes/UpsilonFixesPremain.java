@@ -57,6 +57,8 @@ public class UpsilonFixesPremain implements Runnable {
 		
 		register("rp2.BlockShapedLamp", UpsilonFixesConfig.fixRedPowerHitboxes);
 
+		register("rp2.MachineLib", UpsilonFixesConfig.redpowerBCCompat);
+
 		register("thermalexpansion.BlockTeleport", UpsilonFixesConfig.keepTesseractFrequencyOnDismantle);
 		register("thermalexpansion.ItemBlock", UpsilonFixesConfig.keepTesseractFrequencyOnDismantle);
 

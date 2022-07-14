@@ -102,7 +102,11 @@ public class UpsilonFixesConfig {
 	@Key("fix-redpower-hitboxes")
 	@Comment("Fixes RedPower2 non-full-block hitboxes.")
 	public static boolean fixRedPowerHitboxes = true;
-	
+
+	@Key("redpower-pipe-integration")
+	@Comment("RedPower2 can insert into BuildCraft pipes.")
+	public static boolean redpowerBCCompat = true;
+
 	@Key("fix-xycraft-ore-textures")
 	@Comment("Fixes XyCraft ore textures to actually use the correct parts\nof the block atlas, instead of just recoloring the white one.")
 	public static boolean fixXycraftOreTextures = true;

@@ -57,11 +57,13 @@ dependencies {
 	mod 'libs:IC2'
 	mod 'libs:RedPowerCore'
 	mod 'libs:RedPowerDigital'
+	mod 'libs:RedPowerMechanical'
 	mod 'libs:ChiselRetro'
 	mod 'libs:GregTech'
 	mod 'libs:LogisticsPipes'
 	mod 'libs:XyCraft'
 	mod 'libs:ThermalExpansion'
+	mod 'libs:BuildCraft'
 }
 
 mappings {
