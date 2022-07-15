@@ -1,5 +1,9 @@
 package com.rewindmc.upsilonfixes;
 
+import org.lwjgl.LWJGLUtil;
+
+import com.rewindmc.upsilonfixes.UpsilonFixesConfig.Trilean;
+
 import nilloader.api.ClassTransformer;
 import nilloader.api.NilLogger;
 
@@ -69,7 +73,7 @@ public class UpsilonFixesPremain implements Runnable {
 		
 		register("vanilla.GuiChat", UpsilonFixesConfig.increaseChatLimit);
 
-		register("vanilla.Minecraft", UpsilonFixesConfig.fpsSlider);
+		register("vanilla.Minecraft", UpsilonFixesConfig.fpsSlider || UpsilonFixesConfig.swapRedBlue != Trilean.OFF);
 		register("vanilla.EntityRenderer", UpsilonFixesConfig.fpsSlider);
 		register("vanilla.GuiVideoSettings", UpsilonFixesConfig.fpsSlider);
 		
@@ -78,6 +82,9 @@ public class UpsilonFixesPremain implements Runnable {
 		
 		register("vanilla.NetClientHandler", UpsilonFixesConfig.attackerYawSyncing);
 		register("vanilla.NetServerHandler", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing || UpsilonFixesConfig.increaseChatLimit);
+		
+		boolean macOS = LWJGLUtil.getPlatform() == LWJGLUtil.PLATFORM_MACOSX;
+		register("codechicken.FeatureHackTransformer", UpsilonFixesConfig.disableCodeChickenStencil.resolve(macOS));
 	}
 	
 	private void register(String str, boolean doIt) {

@@ -10,9 +10,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.Locale;
 import java.util.Optional;
 
 import nilloader.api.NilLogger;
+import nilloader.api.lib.qdcss.BadValueException;
 import nilloader.api.lib.qdcss.QDCSS;
 
 public class UpsilonFixesConfig {
@@ -29,6 +31,18 @@ public class UpsilonFixesConfig {
 		String value();
 	}
 	
+	public enum Trilean {
+		AUTO,
+		OFF,
+		ON,
+		;
+		
+		public boolean resolve(boolean def) {
+			if (this == AUTO) return def;
+			return this == ON;
+		}
+	}
+	
 	@Key("aer-from-flux-bee")
 	@Comment("Allows the Flux bee from Thaumic Bees to provide Aer-type flux. The Aer\neffect is often thought to be unused, but there are some obscure ways to\nget it in Thaumcraft, so the Flux bee should be able to provide it.")
 	public static boolean aerFromFluxBee = true;
@@ -41,6 +55,10 @@ public class UpsilonFixesConfig {
 	@Comment("Makes GregTech Jack Hammers a lot better.")
 	public static boolean buffGregTechJackHammers = true;
 	
+	@Key("disable-codechicken-stencil")
+	@Comment("Prevents CodeChickenCore from allocating a stencil buffer. May\ncause rendering issues. Fixes the game not rendering at all on macOS.")
+	public static Trilean disableCodeChickenStencil = Trilean.AUTO;
+
 	@Key("disable-xycraft-quartz-crystal-worldgen")
 	@Comment("Prevents XyCraft's quartz crystals from generating. They're a huge\nperformance hit and nobody likes them.")
 	public static boolean disableXycraftQuartzCrystalWorldgen = true;
@@ -48,7 +66,7 @@ public class UpsilonFixesConfig {
 	@Key("drop-key-in-inventories")
 	@Comment("Allows pressing the drop key over a slot in an inventory to drop the\ncontents of the slot on the ground. 1.5 backport.")
 	public static boolean dropKeyInInventories = true;
-
+	
 	@Key("fix-codechickencore-hierarchy-check")
 	@Comment("Prevents CodeChickenCore from exploding when prematurely reading classes.")
 	public static boolean fixCodeChickenCoreHierarchyCheck = true;
@@ -109,22 +127,22 @@ public class UpsilonFixesConfig {
 	@Comment("Allows using multiple texture packs at once if they're marked as\nlayerable.")
 	public static boolean layeredTexturePacks = true;
 	
-	@Key("localize-tradeomat-stock")
-	@Comment("Adds a missing lang entry for the Trade-O-Mat's stock.")
-	public static boolean localizeTradeOMatStock = true;
-	
 	@Key("localize-rejuvenating-effect")
 	@Comment("Adds a missing lang entry for the Rejuvenating bee's effect.")
 	public static boolean localizeRejuvenatingEffect = true;
 	
+	@Key("localize-tradeomat-stock")
+	@Comment("Adds a missing lang entry for the Trade-O-Mat's stock.")
+	public static boolean localizeTradeOMatStock = true;
+	
 	@Key("logistics-pipes-fabricator-import")
 	@Comment("Adds XyCraft's Fabricator as an importable tile entity in crafting logistics pipes.")
 	public static boolean logisticsPipesFabricatorImport = true;
-	
+
 	@Key("nilmods-in-voxelmenu")
 	@Comment("Show nilmods in Voxel Menu's Mod Information screen.")
 	public static boolean nilmodsInVoxelMenu = true;
-
+	
 	@Key("remove-dead-cosmetics")
 	@Comment("Some mods add cosmetics (usually capes) that try to contact dead servers.")
 	public static boolean removeDeadCosmetics = true;
@@ -145,6 +163,10 @@ public class UpsilonFixesConfig {
 	@Comment("Enables holding the IC2 boost key causing you to sprint.")
 	public static boolean sprintKey = true;
 	
+	@Key("swap-red-blue")
+	@Comment("Swap the red and blue channels in the main framebuffer.\nFixes the game rendering with incorrect colors on M1 Macs.")
+	public static Trilean swapRedBlue = Trilean.AUTO;
+	
 	@Key("upsilon-branding")
 	@Comment("Enables the Rewind Upsilon modpack branding.")
 	public static boolean upsilonBranding = false;
@@ -160,8 +182,13 @@ public class UpsilonFixesConfig {
 			try {
 				Class<?> real = Class.forName(UpsilonFixesConfig.class.getName(), true, ClassLoader.getSystemClassLoader());
 				for (Field f : real.getFields()) {
-					if (f.getType() == boolean.class && Modifier.isStatic(f.getModifiers())) {
-						me.getField(f.getName()).set(null, f.get(null));
+					if (Modifier.isStatic(f.getModifiers())) {
+						Field mine = me.getField(f.getName());
+						if (f.getType() == boolean.class) {
+							mine.set(null, f.get(null));
+						} else if (f.getType().isEnum()) {
+							mine.set(null, Enum.valueOf((Class)mine.getType(), ((Enum<?>)f.get(null)).name()));
+						}
 					}
 				}
 			} catch (Throwable t) {
@@ -180,17 +207,46 @@ public class UpsilonFixesConfig {
 			try {
 				for (Field f : UpsilonFixesConfig.class.getDeclaredFields()) {
 					String k = f.getAnnotation(Key.class).value();
-					Optional<Boolean> opt = css.getBoolean("features."+k);
-					boolean v;
-					if (opt.isPresent()) {
-						v = opt.get();
-						f.set(null, v);
+					String valueStr;
+					if (f.getType() == boolean.class) {
+						Optional<Boolean> opt;
+						try {
+							opt = css.getBoolean("features."+k);
+						} catch (BadValueException e) {
+							UpsilonFixesPremain.log.warn("Config file is malformed", e);
+							opt = Optional.empty();
+						}
+						boolean v;
+						if (opt.isPresent()) {
+							v = opt.get();
+							f.set(null, v);
+						} else {
+							v = f.getBoolean(null);
+						}
+						valueStr = v ? "on" : "off";
+					} else if (f.getType() == Trilean.class) {
+						Optional<Trilean> opt;
+						try {
+							opt = css.getEnum("features."+k, Trilean.class);
+						} catch (BadValueException e) {
+							UpsilonFixesPremain.log.warn("Config file is malformed", e);
+							opt = Optional.empty();
+						}
+						Trilean v;
+						if (opt.isPresent()) {
+							v = opt.get();
+							f.set(null, v);
+						} else {
+							v = (Trilean)f.get(null);
+						}
+						valueStr = v.name().toLowerCase(Locale.ROOT);
 					} else {
-						v = f.getBoolean(null);
+						UpsilonFixesPremain.log.warn("Unknown field type {}", f.getType());
+						continue;
 					}
 					Comment comment = f.getAnnotation(Comment.class);
 					if (comment != null) out.append("\t/*\r\n\t * "+comment.value().replace("\n", "\r\n\t * ")+"\r\n\t */\r\n");
-					out.append("\t"+k+": "+(v ? "on" : "off")+";\r\n\r\n");
+					out.append("\t"+k+": "+valueStr+";\r\n\r\n");
 				}
 			} catch (IllegalAccessException e) {
 				throw new AssertionError(e);
