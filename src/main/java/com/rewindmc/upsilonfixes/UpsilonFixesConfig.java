@@ -103,14 +103,10 @@ public class UpsilonFixesConfig {
 	@Comment("Fixes RedPower2 non-full-block hitboxes.")
 	public static boolean fixRedPowerHitboxes = true;
 
-	@Key("redpower-pipe-integration")
-	@Comment("RedPower2 can insert into BuildCraft pipes.")
-	public static boolean redpowerBCCompat = true;
-
 	@Key("fix-xycraft-ore-textures")
 	@Comment("Fixes XyCraft ore textures to actually use the correct parts\nof the block atlas, instead of just recoloring the white one.")
 	public static boolean fixXycraftOreTextures = true;
-	
+
 	@Key("fps-slider")
 	@Comment("Replace the \"Performance\" option with an FPS slider like modern\nversions.")
 	public static boolean fpsSlider = true;
@@ -142,23 +138,23 @@ public class UpsilonFixesConfig {
 	@Key("logistics-pipes-fabricator-import")
 	@Comment("Adds XyCraft's Fabricator as an importable tile entity in crafting logistics pipes.")
 	public static boolean logisticsPipesFabricatorImport = true;
-
+	
 	@Key("nilmods-in-voxelmenu")
 	@Comment("Show nilmods in Voxel Menu's Mod Information screen.")
 	public static boolean nilmodsInVoxelMenu = true;
+
+	@Key("redpower-pipe-integration")
+	@Comment("RedPower2 can insert into BuildCraft pipes.")
+	public static boolean redpowerBCCompat = true;
 	
 	@Key("remove-dead-cosmetics")
 	@Comment("Some mods add cosmetics (usually capes) that try to contact dead servers.")
 	public static boolean removeDeadCosmetics = true;
 
-	@Key("ultimate-solar-helm-can-fix")
-	@Comment("Ultimate solar helmet will eat filled tin cans just like the quantum helmet normally would.")
-	public static boolean ultimateSolarHelmCans = true;
-
 	@Key("remove-snooper")
 	@Comment("Removes the vanilla snooper. The server is gone anyway.")
 	public static boolean removeSnooper = true;
-	
+
 	@Key("remove-version-checkers")
 	@Comment("1.4.7 mods don't really get updates anymore, and many version checkers\ntry to contact dead servers.")
 	public static boolean removeVersionCheckers = true;
@@ -174,6 +170,10 @@ public class UpsilonFixesConfig {
 	@Key("swap-red-blue")
 	@Comment("Swap the red and blue channels in the main framebuffer.\nFixes the game rendering with incorrect colors on M1 Macs.")
 	public static Trilean swapRedBlue = Trilean.AUTO;
+	
+	@Key("quantum-solar-helm-can-fix")
+	@Comment("Ultimate/Hybrid Solar Helmets will eat filled tin cans just like the quantum helmet normally would.")
+	public static boolean quantumSolarHelmCans = true;
 	
 	@Key("upsilon-branding")
 	@Comment("Enables the Rewind Upsilon modpack branding.")

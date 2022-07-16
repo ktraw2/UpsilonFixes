@@ -36,7 +36,8 @@ public class UpsilonFixesPremain implements Runnable {
 		
 		register("gregtech.GT_Mod", UpsilonFixesConfig.buffGregTechJackHammers);
 
-		register("gravisuite.ItemUltimateSolarHelmet", UpsilonFixesConfig.ultimateSolarHelmCans);
+		register("advsolar.ItemHSolarHelmet", UpsilonFixesConfig.quantumSolarHelmCans);
+		register("gravisuite.ItemUltimateSolarHelmet", UpsilonFixesConfig.quantumSolarHelmCans);
 
 		register("ic2.PlatformClient", UpsilonFixesConfig.removeDeadCosmetics);
 		register("gregtech.GT_ClientAnon1", UpsilonFixesConfig.removeDeadCosmetics);

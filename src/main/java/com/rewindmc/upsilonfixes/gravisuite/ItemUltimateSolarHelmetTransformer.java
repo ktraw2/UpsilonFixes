@@ -14,7 +14,7 @@ import nilloader.api.lib.mini.annotation.Patch;
 public class ItemUltimateSolarHelmetTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("onTick(Lnet/minecraft/src/EntityPlayer;Lnet/minecraft/src/ItemStack;)Z")
-	public void patchGetAnimationIndexPos(PatchContext ctx) {
+	public void patchOnTick(PatchContext ctx) {
 		ctx.jumpToStart();
 		ctx.add(
 				ALOAD(0),
