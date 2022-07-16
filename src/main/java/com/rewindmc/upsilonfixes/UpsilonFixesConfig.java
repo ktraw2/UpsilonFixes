@@ -79,6 +79,10 @@ public class UpsilonFixesConfig {
 	@Comment("Allow texture packs to override the font.")
 	public static boolean fixFontsInTexturePacks = true;
 	
+	@Key("fix-forestry-fermenter-npe")
+	@Comment("Prevents registering null-fluid recipes in the Forestry fermenter.")
+	public static boolean fixForestryFermenterNPE = true;
+	
 	@Key("fix-fz-mixer-infinite-loop")
 	@Comment("Fixes an infinite loop with the Factorization mixer caused\nby a minor oversight.")
 	public static boolean fixFzMixerInfiniteLoop = true;
@@ -143,10 +147,14 @@ public class UpsilonFixesConfig {
 	@Comment("Show nilmods in Voxel Menu's Mod Information screen.")
 	public static boolean nilmodsInVoxelMenu = true;
 
+	@Key("quantum-solar-helm-can-fix")
+	@Comment("Ultimate/Hybrid Solar Helmets will eat filled tin cans just like the quantum helmet normally would.")
+	public static boolean quantumSolarHelmCans = true;
+	
 	@Key("redpower-pipe-integration")
 	@Comment("RedPower2 can insert into BuildCraft pipes.")
 	public static boolean redpowerBCCompat = true;
-	
+
 	@Key("remove-dead-cosmetics")
 	@Comment("Some mods add cosmetics (usually capes) that try to contact dead servers.")
 	public static boolean removeDeadCosmetics = true;
@@ -154,7 +162,7 @@ public class UpsilonFixesConfig {
 	@Key("remove-snooper")
 	@Comment("Removes the vanilla snooper. The server is gone anyway.")
 	public static boolean removeSnooper = true;
-
+	
 	@Key("remove-version-checkers")
 	@Comment("1.4.7 mods don't really get updates anymore, and many version checkers\ntry to contact dead servers.")
 	public static boolean removeVersionCheckers = true;
@@ -170,10 +178,6 @@ public class UpsilonFixesConfig {
 	@Key("swap-red-blue")
 	@Comment("Swap the red and blue channels in the main framebuffer.\nFixes the game rendering with incorrect colors on M1 Macs.")
 	public static Trilean swapRedBlue = Trilean.AUTO;
-	
-	@Key("quantum-solar-helm-can-fix")
-	@Comment("Ultimate/Hybrid Solar Helmets will eat filled tin cans just like the quantum helmet normally would.")
-	public static boolean quantumSolarHelmCans = true;
 	
 	@Key("upsilon-branding")
 	@Comment("Enables the Rewind Upsilon modpack branding.")

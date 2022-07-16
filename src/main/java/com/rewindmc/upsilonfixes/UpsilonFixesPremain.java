@@ -73,6 +73,7 @@ public class UpsilonFixesPremain implements Runnable {
 		register("xycraft.WorldPopCrystal", UpsilonFixesConfig.disableXycraftQuartzCrystalWorldgen);
 		register("factorization.TileEntityMixer", UpsilonFixesConfig.fixFzMixerInfiniteLoop);
 		register("xycraft.BlockOres", UpsilonFixesConfig.fixXycraftOreTextures);
+		register("forestry.MachineFermenterRecipeManager", UpsilonFixesConfig.fixForestryFermenterNPE);
 
 		register("vanilla.GuiContainer", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing);
 		
@@ -88,8 +89,10 @@ public class UpsilonFixesPremain implements Runnable {
 		register("vanilla.NetClientHandler", UpsilonFixesConfig.attackerYawSyncing);
 		register("vanilla.NetServerHandler", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing || UpsilonFixesConfig.increaseChatLimit);
 		
-		boolean macOS = LWJGLUtil.getPlatform() == LWJGLUtil.PLATFORM_MACOSX;
-		register("codechicken.FeatureHackTransformer", UpsilonFixesConfig.disableCodeChickenStencil.resolve(macOS));
+		try {
+			boolean macOS = LWJGLUtil.getPlatform() == LWJGLUtil.PLATFORM_MACOSX;
+			register("codechicken.FeatureHackTransformer", UpsilonFixesConfig.disableCodeChickenStencil.resolve(macOS));
+		} catch (NoClassDefFoundError e) {}
 	}
 	
 	private void register(String str, boolean doIt) {
