@@ -37,7 +37,7 @@ public class BlockTeleportTransformer extends UpsilonMiniTransformer {
 				ILOAD(3),
 				ILOAD(4),
 				INVOKESTATIC(hooks(), "checkTEType", "(Lnet/minecraft/src/World;III)Z"),
-				IFZ(Lcontinue),
+				IFNZ(Lcontinue),
 				RETURN(),
 				Lcontinue
 			);
@@ -56,7 +56,7 @@ public class BlockTeleportTransformer extends UpsilonMiniTransformer {
 				ILOAD(3),
 				ILOAD(4),
 				INVOKESTATIC(hooks(), "checkTEType", "(Lnet/minecraft/src/World;III)Z"),
-				IFZ(Lcontinue),
+				IFNZ(Lcontinue),
 				ICONST_0(),
 				IRETURN(),
 				Lcontinue
