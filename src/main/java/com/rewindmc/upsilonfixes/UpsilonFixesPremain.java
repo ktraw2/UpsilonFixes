@@ -62,7 +62,7 @@ public class UpsilonFixesPremain implements Runnable {
 
 		register("rp2.MachineLib", UpsilonFixesConfig.redpowerBCCompat);
 
-		register("thermalexpansion.BlockTeleport", UpsilonFixesConfig.keepTesseractFrequencyOnDismantle);
+		register("thermalexpansion.BlockTeleport", UpsilonFixesConfig.keepTesseractFrequencyOnDismantle || UpsilonFixesConfig.fixThermalTesseractCast);
 		register("thermalexpansion.ItemBlock", UpsilonFixesConfig.keepTesseractFrequencyOnDismantle);
 
 		register("thaumicbees.AlleleEffectAuraNodeFlux", UpsilonFixesConfig.aerFromFluxBee);

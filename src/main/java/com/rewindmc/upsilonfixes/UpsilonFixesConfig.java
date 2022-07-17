@@ -71,6 +71,10 @@ public class UpsilonFixesConfig {
 	@Comment("Prevents CodeChickenCore from exploding when prematurely reading classes.")
 	public static boolean fixCodeChickenCoreHierarchyCheck = true;
 	
+	@Key("fix-thermal-tesseract-cast")
+	@Comment("Fixes Thermal Expansion tesseract ClassCastException crashes when\ntile entity types are desynced - can be caused by frame machines,\nturtles, etc.")
+	public static boolean fixThermalTesseractCast = true;
+	
 	@Key("fix-ee-transmute-recipes")
 	@Comment("Fixes transmutation crafting recipes in EE3 only working once, and being\nbroken by NEI.")
 	public static boolean fixEETransmuteRecipes = true;
