@@ -71,9 +71,9 @@ public class UpsilonFixesConfig {
 	@Comment("Prevents CodeChickenCore from exploding when prematurely reading classes.")
 	public static boolean fixCodeChickenCoreHierarchyCheck = true;
 	
-	@Key("fix-thermal-tesseract-cast")
-	@Comment("Fixes Thermal Expansion tesseract ClassCastException crashes when\ntile entity types are desynced - can be caused by frame machines,\nturtles, etc.")
-	public static boolean fixThermalTesseractCast = true;
+	@Key("fix-dartcraft-force-engine-limit")
+	@Comment("Fixes the DartCraft Force Engine being effectively limited to 10MJ/t\ndue to an oversight. This is fixed in the 1.6 version of\nDartCraft.")
+	public static boolean fixDartCraftForceEngineLimit = true;
 	
 	@Key("fix-ee-transmute-recipes")
 	@Comment("Fixes transmutation crafting recipes in EE3 only working once, and being\nbroken by NEI.")
@@ -110,6 +110,10 @@ public class UpsilonFixesConfig {
 	@Key("fix-redpower-hitboxes")
 	@Comment("Fixes RedPower2 non-full-block hitboxes.")
 	public static boolean fixRedPowerHitboxes = true;
+	
+	@Key("fix-thermal-tesseract-cast")
+	@Comment("Fixes Thermal Expansion tesseract ClassCastException crashes when\ntile entity types are desynced - can be caused by frame machines,\nturtles, etc.")
+	public static boolean fixThermalTesseractCast = true;
 
 	@Key("fix-xycraft-ore-textures")
 	@Comment("Fixes XyCraft ore textures to actually use the correct parts\nof the block atlas, instead of just recoloring the white one.")

@@ -64,6 +64,7 @@ dependencies {
 	mod 'libs:XyCraft'
 	mod 'libs:ThermalExpansion'
 	mod 'libs:BuildCraft'
+	mod 'libs:DartCraft'
 }
 
 mappings {
