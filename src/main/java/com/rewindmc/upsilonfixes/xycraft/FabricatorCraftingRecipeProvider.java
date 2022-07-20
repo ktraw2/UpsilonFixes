@@ -29,7 +29,7 @@ public class FabricatorCraftingRecipeProvider implements ICraftingRecipeProvider
 			if (fab.matchingRecipe == null) return false;
 			ItemStack result = fab.matchingRecipe.getRecipeOutput();
 			if (result == null) return false;
-			inventory.setInventorySlotContents(9, result);
+			inventory.setInventorySlotContents(9, result.copy());
 
 			int i;
 			ItemStack stackInSlot;
