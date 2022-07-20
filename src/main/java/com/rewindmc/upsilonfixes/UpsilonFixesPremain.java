@@ -75,6 +75,7 @@ public class UpsilonFixesPremain implements Runnable {
 		register("xycraft.BlockOres", UpsilonFixesConfig.fixXycraftOreTextures);
 		register("forestry.MachineFermenterRecipeManager", UpsilonFixesConfig.fixForestryFermenterNPE);
 		register("dartcraft.TileEntityForceEngine", UpsilonFixesConfig.fixDartCraftForceEngineLimit);
+		register("dartcraft.DartCraftCore", UpsilonFixesConfig.fixDartCraftForceDisablingGregTechTweaks);
 
 		register("vanilla.GuiContainer", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing);
 		

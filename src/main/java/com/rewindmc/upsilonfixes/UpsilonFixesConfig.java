@@ -75,6 +75,10 @@ public class UpsilonFixesConfig {
 	@Comment("Fixes the DartCraft Force Engine being effectively limited to 10MJ/t\ndue to an oversight. This is fixed in the 1.6 version of\nDartCraft.")
 	public static boolean fixDartCraftForceEngineLimit = true;
 	
+	@Key("fix-dartcraft-force-disabling-gregtech-tweaks")
+	@Comment("Removes DartCraft forcefully undoing GregTech's recipe tweaks.\nThis is misguided in the first place as GregTech lets you\ndisable its changes in its config.")
+	public static boolean fixDartCraftForceDisablingGregTechTweaks = true;
+	
 	@Key("fix-ee-transmute-recipes")
 	@Comment("Fixes transmutation crafting recipes in EE3 only working once, and being\nbroken by NEI.")
 	public static boolean fixEETransmuteRecipes = true;
