@@ -76,6 +76,7 @@ public class UpsilonFixesPremain implements Runnable {
 		register("forestry.MachineFermenterRecipeManager", UpsilonFixesConfig.fixForestryFermenterNPE);
 		register("dartcraft.TileEntityForceEngine", UpsilonFixesConfig.fixDartCraftForceEngineLimit);
 		register("dartcraft.DartCraftCore", UpsilonFixesConfig.fixDartCraftForceDisablingGregTechTweaks);
+		register("gravisuite.ClientTickHandler", UpsilonFixesConfig.sprintKey);
 
 		register("vanilla.GuiContainer", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing);
 		

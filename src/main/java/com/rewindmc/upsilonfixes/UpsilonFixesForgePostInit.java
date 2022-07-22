@@ -29,7 +29,7 @@ public class UpsilonFixesForgePostInit implements Runnable {
 	public static class InRelauncher {
 		
 		public static void run() {
-			if (IC2.keyboard.getClass().getSimpleName().equals("KeyboardClient")) {
+			if (IC2.keyboard.getClass().getSimpleName().equals("KeyboardClient") && UpsilonFixesConfig.sprintKey) {
 				Client.modifyKeyNames();
 			}
 			if (UpsilonFixesConfig.localizeRejuvenatingEffect) {
