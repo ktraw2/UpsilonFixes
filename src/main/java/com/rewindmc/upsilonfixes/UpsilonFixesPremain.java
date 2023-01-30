@@ -14,7 +14,6 @@ public class UpsilonFixesPremain implements Runnable {
 	@Override
 	public void run() {
 		register("entrypoints.MinecraftForge", true);
-		register("entrypoints.LiteLoader", true);
 		register("entrypoints.FMLPostInitializationEvent", true);
 		register("branding.GuiMainMenu", true);
 		
@@ -91,6 +90,10 @@ public class UpsilonFixesPremain implements Runnable {
 		
 		register("vanilla.NetClientHandler", UpsilonFixesConfig.attackerYawSyncing);
 		register("vanilla.NetServerHandler", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing || UpsilonFixesConfig.increaseChatLimit);
+
+		register("java.DenyAfterConstraint", UpsilonFixesConfig.reenableSha1Signatures);
+		
+		register("asm.ClassReader", UpsilonFixesConfig.asmWorkaround);
 		
 		try {
 			boolean macOS = LWJGLUtil.getPlatform() == LWJGLUtil.PLATFORM_MACOSX;

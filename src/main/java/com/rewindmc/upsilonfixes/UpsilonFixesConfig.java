@@ -47,6 +47,10 @@ public class UpsilonFixesConfig {
 	@Comment("Allows the Flux bee from Thaumic Bees to provide Aer-type flux. The Aer\neffect is often thought to be unused, but there are some obscure ways to\nget it in Thaumcraft, so the Flux bee should be able to provide it.")
 	public static boolean aerFromFluxBee = true;
 	
+	@Key("asm-workaround")
+	@Comment("Makes ASM 4.0 pretend to be able to understand Java 8 class files. Necessary\nwhen using NilLoader via hijacking.")
+	public static boolean asmWorkaround = true;
+	
 	@Key("attacker-yaw-syncing")
 	@Comment("Fixes the attacker yaw not syncing from server to client, to restore the\nproper camera tilt animation when damaged.")
 	public static boolean attackerYawSyncing = true;
@@ -98,10 +102,6 @@ public class UpsilonFixesConfig {
 	@Key("fix-gregtech-cell-remainder")
 	@Comment("Configures remainder items for GregTech cells.")
 	public static boolean fixGregTechCellRemainder = true;
-	
-	@Key("fix-liteloader-log")
-	@Comment("Attaches the LiteLoader logger to the FML logger, making it look less\nugly.")
-	public static boolean fixLiteLoaderLog = true;
 	
 	@Key("fix-miscperipherals-asm")
 	@Comment("Fixes misuse of the ASM API by MiscPeripherals breaking with newer ASM\nlibraries.")
@@ -160,12 +160,16 @@ public class UpsilonFixesConfig {
 	public static boolean nilmodsInVoxelMenu = true;
 
 	@Key("quantum-solar-helm-can-fix")
-	@Comment("Ultimate/Hybrid Solar Helmets will eat filled tin cans just like the quantum helmet normally would.")
+	@Comment("Ultimate/Hybrid Solar Helmets will eat filled tin cans just like the quantum\nhelmet normally would.")
 	public static boolean quantumSolarHelmCans = true;
 	
 	@Key("redpower-pipe-integration")
 	@Comment("RedPower2 can insert into BuildCraft pipes.")
 	public static boolean redpowerBCCompat = true;
+
+	@Key("reenable-sha1-signatures")
+	@Comment("Re-enables SHA-1 jar signing in Java itself. This is necessary for many 1.4\nmods to load on new Java 8 releases.")
+	public static boolean reenableSha1Signatures = true;
 
 	@Key("remove-dead-cosmetics")
 	@Comment("Some mods add cosmetics (usually capes) that try to contact dead servers.")

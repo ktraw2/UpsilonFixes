@@ -7,7 +7,7 @@
 
 entrypoints {
 	premain: "com.rewindmc.upsilonfixes.UpsilonFixesPremain";
+	hijack: "com.rewindmc.upsilonfixes.UpsilonFixesPremain";
 	forge-earlyinit: "com.rewindmc.upsilonfixes.UpsilonFixesForgeEarlyInit";
 	forge-postinit: "com.rewindmc.upsilonfixes.UpsilonFixesForgePostInit";
-	liteloader-preinit: "com.rewindmc.upsilonfixes.UpsilonFixesLiteLoaderPreInit";
 }
