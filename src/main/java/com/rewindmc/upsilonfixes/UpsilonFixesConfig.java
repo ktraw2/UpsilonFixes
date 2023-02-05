@@ -123,6 +123,10 @@ public class UpsilonFixesConfig {
 	@Comment("Fixes Thermal Expansion tesseract ClassCastException crashes when\ntile entity types are desynced - can be caused by frame machines,\nturtles, etc.")
 	public static boolean fixThermalTesseractCast = true;
 
+	@Key("fix-xycraft-item-lighting")
+	@Comment("Fixes XyCraft ore items messing up the light state, making all\nitems rendered after them in the GUI draw with wrong lighting.")
+	public static boolean fixXycraftItemLighting = true;
+
 	@Key("fix-xycraft-ore-textures")
 	@Comment("Fixes XyCraft ore textures to actually use the correct parts\nof the block atlas, instead of just recoloring the white one.")
 	public static boolean fixXycraftOreTextures = true;

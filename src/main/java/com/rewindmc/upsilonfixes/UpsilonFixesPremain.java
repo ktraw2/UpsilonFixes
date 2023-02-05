@@ -71,6 +71,7 @@ public class UpsilonFixesPremain implements Runnable {
 		register("dartcraft.TileEntityForceEngine", UpsilonFixesConfig.fixDartCraftForceEngineLimit);
 		register("dartcraft.DartCraftCore", UpsilonFixesConfig.fixDartCraftForceDisablingGregTechTweaks);
 		register("gravisuite.ClientTickHandler", UpsilonFixesConfig.sprintKey);
+		register("xycraft.RenderBlockHelper", UpsilonFixesConfig.fixXycraftItemLighting);
 
 		register("vanilla.GuiContainer", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing);
 		
@@ -87,7 +88,7 @@ public class UpsilonFixesPremain implements Runnable {
 		register("vanilla.NetServerHandler", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing || UpsilonFixesConfig.increaseChatLimit);
 
 		register("java.DenyAfterConstraint", UpsilonFixesConfig.reenableSha1Signatures);
-		
+
 		register("asm.ClassReader", UpsilonFixesConfig.asmWorkaround);
 		
 		try {
