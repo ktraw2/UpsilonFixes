@@ -1,9 +1,11 @@
 package com.rewindmc.upsilonfixes;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 import com.rewindmc.upsilonfixes.xycraft.FabricatorCraftingRecipeProvider;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.relauncher.FMLRelauncher;
 import gregtechmod.common.items.GT_Jackhammer_Item;
 import gregtechmod.common.items.GT_MetaItem_Cell;
 import gregtechmod.common.items.GT_MetaItem_Gas;
@@ -20,7 +22,14 @@ public class UpsilonFixesForgePostInit implements Runnable {
 	@Override
 	public void run() {
 		try {
-			Class.forName("com.rewindmc.upsilonfixes.UpsilonFixesForgePostInit$InRelauncher", true, FMLRelauncher.instance().classLoader).getMethod("run").invoke(null);
+			Class<?> relauncherClazz = Class.forName("cpw.mods.fml.relauncher.FMLRelauncher");
+			Method instance = relauncherClazz.getDeclaredMethod("instance");
+			instance.setAccessible(true);
+			Object relauncher = instance.invoke(null);
+			Field classLoader = relauncherClazz.getDeclaredField("classLoader");
+			classLoader.setAccessible(true);
+			ClassLoader loader = (ClassLoader)classLoader.get(relauncher);
+			Class.forName("com.rewindmc.upsilonfixes.UpsilonFixesForgePostInit$InRelauncher", true, loader).getMethod("run").invoke(null);
 		} catch (Exception e) {
 			UpsilonFixesPremain.log.warn("Failed to invoke Forge postinit handler inside relaunch class loader", e);
 		}
