@@ -63,13 +63,13 @@ public class UpsilonFixesConfig {
 	@Comment("Prevents CodeChickenCore from allocating a stencil buffer. May\ncause rendering issues. Fixes the game not rendering at all on macOS.")
 	public static Trilean disableCodeChickenStencil = Trilean.AUTO;
 
-	@Key("disable-xycraft-quartz-crystal-worldgen")
-	@Comment("Prevents XyCraft's quartz crystals from generating. They're a huge\nperformance hit and nobody likes them.")
-	public static boolean disableXycraftQuartzCrystalWorldgen = true;
-	
 	@Key("disable-xrandr")
 	@Comment("Linux-only. Disables buggy XRandR support in LWJGL2. Causes various\nweird issues like monitor flickering when closing the game or >60Hz getting\nmessed up.")
 	public static boolean disableXrandr = true;
+	
+	@Key("disable-xycraft-quartz-crystal-worldgen")
+	@Comment("Prevents XyCraft's quartz crystals from generating. They're a huge\nperformance hit and nobody likes them.")
+	public static boolean disableXycraftQuartzCrystalWorldgen = true;
 
 	@Key("drop-key-in-inventories")
 	@Comment("Allows pressing the drop key over a slot in an inventory to drop the\ncontents of the slot on the ground. 1.5 backport.")
@@ -79,13 +79,13 @@ public class UpsilonFixesConfig {
 	@Comment("Prevents CodeChickenCore from exploding when prematurely reading classes.")
 	public static boolean fixCodeChickenCoreHierarchyCheck = true;
 	
-	@Key("fix-dartcraft-force-engine-limit")
-	@Comment("Fixes the DartCraft Force Engine being effectively limited to 10MJ/t\ndue to an oversight. This is fixed in the 1.6 version of\nDartCraft.")
-	public static boolean fixDartCraftForceEngineLimit = true;
-	
 	@Key("fix-dartcraft-force-disabling-gregtech-tweaks")
 	@Comment("Removes DartCraft forcefully undoing GregTech's recipe tweaks.\nThis is misguided in the first place as GregTech lets you\ndisable its changes in its config.")
 	public static boolean fixDartCraftForceDisablingGregTechTweaks = true;
+	
+	@Key("fix-dartcraft-force-engine-limit")
+	@Comment("Fixes the DartCraft Force Engine being effectively limited to 10MJ/t\ndue to an oversight. This is fixed in the 1.6 version of\nDartCraft.")
+	public static boolean fixDartCraftForceEngineLimit = true;
 	
 	@Key("fix-ee-transmute-recipes")
 	@Comment("Fixes transmutation crafting recipes in EE3 only working once, and being\nbroken by NEI.")
@@ -163,9 +163,17 @@ public class UpsilonFixesConfig {
 	@Comment("Adds XyCraft's Fabricator as an importable tile entity in crafting logistics pipes.")
 	public static boolean logisticsPipesFabricatorImport = true;
 	
+	@Key("modern-durability-color")
+	@Comment("Backports the modern hue-based durability bar color - it's more legible.")
+	public static boolean modernDurabilityColor = true;
+	
 	@Key("quantum-solar-helm-can-fix")
 	@Comment("Ultimate/Hybrid Solar Helmets will eat filled tin cans just like the quantum\nhelmet normally would.")
 	public static boolean quantumSolarHelmCans = true;
+
+	@Key("redesign-menus")
+	@Comment("Redesign the main menu, pause menu, etc in a way very similar to VoxelMenu.")
+	public static boolean redesignMenus = false;
 	
 	@Key("redpower-pipe-integration")
 	@Comment("RedPower2 can insert into BuildCraft pipes.")
@@ -174,15 +182,11 @@ public class UpsilonFixesConfig {
 	@Key("reenable-sha1-signatures")
 	@Comment("Re-enables SHA-1 jar signing in Java itself. This is necessary for many 1.4\nmods to load on new Java 8 releases.")
 	public static boolean reenableSha1Signatures = true;
-	
-	@Key("redesign-menus")
-	@Comment("Redesign the main menu, pause menu, etc in a way very similar to VoxelMenu.")
-	public static boolean redesignMenus = false;
 
 	@Key("remove-dead-cosmetics")
 	@Comment("Some mods add cosmetics (usually capes) that try to contact dead servers.")
 	public static boolean removeDeadCosmetics = true;
-
+	
 	@Key("remove-snooper")
 	@Comment("Removes the vanilla snooper. The server is gone anyway.")
 	public static boolean removeSnooper = true;

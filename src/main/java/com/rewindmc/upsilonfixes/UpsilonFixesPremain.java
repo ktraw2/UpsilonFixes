@@ -72,6 +72,7 @@ public class UpsilonFixesPremain implements Runnable {
 		register("dartcraft.DartCraftCore", UpsilonFixesConfig.fixDartCraftForceDisablingGregTechTweaks);
 		register("gravisuite.ClientTickHandler", UpsilonFixesConfig.sprintKey);
 		register("xycraft.RenderBlockHelper", UpsilonFixesConfig.fixXycraftItemLighting);
+		register("vanilla.RenderItem", UpsilonFixesConfig.modernDurabilityColor);
 
 		register("vanilla.GuiContainer", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing);
 		
