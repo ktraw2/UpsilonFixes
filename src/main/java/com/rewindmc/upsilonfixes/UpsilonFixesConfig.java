@@ -66,6 +66,10 @@ public class UpsilonFixesConfig {
 	@Key("disable-xycraft-quartz-crystal-worldgen")
 	@Comment("Prevents XyCraft's quartz crystals from generating. They're a huge\nperformance hit and nobody likes them.")
 	public static boolean disableXycraftQuartzCrystalWorldgen = true;
+	
+	@Key("disable-xrandr")
+	@Comment("Linux-only. Disables buggy XRandR support in LWJGL2. Causes various\nweird issues like monitor flickering when closing the game or >60Hz getting\nmessed up.")
+	public static boolean disableXrandr = true;
 
 	@Key("drop-key-in-inventories")
 	@Comment("Allows pressing the drop key over a slot in an inventory to drop the\ncontents of the slot on the ground. 1.5 backport.")
@@ -155,10 +159,6 @@ public class UpsilonFixesConfig {
 	@Comment("Adds XyCraft's Fabricator as an importable tile entity in crafting logistics pipes.")
 	public static boolean logisticsPipesFabricatorImport = true;
 	
-	@Key("nilmods-in-voxelmenu")
-	@Comment("Show nilmods in Voxel Menu's Mod Information screen.")
-	public static boolean nilmodsInVoxelMenu = true;
-
 	@Key("quantum-solar-helm-can-fix")
 	@Comment("Ultimate/Hybrid Solar Helmets will eat filled tin cans just like the quantum\nhelmet normally would.")
 	public static boolean quantumSolarHelmCans = true;
@@ -170,6 +170,10 @@ public class UpsilonFixesConfig {
 	@Key("reenable-sha1-signatures")
 	@Comment("Re-enables SHA-1 jar signing in Java itself. This is necessary for many 1.4\nmods to load on new Java 8 releases.")
 	public static boolean reenableSha1Signatures = true;
+	
+	@Key("redesign-menus")
+	@Comment("Redesign the main menu, pause menu, etc in a way very similar to VoxelMenu.")
+	public static boolean redesignMenus = false;
 
 	@Key("remove-dead-cosmetics")
 	@Comment("Some mods add cosmetics (usually capes) that try to contact dead servers.")
@@ -190,10 +194,6 @@ public class UpsilonFixesConfig {
 	@Key("sprint-key")
 	@Comment("Enables holding the IC2 boost key causing you to sprint.")
 	public static boolean sprintKey = true;
-	
-	@Key("swap-red-blue")
-	@Comment("Swap the red and blue channels in the main framebuffer.\nFixes the game rendering with incorrect colors on M1 Macs.")
-	public static Trilean swapRedBlue = Trilean.AUTO;
 	
 	@Key("upsilon-branding")
 	@Comment("Enables the Rewind Upsilon modpack branding.")

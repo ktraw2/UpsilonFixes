@@ -20,10 +20,10 @@ public class FontRendererTransformer extends UpsilonMiniTransformer {
 		
 		ctx.add(
 			INVOKESTATIC("net/minecraft/client/Minecraft", "getMinecraft", "()Lnet/minecraft/client/Minecraft;"),
-		    GETFIELD("net/minecraft/client/Minecraft", "texturePackList", "Lnet/minecraft/src/TexturePackList;"),
-		    INVOKEVIRTUAL("net/minecraft/src/TexturePackList", "getSelectedTexturePack", "()Lnet/minecraft/src/ITexturePack;"),
-		    ALOAD(2),
-		    INVOKEINTERFACE("net/minecraft/src/ITexturePack", "getResourceAsStream", "(Ljava/lang/String;)Ljava/io/InputStream;")
+			GETFIELD("net/minecraft/client/Minecraft", "texturePackList", "Lnet/minecraft/src/TexturePackList;"),
+			INVOKEVIRTUAL("net/minecraft/src/TexturePackList", "getSelectedTexturePack", "()Lnet/minecraft/src/ITexturePack;"),
+			ALOAD(2),
+			INVOKEINTERFACE("net/minecraft/src/ITexturePack", "getResourceAsStream", "(Ljava/lang/String;)Ljava/io/InputStream;")
 		);
 	}
 	

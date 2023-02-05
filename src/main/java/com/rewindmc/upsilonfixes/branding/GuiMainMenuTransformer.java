@@ -16,6 +16,7 @@ public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 	private static final String[] addSplashes = {
 		"Trans rights!",
 		"The work of many people!",
+		"Contains infinite genders!",
 		
 		// I'm gonna include these from the new versions just to piss off Those Kind Of People
 		"Black lives matter!",
@@ -43,7 +44,6 @@ public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 		"Vertical!",
 		"You hear about video games?",
 		"Powered by complementary colors!",
-		"Automatically updating!",
 		"Perfect is the enemy of good!",
 		"Composed of blobs!",
 		"Optionally difficult!",
@@ -51,6 +51,7 @@ public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 		"Treatment for your burn!",
 		"1.18?",
 		"1.19?",
+		"1.20??",
 		"Order-dependent transparency!",
 		"Now with additional biomes!",
 		"Contains a variety of nuts!",
@@ -66,6 +67,17 @@ public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 		"Why? Why not!",
 		"Official NilLoader proof of concept!",
 		"Here is there!",
+		"Inaccurately represents VHS!",
+		"Contains MPEG-1!",
+		"Not designed for OLED displays!",
+		"Toot toot sonic warrior!",
+		"Forever in your mind!",
+		"Shape the planets and conquer time!",
+		"You can do anything!",
+		"It came from space.",
+		"Bootleg redstone blocks!",
+		"N I K O L I T E",
+		"Try the tank cart!",
 
 		"Try the clones!",
 		"Also try Minetest!",
@@ -73,7 +85,7 @@ public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 		"Also try Vintage Story!",
 		"Also try ZZT!",
 		"Also try MegaZeux!",
-		"Also try Aloe!",
+		"Also try Tinkerer's Quilt!",
 		"Also try Xonotic!",
 
 		"#minecraftfarms",
@@ -100,8 +112,8 @@ public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 	public void patchInit(PatchContext ctx) {
 		ctx.search(
 			ALOAD(0),
-		    ALOAD(2),
-		    GETSTATIC("net/minecraft/src/GuiMainMenu", "rand", "Ljava/util/Random;")
+			ALOAD(2),
+			GETSTATIC("net/minecraft/src/GuiMainMenu", "rand", "Ljava/util/Random;")
 		).jumpBefore();
 		
 		ctx.add(

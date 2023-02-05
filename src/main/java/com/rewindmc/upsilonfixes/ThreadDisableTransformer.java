@@ -1,6 +1,5 @@
 package com.rewindmc.upsilonfixes;
 
-import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 

@@ -2,8 +2,6 @@ package com.rewindmc.upsilonfixes;
 
 import org.lwjgl.LWJGLUtil;
 
-import com.rewindmc.upsilonfixes.UpsilonFixesConfig.Trilean;
-
 import nilloader.api.ClassTransformer;
 import nilloader.api.NilLogger;
 
@@ -13,12 +11,13 @@ public class UpsilonFixesPremain implements Runnable {
 	
 	@Override
 	public void run() {
+		if (UpsilonFixesConfig.disableXrandr) {
+			System.setProperty("LWJGL_DISABLE_XRANDR", "true");
+		}
+		
 		register("entrypoints.MinecraftForge", true);
 		register("entrypoints.FMLPostInitializationEvent", true);
 		register("branding.GuiMainMenu", true);
-		
-		register("branding.GuiButtonMainMenu", UpsilonFixesConfig.upsilonBranding);
-		register("branding.GuiMainMenuVoxelBox", UpsilonFixesConfig.upsilonBranding);
 		
 		register("layering.GuiMainMenuVoxelBox", UpsilonFixesConfig.layeredTexturePacks);
 		register("layering.GuiMainMenu", UpsilonFixesConfig.layeredTexturePacks);
@@ -31,7 +30,6 @@ public class UpsilonFixesPremain implements Runnable {
 		register("appeng.VersionChecker", UpsilonFixesConfig.removeVersionCheckers);
 		register("cofh.VersionCheckThread", UpsilonFixesConfig.removeVersionCheckers);
 		register("mffs.Versioninfo", UpsilonFixesConfig.removeVersionCheckers);
-		register("neiplugins.VersionCheckThread", UpsilonFixesConfig.removeVersionCheckers);
 		
 		register("gregtech.GT_Mod", UpsilonFixesConfig.buffGregTechJackHammers);
 
@@ -53,9 +51,6 @@ public class UpsilonFixesPremain implements Runnable {
 
 		register("vanilla.FontRenderer", UpsilonFixesConfig.fixFontsInTexturePacks);
 		register("vanilla.RenderEngine", UpsilonFixesConfig.fixFontsInTexturePacks);
-		
-		register("voxelmenu.GuiMainMenuVoxelBox", UpsilonFixesConfig.nilmodsInVoxelMenu);
-		register("voxelmenu.GuiModInfo", UpsilonFixesConfig.nilmodsInVoxelMenu);
 		
 		register("rp2.BlockShapedLamp", UpsilonFixesConfig.fixRedPowerHitboxes);
 
@@ -81,7 +76,7 @@ public class UpsilonFixesPremain implements Runnable {
 		
 		register("vanilla.GuiChat", UpsilonFixesConfig.increaseChatLimit);
 
-		register("vanilla.Minecraft", UpsilonFixesConfig.fpsSlider || UpsilonFixesConfig.swapRedBlue != Trilean.OFF);
+		register("vanilla.Minecraft", UpsilonFixesConfig.fpsSlider);
 		register("vanilla.EntityRenderer", UpsilonFixesConfig.fpsSlider);
 		register("vanilla.GuiVideoSettings", UpsilonFixesConfig.fpsSlider);
 		
