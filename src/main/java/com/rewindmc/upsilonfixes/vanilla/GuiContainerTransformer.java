@@ -185,7 +185,7 @@ public class GuiContainerTransformer extends UpsilonMiniTransformer {
 	public static class Hooks {
 		
 		public static void keyTyped(GuiContainer gui, Slot slot, char c, int code) {
-			if (Minecraft.getMinecraft().thePlayer.inventory.getItemStack() == null && slot != null) {
+			if (UpsilonFixesConfig.dropKeyInInventories && Minecraft.getMinecraft().thePlayer.inventory.getItemStack() == null && slot != null) {
 				if (code == Minecraft.getMinecraft().gameSettings.keyBindDrop.keyCode) {
 					byte[] bys = new byte[5];
 					ByteBuffer.wrap(bys)

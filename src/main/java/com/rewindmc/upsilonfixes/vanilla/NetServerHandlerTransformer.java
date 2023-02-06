@@ -69,7 +69,9 @@ public class NetServerHandlerTransformer extends UpsilonMiniTransformer {
 							stack.stackSize = 1;
 						} else {
 							slot.putStack(null);
+							stack = stack.copy(); // avoid taking ownership of crafting outputs
 						}
+						slot.onPickupFromSlot(player, stack);
 						player.dropPlayerItem(stack);
 					}
 				}
