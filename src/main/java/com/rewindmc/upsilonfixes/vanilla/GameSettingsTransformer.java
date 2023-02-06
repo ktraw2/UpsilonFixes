@@ -4,10 +4,10 @@ import com.rewindmc.upsilonfixes.UpsilonFixesConfig;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.EnumOptions;
-import net.minecraft.src.GameSettings;
-import net.minecraft.src.ScaledResolution;
-import net.minecraft.src.StringTranslate;
+import net.minecraft.client.settings.EnumOptions;
+import net.minecraft.client.settings.GameSettings;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.util.StringTranslate;
 import nilloader.api.lib.asm.tree.LabelNode;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
@@ -21,14 +21,14 @@ public class GameSettingsTransformer extends UpsilonMiniTransformer {
 		
 		ctx.add(
 			ALOAD(0),
-			INVOKESTATIC(hooks(), "postLoad", "(Lnet/minecraft/src/GameSettings;)V")
+			INVOKESTATIC(hooks(), "postLoad", "(Lnet/minecraft/client/settings/GameSettings;)V")
 		);
 	}
 	
-	@Patch.Method("setOptionValue(Lnet/minecraft/src/EnumOptions;I)V")
+	@Patch.Method("setOptionValue(Lnet/minecraft/client/settings/EnumOptions;I)V")
 	public void patchSetOptionValue(PatchContext ctx) {
 		if (UpsilonFixesConfig.smearing) {
-			ctx.search(PUTFIELD("net/minecraft/src/GameSettings", "touchscreen", "Z")).jumpBefore();
+			ctx.search(PUTFIELD("net/minecraft/client/settings/GameSettings", "touchscreen", "Z")).jumpBefore();
 			ctx.add(
 				POP(),
 				ICONST_0()
@@ -36,7 +36,7 @@ public class GameSettingsTransformer extends UpsilonMiniTransformer {
 		}
 		if (UpsilonFixesConfig.removeSnooper) {
 			ctx.jumpToStart();
-			ctx.search(PUTFIELD("net/minecraft/src/GameSettings",  "snooperEnabled", "Z")).jumpBefore();
+			ctx.search(PUTFIELD("net/minecraft/client/settings/GameSettings",  "snooperEnabled", "Z")).jumpBefore();
 			ctx.add(
 				POP(),
 				ICONST_0()
@@ -45,7 +45,7 @@ public class GameSettingsTransformer extends UpsilonMiniTransformer {
 		if (UpsilonFixesConfig.modernGuiScale) {
 			ctx.jumpToStart();
 			ctx.search(
-				PUTFIELD("net/minecraft/src/GameSettings", "guiScale", "I")
+				PUTFIELD("net/minecraft/client/settings/GameSettings", "guiScale", "I")
 			).jumpBefore();
 			ctx.searchBackward(
 				ICONST_3(),
@@ -54,7 +54,7 @@ public class GameSettingsTransformer extends UpsilonMiniTransformer {
 
 			ctx.jumpToStart();
 			ctx.search(
-				PUTFIELD("net/minecraft/src/GameSettings", "guiScale", "I")
+				PUTFIELD("net/minecraft/client/settings/GameSettings", "guiScale", "I")
 			).jumpBefore();
 			ctx.add(
 				INVOKESTATIC(hooks(), "getMaxGuiScale", "()I"),
@@ -63,7 +63,7 @@ public class GameSettingsTransformer extends UpsilonMiniTransformer {
 		}
 	}
 	
-	@Patch.Method("getKeyBinding(Lnet/minecraft/src/EnumOptions;)Ljava/lang/String;")
+	@Patch.Method("getKeyBinding(Lnet/minecraft/client/settings/EnumOptions;)Ljava/lang/String;")
 	@Patch.Method.AffectsControlFlow
 	public void patchGetKeyBinding(PatchContext ctx) {
 		ctx.jumpToStart();
@@ -71,7 +71,7 @@ public class GameSettingsTransformer extends UpsilonMiniTransformer {
 		ctx.add(
 			ALOAD(0),
 			ALOAD(1),
-			INVOKESTATIC(hooks(), "getText", "(Lnet/minecraft/src/GameSettings;Lnet/minecraft/src/EnumOptions;)Ljava/lang/String;"),
+			INVOKESTATIC(hooks(), "getText", "(Lnet/minecraft/client/settings/GameSettings;Lnet/minecraft/client/settings/EnumOptions;)Ljava/lang/String;"),
 			DUP(),
 			IFNULL(Lcontinue),
 			ARETURN(),

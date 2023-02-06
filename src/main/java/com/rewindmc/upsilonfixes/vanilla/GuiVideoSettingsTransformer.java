@@ -3,10 +3,10 @@ package com.rewindmc.upsilonfixes.vanilla;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.EnumOptions;
-import net.minecraft.src.GuiSlider;
-import net.minecraft.src.GuiSmallButton;
-import net.minecraft.src.GuiVideoSettings;
+import net.minecraft.client.settings.EnumOptions;
+import net.minecraft.client.gui.GuiSlider;
+import net.minecraft.client.gui.GuiSmallButton;
+import net.minecraft.client.gui.GuiVideoSettings;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
@@ -19,7 +19,7 @@ public class GuiVideoSettingsTransformer extends UpsilonMiniTransformer {
 		
 		ctx.add(
 			ALOAD(0),
-			INVOKESTATIC(hooks(), "modifyButtons", "(Lnet/minecraft/src/GuiVideoSettings;)V")
+			INVOKESTATIC(hooks(), "modifyButtons", "(Lnet/minecraft/client/gui/GuiVideoSettings;)V")
 		);
 	}
 	

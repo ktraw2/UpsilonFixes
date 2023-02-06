@@ -4,7 +4,7 @@ import java.io.InputStream;
 
 import com.rewindmc.upsilonfixes.UpsilonFixesPremain;
 
-import net.minecraft.src.ITexturePack;
+import net.minecraft.client.texturepacks.ITexturePack;
 import nilloader.api.lib.asm.tree.LabelNode;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
@@ -17,7 +17,7 @@ public abstract class TexturePackTransformer extends UpsilonMiniTransformer {
 		ctx.add(
 			ALOAD(0),
 			ALOAD(1),
-			INVOKESTATIC("com/rewindmc/upsilonfixes/layering/TexturePackTransformer$Hooks", "interceptGetResourceAsStream", "(Lnet/minecraft/src/ITexturePack;Ljava/lang/String;)Ljava/io/InputStream;"),
+			INVOKESTATIC("com/rewindmc/upsilonfixes/layering/TexturePackTransformer$Hooks", "interceptGetResourceAsStream", "(Lnet/minecraft/client/texturepacks/ITexturePack;Ljava/lang/String;)Ljava/io/InputStream;"),
 			DUP(),
 			IFNULL(Lcontinue),
 			ARETURN(),

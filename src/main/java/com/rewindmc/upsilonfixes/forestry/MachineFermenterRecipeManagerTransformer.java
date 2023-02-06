@@ -10,7 +10,7 @@ import nilloader.api.lib.mini.annotation.Patch;
 @Patch.Class("forestry.factory.gadgets.MachineFermenter$RecipeManager")
 public class MachineFermenterRecipeManagerTransformer extends UpsilonMiniTransformer {
 
-	@Patch.Method("addRecipe(Lnet/minecraft/src/ItemStack;IFLnet/minecraftforge/liquids/LiquidStack;Lnet/minecraftforge/liquids/LiquidStack;)V")
+	@Patch.Method("addRecipe(Lnet/minecraft/item/ItemStack;IFLnet/minecraftforge/liquids/LiquidStack;Lnet/minecraftforge/liquids/LiquidStack;)V")
 	@Patch.Method.AffectsControlFlow
 	public void patchAddRecipe1(PatchContext ctx) {
 		ctx.jumpToStart();
@@ -32,7 +32,7 @@ public class MachineFermenterRecipeManagerTransformer extends UpsilonMiniTransfo
 		);
 	}
 
-	@Patch.Method("addRecipe(Lnet/minecraft/src/ItemStack;IFLnet/minecraftforge/liquids/LiquidStack;)V")
+	@Patch.Method("addRecipe(Lnet/minecraft/item/ItemStack;IFLnet/minecraftforge/liquids/LiquidStack;)V")
 	@Patch.Method.AffectsControlFlow
 	public void patchAddRecipe2(PatchContext ctx) {
 		// This method is just bad and poorly considered. Why does it exist?

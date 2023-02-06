@@ -1,7 +1,7 @@
 package com.rewindmc.upsilonfixes.vanilla;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.FontRenderer;
+import net.minecraft.client.gui.FontRenderer;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;

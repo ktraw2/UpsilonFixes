@@ -2,7 +2,7 @@ package com.rewindmc.upsilonfixes.vanilla;
 
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 
-import net.minecraft.src.GuiChat;
+import net.minecraft.client.gui.GuiChat;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
@@ -15,7 +15,7 @@ public class GuiChatTransformer extends UpsilonMiniTransformer {
 		
 		ctx.add(
 			ALOAD(0),
-			INVOKESTATIC(hooks(), "modifyWidgets", "(Lnet/minecraft/src/GuiChat;)V")
+			INVOKESTATIC(hooks(), "modifyWidgets", "(Lnet/minecraft/client/gui/GuiChat;)V")
 		);
 	}
 	

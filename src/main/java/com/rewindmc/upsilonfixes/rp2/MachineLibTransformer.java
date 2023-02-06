@@ -3,9 +3,9 @@ package com.rewindmc.upsilonfixes.rp2;
 import buildcraft.api.transport.IPipeEntry;
 import com.eloraam.redpower.core.WorldCoord;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.TileEntity;
-import net.minecraft.src.World;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import nilloader.api.lib.asm.tree.LabelNode;
 import nilloader.api.lib.mini.PatchContext;
@@ -14,7 +14,7 @@ import nilloader.api.lib.mini.annotation.Patch;
 @Patch.Class("com.eloraam.redpower.core.MachineLib")
 public class MachineLibTransformer extends UpsilonMiniTransformer {
 
-	@Patch.Method("addToInventoryCore(Lnet/minecraft/src/World;Lnet/minecraft/src/ItemStack;Lcom/eloraam/redpower/core/WorldCoord;IZ)Z")
+	@Patch.Method("addToInventoryCore(Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;Lcom/eloraam/redpower/core/WorldCoord;IZ)Z")
 	@Patch.Method.AffectsControlFlow
 	public void patchPipesIntoRP(PatchContext ctx) {
 		ctx.jumpToStart();
@@ -25,7 +25,7 @@ public class MachineLibTransformer extends UpsilonMiniTransformer {
 				ALOAD(2),
 				ILOAD(3),
 				ILOAD(4),
-				INVOKESTATIC(hooks(), "pipeInsert", "(Lnet/minecraft/src/World;Lnet/minecraft/src/ItemStack;Lcom/eloraam/redpower/core/WorldCoord;IZ)Z"),
+				INVOKESTATIC(hooks(), "pipeInsert", "(Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;Lcom/eloraam/redpower/core/WorldCoord;IZ)Z"),
 				IFEQ(label),
 				ICONST_1(),
 				IRETURN(),

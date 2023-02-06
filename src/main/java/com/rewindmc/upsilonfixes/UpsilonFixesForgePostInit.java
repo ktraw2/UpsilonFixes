@@ -15,7 +15,7 @@ import ic2.core.Ic2Items;
 import ic2.core.util.KeyboardClient;
 import info.jbcs.minecraft.chisel.Chisel;
 import logisticspipes.proxy.SimpleServiceLocator;
-import net.minecraft.src.Packet3Chat;
+import net.minecraft.network.packet.Packet3Chat;
 
 public class UpsilonFixesForgePostInit implements Runnable {
 

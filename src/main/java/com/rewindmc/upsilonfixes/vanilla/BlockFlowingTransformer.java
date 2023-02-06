@@ -4,10 +4,10 @@ import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
-@Patch.Class("net/minecraft/src/BlockFlowing")
+@Patch.Class("net/minecraft/block/BlockFlowing")
 public class BlockFlowingTransformer extends UpsilonMiniTransformer {
 	
-	@Patch.Method("updateTick(Lnet/minecraft/src/World;IIILjava/util/Random;)V")
+	@Patch.Method("updateTick(Lnet/minecraft/world/World;IIILjava/util/Random;)V")
 	public void patchUpdateTick(PatchContext ctx) {
 		// It turns out water whirlpools prior to 1.5 are a *bug*!
 		// 1.4 code:
@@ -21,7 +21,7 @@ public class BlockFlowingTransformer extends UpsilonMiniTransformer {
 			ILOAD(2),
 			ILOAD(3),
 			ILOAD(4),
-			INVOKEVIRTUAL("net/minecraft/src/World", "getBlockMetadata", "(III)I")
+			INVOKEVIRTUAL("net/minecraft/world/World", "getBlockMetadata", "(III)I")
 		).jumpAfter();
 
 		// All we need to do is insert the "- 1" part in the second argument...

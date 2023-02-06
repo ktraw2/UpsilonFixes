@@ -8,13 +8,13 @@ import nilloader.api.lib.mini.annotation.Patch;
 @Patch.Class("com.thevoxelbox.voxelmenu.ingame.GuiIngameMenu")
 public class GuiIngameMenuVoxelBoxTransformer extends UpsilonMiniTransformer {
 
-	@Patch.Method("a(Lnet/minecraft/src/GuiButton;)V")
+	@Patch.Method("a(Lnet/minecraft/client/gui/GuiButton;)V")
 	public void patchActionPerformed(PatchContext ctx) {
 		ctx.search(
-			NEW("net/minecraft/src/GuiTexturePacks"),
+			NEW("net/minecraft/client/texturepacks/GuiTexturePacks"),
 			DUP(),
 			ALOAD(0),
-			INVOKESPECIAL("net/minecraft/src/GuiTexturePacks", "<init>", "(Lnet/minecraft/src/GuiScreen;)V")
+			INVOKESPECIAL("net/minecraft/client/texturepacks/GuiTexturePacks", "<init>", "(Lnet/minecraft/client/gui/GuiScreen;)V")
 		).jumpAfter();
 		
 		ctx.add(
@@ -22,7 +22,7 @@ public class GuiIngameMenuVoxelBoxTransformer extends UpsilonMiniTransformer {
 			NEW("com/rewindmc/upsilonfixes/layering/GuiTexturePacksWithLayers"),
 			DUP(),
 			ALOAD(0),
-			INVOKESPECIAL("com/rewindmc/upsilonfixes/layering/GuiTexturePacksWithLayers", "<init>", "(Lnet/minecraft/src/GuiScreen;)V")
+			INVOKESPECIAL("com/rewindmc/upsilonfixes/layering/GuiTexturePacksWithLayers", "<init>", "(Lnet/minecraft/client/gui/GuiScreen;)V")
 		);
 	}
 

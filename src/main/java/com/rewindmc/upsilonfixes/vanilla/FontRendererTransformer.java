@@ -7,7 +7,7 @@ import nilloader.api.lib.mini.annotation.Patch;;
 @Patch.Class("net.minecraft.src.FontRenderer")
 public class FontRendererTransformer extends UpsilonMiniTransformer {
 
-	@Patch.Method("<init>(Lnet/minecraft/src/GameSettings;Ljava/lang/String;Lnet/minecraft/src/RenderEngine;Z)V")
+	@Patch.Method("<init>(Lnet/minecraft/client/settings/GameSettings;Ljava/lang/String;Lnet/minecraft/client/renderer/RenderEngine;Z)V")
 	public void patchConstructor(PatchContext ctx) {
 		ctx.search(
 			ALOAD(2),
@@ -20,10 +20,10 @@ public class FontRendererTransformer extends UpsilonMiniTransformer {
 		
 		ctx.add(
 			INVOKESTATIC("net/minecraft/client/Minecraft", "getMinecraft", "()Lnet/minecraft/client/Minecraft;"),
-			GETFIELD("net/minecraft/client/Minecraft", "texturePackList", "Lnet/minecraft/src/TexturePackList;"),
-			INVOKEVIRTUAL("net/minecraft/src/TexturePackList", "getSelectedTexturePack", "()Lnet/minecraft/src/ITexturePack;"),
+			GETFIELD("net/minecraft/client/Minecraft", "texturePackList", "Lnet/minecraft/client/texturepacks/TexturePackList;"),
+			INVOKEVIRTUAL("net/minecraft/client/texturepacks/TexturePackList", "getSelectedTexturePack", "()Lnet/minecraft/client/texturepacks/ITexturePack;"),
 			ALOAD(2),
-			INVOKEINTERFACE("net/minecraft/src/ITexturePack", "getResourceAsStream", "(Ljava/lang/String;)Ljava/io/InputStream;")
+			INVOKEINTERFACE("net/minecraft/client/texturepacks/ITexturePack", "getResourceAsStream", "(Ljava/lang/String;)Ljava/io/InputStream;")
 		);
 	}
 	

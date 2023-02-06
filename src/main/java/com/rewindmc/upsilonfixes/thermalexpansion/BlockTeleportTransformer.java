@@ -2,9 +2,9 @@ package com.rewindmc.upsilonfixes.thermalexpansion;
 
 import com.rewindmc.upsilonfixes.UpsilonFixesConfig;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.World;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 import nilloader.api.lib.asm.tree.LabelNode;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
@@ -13,19 +13,19 @@ import thermalexpansion.transport.tileentity.TileTeleportRoot;
 @Patch.Class("thermalexpansion.transport.block.BlockTeleport")
 public class BlockTeleportTransformer extends UpsilonMiniTransformer {
 
-	@Patch.Method("dismantleBlock(Lnet/minecraft/src/EntityPlayer;Lnet/minecraft/src/World;IIIZ)Lnet/minecraft/src/ItemStack;")
+	@Patch.Method("dismantleBlock(Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/world/World;IIIZ)Lnet/minecraft/item/ItemStack;")
 	public void patchDismantleBlock(PatchContext ctx) {
 		if (UpsilonFixesConfig.keepTesseractFrequencyOnDismantle) {
 			ctx.jumpToLastReturn();
 			ctx.add(
 				ALOAD(7),
-				INVOKESTATIC(hooks(), "addFreq", "(Lnet/minecraft/src/ItemStack;Lthermalexpansion/transport/tileentity/TileTeleportRoot;)Lnet/minecraft/src/ItemStack;")
+				INVOKESTATIC(hooks(), "addFreq", "(Lnet/minecraft/item/ItemStack;Lthermalexpansion/transport/tileentity/TileTeleportRoot;)Lnet/minecraft/item/ItemStack;")
 			);
 		}
 	}
 	
-	@Patch.Method("a(Lnet/minecraft/src/World;IIIII)V")
-	@Patch.Method("a(Lnet/minecraft/src/World;IIILnet/minecraft/src/EntityLiving;)V")
+	@Patch.Method("a(Lnet/minecraft/world/World;IIIII)V")
+	@Patch.Method("a(Lnet/minecraft/world/World;IIILnet/minecraft/entity/EntityLiving;)V")
 	@Patch.Method.AffectsControlFlow
 	public void patchUncheckedCastsVoid(PatchContext ctx) {
 		if (UpsilonFixesConfig.fixThermalTesseractCast) {
@@ -36,7 +36,7 @@ public class BlockTeleportTransformer extends UpsilonMiniTransformer {
 				ILOAD(2),
 				ILOAD(3),
 				ILOAD(4),
-				INVOKESTATIC(hooks(), "checkTEType", "(Lnet/minecraft/src/World;III)Z"),
+				INVOKESTATIC(hooks(), "checkTEType", "(Lnet/minecraft/world/World;III)Z"),
 				IFNZ(Lcontinue),
 				RETURN(),
 				Lcontinue
@@ -44,7 +44,7 @@ public class BlockTeleportTransformer extends UpsilonMiniTransformer {
 		}
 	}
 	
-	@Patch.Method("a(Lnet/minecraft/src/World;IIILnet/minecraft/src/EntityPlayer;IFFF)Z")
+	@Patch.Method("a(Lnet/minecraft/world/World;IIILnet/minecraft/entity/player/EntityPlayer;IFFF)Z")
 	@Patch.Method.AffectsControlFlow
 	public void patchUncheckedCastsBool(PatchContext ctx) {
 		if (UpsilonFixesConfig.fixThermalTesseractCast) {
@@ -55,7 +55,7 @@ public class BlockTeleportTransformer extends UpsilonMiniTransformer {
 				ILOAD(2),
 				ILOAD(3),
 				ILOAD(4),
-				INVOKESTATIC(hooks(), "checkTEType", "(Lnet/minecraft/src/World;III)Z"),
+				INVOKESTATIC(hooks(), "checkTEType", "(Lnet/minecraft/world/World;III)Z"),
 				IFNZ(Lcontinue),
 				ICONST_0(),
 				IRETURN(),

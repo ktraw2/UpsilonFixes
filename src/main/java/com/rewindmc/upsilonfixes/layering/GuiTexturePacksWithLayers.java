@@ -8,14 +8,14 @@ import org.lwjgl.Sys;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.FontRenderer;
-import net.minecraft.src.GuiButton;
-import net.minecraft.src.GuiScreen;
-import net.minecraft.src.GuiSlot;
-import net.minecraft.src.GuiSmallButton;
-import net.minecraft.src.ITexturePack;
-import net.minecraft.src.StringTranslate;
-import net.minecraft.src.Tessellator;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiSlot;
+import net.minecraft.client.gui.GuiSmallButton;
+import net.minecraft.client.texturepacks.ITexturePack;
+import net.minecraft.util.StringTranslate;
+import net.minecraft.client.renderer.Tessellator;
 
 public class GuiTexturePacksWithLayers extends GuiScreen {
 	protected GuiScreen parent;

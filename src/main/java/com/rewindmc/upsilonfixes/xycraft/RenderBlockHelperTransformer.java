@@ -10,7 +10,7 @@ import nilloader.api.lib.mini.annotation.Patch;
 @Patch.Class("soaryn.xycraft.world.render.RenderBlockHelper")
 public class RenderBlockHelperTransformer extends UpsilonMiniTransformer {
 
-	@Patch.Method("DrawAnimation(Lnet/minecraft/src/RenderBlocks;Lnet/minecraft/src/Block;IFFFFFF)V")
+	@Patch.Method("DrawAnimation(Lnet/minecraft/client/renderer/RenderBlocks;Lnet/minecraft/block/Block;IFFFFFF)V")
 	public void patchDrawAnimation(PatchContext ctx) {
 		ctx.jumpToStart();
 		ctx.add(
@@ -18,7 +18,7 @@ public class RenderBlockHelperTransformer extends UpsilonMiniTransformer {
 			INVOKESTATIC("org/lwjgl/opengl/GL11", "glDisable", "(I)V")
 		);
 		
-		ctx.search(INVOKESTATIC("net/minecraft/src/RenderHelper", "enableStandardItemLighting", "()V")).erase();
+		ctx.search(INVOKESTATIC("net/minecraft/client/renderer/RenderHelper", "enableStandardItemLighting", "()V")).erase();
 		
 		ctx.jumpToLastReturn();
 		ctx.add(

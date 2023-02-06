@@ -1,11 +1,11 @@
 package com.rewindmc.upsilonfixes.vanilla;
 
-import net.minecraft.src.Container;
-import net.minecraft.src.EntityPlayerMP;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.NetServerHandler;
-import net.minecraft.src.Packet250CustomPayload;
-import net.minecraft.src.Slot;
+import net.minecraft.inventory.Container;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.NetServerHandler;
+import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.inventory.Slot;
 import nilloader.api.lib.asm.tree.LabelNode;
 
 import java.nio.ByteBuffer;
@@ -17,7 +17,7 @@ import nilloader.api.lib.mini.annotation.Patch;
 @Patch.Class("net.minecraft.src.NetServerHandler")
 public class NetServerHandlerTransformer extends UpsilonMiniTransformer {
 
-	@Patch.Method("handleCustomPayload(Lnet/minecraft/src/Packet250CustomPayload;)V")
+	@Patch.Method("handleCustomPayload(Lnet/minecraft/network/packet/Packet250CustomPayload;)V")
 	@Patch.Method.AffectsControlFlow
 	public void patchHandleCustomPayload(PatchContext ctx) {
 		if (UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing) {
@@ -26,7 +26,7 @@ public class NetServerHandlerTransformer extends UpsilonMiniTransformer {
 			ctx.add(
 				ALOAD(0),
 				ALOAD(1),
-				INVOKESTATIC(hooks(), "interceptPacket", "(Lnet/minecraft/src/NetServerHandler;Lnet/minecraft/src/Packet250CustomPayload;)Z"),
+				INVOKESTATIC(hooks(), "interceptPacket", "(Lnet/minecraft/network/NetServerHandler;Lnet/minecraft/network/packet/Packet250CustomPayload;)Z"),
 				IFZ(Lexit),
 				RETURN(),
 				Lexit
@@ -34,7 +34,7 @@ public class NetServerHandlerTransformer extends UpsilonMiniTransformer {
 		}
 	}
 	
-	@Patch.Method("handleChat(Lnet/minecraft/src/Packet3Chat;)V")
+	@Patch.Method("handleChat(Lnet/minecraft/network/packet/Packet3Chat;)V")
 	public void patchHandleChat(PatchContext ctx) {
 		if (UpsilonFixesConfig.increaseChatLimit) {
 			ctx.search(

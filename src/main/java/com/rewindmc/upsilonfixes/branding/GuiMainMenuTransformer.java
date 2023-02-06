@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.rewindmc.upsilonfixes.UpsilonFixesConfig;
 
-import net.minecraft.src.GuiMainMenu;
+import net.minecraft.client.gui.GuiMainMenu;
 import nilloader.api.lib.asm.tree.LabelNode;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
@@ -113,13 +113,13 @@ public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 		ctx.search(
 			ALOAD(0),
 			ALOAD(2),
-			GETSTATIC("net/minecraft/src/GuiMainMenu", "rand", "Ljava/util/Random;")
+			GETSTATIC("net/minecraft/client/gui/GuiMainMenu", "rand", "Ljava/util/Random;")
 		).jumpBefore();
 		
 		ctx.add(
 			ALOAD(0),
 			ALOAD(2),
-			INVOKESTATIC(hooks(), "contributeSplashes", "(Lnet/minecraft/src/GuiMainMenu;Ljava/util/List;)V")
+			INVOKESTATIC(hooks(), "contributeSplashes", "(Lnet/minecraft/client/gui/GuiMainMenu;Ljava/util/List;)V")
 		);
 	}
 
@@ -131,7 +131,7 @@ public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 		ctx.add(
 			POP(),
 			ALOAD(0),
-			GETFIELD("net/minecraft/src/GuiMainMenu", "splashText", "Ljava/lang/String;")
+			GETFIELD("net/minecraft/client/gui/GuiMainMenu", "splashText", "Ljava/lang/String;")
 		);
 
 		ctx.search(
@@ -140,7 +140,7 @@ public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 		ctx.add(
 			POP(),
 			ALOAD(0),
-			GETFIELD("net/minecraft/src/GuiMainMenu", "splashText", "Ljava/lang/String;")
+			GETFIELD("net/minecraft/client/gui/GuiMainMenu", "splashText", "Ljava/lang/String;")
 		);
 	}
 	
@@ -156,7 +156,7 @@ public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 		ctx.add(
 			LDC("Vertical!"),
 			ALOAD(0),
-			GETFIELD("net/minecraft/src/GuiMainMenu", "splashText", "Ljava/lang/String;"),
+			GETFIELD("net/minecraft/client/gui/GuiMainMenu", "splashText", "Ljava/lang/String;"),
 			INVOKEVIRTUAL("java/lang/String", "equals", "(Ljava/lang/Object;)Z"),
 			IFZ(L1),
 			POP(),

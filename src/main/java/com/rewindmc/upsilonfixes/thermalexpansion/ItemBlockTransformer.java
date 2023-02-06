@@ -1,8 +1,8 @@
 package com.rewindmc.upsilonfixes.thermalexpansion;
 
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.World;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import nilloader.api.lib.asm.tree.LabelNode;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
@@ -11,12 +11,12 @@ import thermalexpansion.transport.tileentity.TileTeleportRoot;
 @Patch.Class("net.minecraft.src.ItemBlock")
 public class ItemBlockTransformer extends UpsilonMiniTransformer {
 
-	@Patch.Method("placeBlockAt(Lnet/minecraft/src/ItemStack;Lnet/minecraft/src/EntityPlayer;Lnet/minecraft/src/World;IIIIFFFI)Z")
+	@Patch.Method("placeBlockAt(Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/world/World;IIIIFFFI)Z")
 	@Patch.Method.AffectsControlFlow
 	public void patchPlaceBlockAt(PatchContext ctx) {
 		ctx.jumpToStart();
 		ctx.search(
-			INVOKEVIRTUAL("net/minecraft/src/Block", "onBlockPlacedBy", "(Lnet/minecraft/src/World;IIILnet/minecraft/src/EntityLiving;)V")
+			INVOKEVIRTUAL("net/minecraft/block/Block", "onBlockPlacedBy", "(Lnet/minecraft/world/World;IIILnet/minecraft/entity/EntityLiving;)V")
 		).jumpAfter();
 		LabelNode label = new LabelNode();
 		ctx.add(
@@ -28,7 +28,7 @@ public class ItemBlockTransformer extends UpsilonMiniTransformer {
 			ILOAD(4),
 			ILOAD(5),
 			ILOAD(6),
-			INVOKESTATIC(hooks(), "placeBlockAt", "(Lnet/minecraft/src/ItemStack;Lnet/minecraft/src/World;III)V"),
+			INVOKESTATIC(hooks(), "placeBlockAt", "(Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;III)V"),
 			label
 		);
 	}

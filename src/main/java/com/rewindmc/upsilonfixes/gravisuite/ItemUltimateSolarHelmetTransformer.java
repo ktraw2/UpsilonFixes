@@ -5,21 +5,21 @@ import ic2.core.IC2;
 import ic2.core.Ic2Items;
 import ic2.core.item.ElectricItem;
 import ic2.core.item.ItemTinCan;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.ItemStack;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("gravisuite.ItemUltimateSolarHelmet")
 public class ItemUltimateSolarHelmetTransformer extends UpsilonMiniTransformer {
 
-	@Patch.Method("onTick(Lnet/minecraft/src/EntityPlayer;Lnet/minecraft/src/ItemStack;)Z")
+	@Patch.Method("onTick(Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/item/ItemStack;)Z")
 	public void patchOnTick(PatchContext ctx) {
 		ctx.jumpToStart();
 		ctx.add(
 				ALOAD(0),
 				ALOAD(1),
-				INVOKESTATIC(hooks(), "feedPlayer", "(Lnet/minecraft/src/EntityPlayer;Lnet/minecraft/src/ItemStack;)V")
+				INVOKESTATIC(hooks(), "feedPlayer", "(Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/item/ItemStack;)V")
 		);
 	}
 

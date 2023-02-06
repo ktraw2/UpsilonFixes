@@ -6,10 +6,10 @@ import com.rewindmc.upsilonfixes.UpsilonFixesConfig;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.GuiContainer;
-import net.minecraft.src.GuiScreen;
-import net.minecraft.src.Packet250CustomPayload;
-import net.minecraft.src.Slot;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.inventory.Slot;
 import nilloader.api.lib.asm.tree.ClassNode;
 import nilloader.api.lib.asm.tree.FieldNode;
 import nilloader.api.lib.asm.tree.LabelNode;
@@ -30,7 +30,7 @@ public class GuiContainerTransformer extends UpsilonMiniTransformer {
 		return false;
 	}
 	
-	@Patch.Method("<init>(Lnet/minecraft/src/Container;)V")
+	@Patch.Method("<init>(Lnet/minecraft/inventory/Container;)V")
 	public void patchConstructor(PatchContext ctx) {
 		if (UpsilonFixesConfig.smearing) {
 			ctx.jumpToLastReturn();
@@ -40,8 +40,8 @@ public class GuiContainerTransformer extends UpsilonMiniTransformer {
 				NEW("com/rewindmc/upsilonfixes/SmearingCompanion"),
 					DUP(),
 					ALOAD(0),
-					INVOKESPECIAL("com/rewindmc/upsilonfixes/SmearingCompanion", "<init>", "(Lnet/minecraft/src/GuiContainer;)V"),
-				PUTFIELD("net/minecraft/src/GuiContainer", "smearingCompanion", "Lcom/rewindmc/upsilonfixes/SmearingCompanion;")
+					INVOKESPECIAL("com/rewindmc/upsilonfixes/SmearingCompanion", "<init>", "(Lnet/minecraft/client/gui/inventory/GuiContainer;)V"),
+				PUTFIELD("net/minecraft/client/gui/inventory/GuiContainer", "smearingCompanion", "Lcom/rewindmc/upsilonfixes/SmearingCompanion;")
 			);
 		}
 	}
@@ -49,17 +49,17 @@ public class GuiContainerTransformer extends UpsilonMiniTransformer {
 	@Patch.Method("keyTyped(CI)V")
 	public void patchKeyTyped(PatchContext ctx) {
 		ctx.search(
-			INVOKEVIRTUAL("net/minecraft/src/GuiContainer", "checkHotbarKeys", "(I)Z"),
+			INVOKEVIRTUAL("net/minecraft/client/gui/inventory/GuiContainer", "checkHotbarKeys", "(I)Z"),
 			POP()
 		).jumpAfter();
 		
 		ctx.add(
 			ALOAD(0),
 			ALOAD(0),
-			GETFIELD("net/minecraft/src/GuiContainer", "theSlot", "Lnet/minecraft/src/Slot;"),
+			GETFIELD("net/minecraft/client/gui/inventory/GuiContainer", "theSlot", "Lnet/minecraft/inventory/Slot;"),
 			ILOAD(1),
 			ILOAD(2),
-			INVOKESTATIC(hooks(), "keyTyped", "(Lnet/minecraft/src/GuiContainer;Lnet/minecraft/src/Slot;CI)V")
+			INVOKESTATIC(hooks(), "keyTyped", "(Lnet/minecraft/client/gui/inventory/GuiContainer;Lnet/minecraft/inventory/Slot;CI)V")
 		);
 	}
 	
@@ -70,7 +70,7 @@ public class GuiContainerTransformer extends UpsilonMiniTransformer {
 			
 			ctx.add(
 				ALOAD(0),
-				GETFIELD("net/minecraft/src/GuiContainer", "smearingCompanion", "Lcom/rewindmc/upsilonfixes/SmearingCompanion;"),
+				GETFIELD("net/minecraft/client/gui/inventory/GuiContainer", "smearingCompanion", "Lcom/rewindmc/upsilonfixes/SmearingCompanion;"),
 				ILOAD(1),
 				ILOAD(2),
 				ILOAD(3),
@@ -80,7 +80,7 @@ public class GuiContainerTransformer extends UpsilonMiniTransformer {
 			// prevent vanilla logic from running
 			
 			ctx.search(
-				GETFIELD("net/minecraft/src/Slot", "slotNumber", "I")
+				GETFIELD("net/minecraft/inventory/Slot", "slotNumber", "I")
 			).jumpAfter();
 			
 			ctx.add(
@@ -98,12 +98,12 @@ public class GuiContainerTransformer extends UpsilonMiniTransformer {
 				FLOAD(3),
 				ILOAD(1),
 				ILOAD(2),
-				INVOKEVIRTUAL("net/minecraft/src/GuiContainer", "drawGuiContainerBackgroundLayer", "(FII)V")
+				INVOKEVIRTUAL("net/minecraft/client/gui/inventory/GuiContainer", "drawGuiContainerBackgroundLayer", "(FII)V")
 			).jumpAfter();
 			
 			ctx.add(
 				ALOAD(0),
-				GETFIELD("net/minecraft/src/GuiContainer", "smearingCompanion", "Lcom/rewindmc/upsilonfixes/SmearingCompanion;"),
+				GETFIELD("net/minecraft/client/gui/inventory/GuiContainer", "smearingCompanion", "Lcom/rewindmc/upsilonfixes/SmearingCompanion;"),
 				ILOAD(1),
 				ILOAD(2),
 				FLOAD(3),
@@ -121,9 +121,9 @@ public class GuiContainerTransformer extends UpsilonMiniTransformer {
 				checkCursorStack.jumpBefore();
 				ctx.add(
 					ALOAD(0),
-					GETFIELD("net/minecraft/src/GuiContainer", "smearingCompanion", "Lcom/rewindmc/upsilonfixes/SmearingCompanion;"),
+					GETFIELD("net/minecraft/client/gui/inventory/GuiContainer", "smearingCompanion", "Lcom/rewindmc/upsilonfixes/SmearingCompanion;"),
 					ALOAD(11),
-					INVOKEVIRTUAL("com/rewindmc/upsilonfixes/SmearingCompanion", "modifyCursorStack", "(Lnet/minecraft/src/ItemStack;)Lnet/minecraft/src/ItemStack;"),
+					INVOKEVIRTUAL("com/rewindmc/upsilonfixes/SmearingCompanion", "modifyCursorStack", "(Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;"),
 					ASTORE(11)
 				);
 			}
@@ -133,12 +133,12 @@ public class GuiContainerTransformer extends UpsilonMiniTransformer {
 				ALOAD(0),
 				ILOAD(1),
 				ILOAD(2),
-				INVOKEVIRTUAL("net/minecraft/src/GuiContainer", "drawGuiContainerForegroundLayer", "(II)V")
+				INVOKEVIRTUAL("net/minecraft/client/gui/inventory/GuiContainer", "drawGuiContainerForegroundLayer", "(II)V")
 			).jumpBefore();
 			
 			ctx.add(
 				ALOAD(0),
-				GETFIELD("net/minecraft/src/GuiContainer", "smearingCompanion", "Lcom/rewindmc/upsilonfixes/SmearingCompanion;"),
+				GETFIELD("net/minecraft/client/gui/inventory/GuiContainer", "smearingCompanion", "Lcom/rewindmc/upsilonfixes/SmearingCompanion;"),
 				ILOAD(1),
 				ILOAD(2),
 				FLOAD(3),
@@ -154,7 +154,7 @@ public class GuiContainerTransformer extends UpsilonMiniTransformer {
 			
 			ctx.add(
 				ALOAD(0),
-				GETFIELD("net/minecraft/src/GuiContainer", "smearingCompanion", "Lcom/rewindmc/upsilonfixes/SmearingCompanion;"),
+				GETFIELD("net/minecraft/client/gui/inventory/GuiContainer", "smearingCompanion", "Lcom/rewindmc/upsilonfixes/SmearingCompanion;"),
 				ILOAD(1),
 				ILOAD(2),
 				ILOAD(3),
@@ -163,20 +163,20 @@ public class GuiContainerTransformer extends UpsilonMiniTransformer {
 		}
 	}
 	
-	@Patch.Method("drawSlotInventory(Lnet/minecraft/src/Slot;)V")
+	@Patch.Method("drawSlotInventory(Lnet/minecraft/inventory/Slot;)V")
 	public void patchDrawSlotInventory(PatchContext ctx) {
 		if (UpsilonFixesConfig.smearing) {
 			ctx.search(
-				INVOKEVIRTUAL("net/minecraft/src/Slot", "getStack", "()Lnet/minecraft/src/ItemStack;"),
+				INVOKEVIRTUAL("net/minecraft/inventory/Slot", "getStack", "()Lnet/minecraft/item/ItemStack;"),
 				ASTORE(4)
 			).jumpAfter();
 			
 			ctx.add(
 				ALOAD(0),
-				GETFIELD("net/minecraft/src/GuiContainer", "smearingCompanion", "Lcom/rewindmc/upsilonfixes/SmearingCompanion;"),
+				GETFIELD("net/minecraft/client/gui/inventory/GuiContainer", "smearingCompanion", "Lcom/rewindmc/upsilonfixes/SmearingCompanion;"),
 				ALOAD(1),
 				ALOAD(4),
-				INVOKEVIRTUAL("com/rewindmc/upsilonfixes/SmearingCompanion", "modifySlotStack", "(Lnet/minecraft/src/Slot;Lnet/minecraft/src/ItemStack;)Lnet/minecraft/src/ItemStack;"),
+				INVOKEVIRTUAL("com/rewindmc/upsilonfixes/SmearingCompanion", "modifySlotStack", "(Lnet/minecraft/inventory/Slot;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;"),
 				ASTORE(4)
 			);
 		}

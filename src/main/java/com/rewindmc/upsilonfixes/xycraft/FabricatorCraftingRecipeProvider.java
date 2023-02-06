@@ -3,10 +3,10 @@ package com.rewindmc.upsilonfixes.xycraft;
 import logisticspipes.proxy.interfaces.ICraftingRecipeProvider;
 import logisticspipes.utils.ItemIdentifier;
 import logisticspipes.utils.SimpleInventory;
-import net.minecraft.src.IInventory;
-import net.minecraft.src.InventoryCrafting;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.TileEntity;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import soaryn.xycraft.machines.block.TileFabricator;
 
 public class FabricatorCraftingRecipeProvider implements ICraftingRecipeProvider {

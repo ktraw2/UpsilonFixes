@@ -8,7 +8,7 @@ import nilloader.api.lib.mini.annotation.Patch;
 @Patch.Class("soaryn.xycraft.world.block.BlockOres")
 public class BlockOresTransformer extends UpsilonMiniTransformer {
 
-	@Patch.Method("getAnimationIndex(Lnet/minecraft/src/IBlockAccess;IIILnet/minecraftforge/common/ForgeDirection;)I")
+	@Patch.Method("getAnimationIndex(Lnet/minecraft/world/IBlockAccess;IIILnet/minecraftforge/common/ForgeDirection;)I")
 	@Patch.Method.AffectsControlFlow
 	public void patchGetAnimationIndexPos(PatchContext ctx) {
 		ctx.jumpToStart();
@@ -17,7 +17,7 @@ public class BlockOresTransformer extends UpsilonMiniTransformer {
 			ILOAD(2),
 			ILOAD(3),
 			ILOAD(4),
-			INVOKEINTERFACE("net/minecraft/src/IBlockAccess", "getBlockMetadata", "(III)I"),
+			INVOKEINTERFACE("net/minecraft/world/IBlockAccess", "getBlockMetadata", "(III)I"),
 			INVOKESTATIC(hooks(), "getAnimationIndex", "(I)I"),
 			IRETURN()
 		);
@@ -40,7 +40,7 @@ public class BlockOresTransformer extends UpsilonMiniTransformer {
 		patchGetColorGeneric(ctx, 1);
 	}
 	
-	@Patch.Method("getColor(Lnet/minecraft/src/IBlockAccess;IIILnet/minecraftforge/common/ForgeDirection;)Lcodechicken/xycraftcopy/core/colour/Colour;")
+	@Patch.Method("getColor(Lnet/minecraft/world/IBlockAccess;IIILnet/minecraftforge/common/ForgeDirection;)Lcodechicken/xycraftcopy/core/colour/Colour;")
 	public void patchGetColor(PatchContext ctx) {
 		patchGetColorGeneric(ctx, 6);
 	}

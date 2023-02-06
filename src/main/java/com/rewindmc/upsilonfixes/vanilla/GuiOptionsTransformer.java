@@ -3,11 +3,11 @@ package com.rewindmc.upsilonfixes.vanilla;
 import com.rewindmc.upsilonfixes.UpsilonFixesConfig;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 
-import net.minecraft.src.EnumOptions;
-import net.minecraft.src.GuiButton;
-import net.minecraft.src.GuiOptions;
-import net.minecraft.src.GuiSmallButton;
-import net.minecraft.src.StringTranslate;
+import net.minecraft.client.settings.EnumOptions;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiOptions;
+import net.minecraft.client.gui.GuiSmallButton;
+import net.minecraft.util.StringTranslate;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
@@ -20,7 +20,7 @@ public class GuiOptionsTransformer extends UpsilonMiniTransformer {
 		
 		ctx.add(
 			ALOAD(0),
-			INVOKESTATIC(hooks(), "modifyButtons", "(Lnet/minecraft/src/GuiOptions;)V")
+			INVOKESTATIC(hooks(), "modifyButtons", "(Lnet/minecraft/client/gui/GuiOptions;)V")
 		);
 	}
 	

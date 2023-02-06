@@ -16,7 +16,7 @@ import java.util.WeakHashMap;
 
 import com.rewindmc.upsilonfixes.UpsilonFixesPremain;
 
-import net.minecraft.src.ITexturePack;
+import net.minecraft.client.texturepacks.ITexturePack;
 
 public class Layering {
 

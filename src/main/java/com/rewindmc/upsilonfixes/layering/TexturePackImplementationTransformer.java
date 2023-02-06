@@ -18,11 +18,11 @@ public class TexturePackImplementationTransformer extends UpsilonMiniTransformer
 		ctx.add(
 			// call interceptor for default pack (can't patch TexturePackDefault as it doesn't define this method)
 			ALOAD(0),
-			INSTANCEOF("net/minecraft/src/TexturePackDefault"),
+			INSTANCEOF("net/minecraft/client/texturepacks/TexturePackDefault"),
 			IFZ(Lnotdefault),
 			ALOAD(0),
 			ALOAD(1),
-			INVOKESTATIC("com/rewindmc/upsilonfixes/layering/TexturePackTransformer$Hooks", "interceptGetResourceAsStream", "(Lnet/minecraft/src/ITexturePack;Ljava/lang/String;)Ljava/io/InputStream;"),
+			INVOKESTATIC("com/rewindmc/upsilonfixes/layering/TexturePackTransformer$Hooks", "interceptGetResourceAsStream", "(Lnet/minecraft/client/texturepacks/ITexturePack;Ljava/lang/String;)Ljava/io/InputStream;"),
 			DUP(),
 			IFNULL(Lcontinuefromintercept),
 			ARETURN(),
@@ -37,7 +37,7 @@ public class TexturePackImplementationTransformer extends UpsilonMiniTransformer
 			IFNZ(Lcontinue),
 			// don't delegate to classloader for layer packs
 			ALOAD(0),
-			INVOKESTATIC("com/rewindmc/upsilonfixes/layering/Layering", "isLayerPack", "(Lnet/minecraft/src/ITexturePack;)Z"),
+			INVOKESTATIC("com/rewindmc/upsilonfixes/layering/Layering", "isLayerPack", "(Lnet/minecraft/client/texturepacks/ITexturePack;)Z"),
 			IFZ(Lcontinue),
 			ACONST_NULL(),
 			ARETURN(),

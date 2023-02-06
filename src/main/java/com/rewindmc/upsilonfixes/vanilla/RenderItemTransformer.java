@@ -10,7 +10,7 @@ import nilloader.api.lib.mini.annotation.Patch;
 @Patch.Class("net.minecraft.src.RenderItem")
 public class RenderItemTransformer extends UpsilonMiniTransformer {
 
-	@Patch.Method("renderItemOverlayIntoGUI(Lnet/minecraft/src/FontRenderer;Lnet/minecraft/src/RenderEngine;Lnet/minecraft/src/ItemStack;II)V")
+	@Patch.Method("renderItemOverlayIntoGUI(Lnet/minecraft/client/gui/FontRenderer;Lnet/minecraft/client/renderer/RenderEngine;Lnet/minecraft/item/ItemStack;II)V")
 	public void patch(PatchContext ctx) {
 		// int var10 = (255 - var7) / 4 << 16 | 16128;
 		ctx.search(
