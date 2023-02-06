@@ -131,10 +131,6 @@ public class UpsilonFixesConfig {
 	@Comment("Fixes XyCraft ore textures to actually use the correct parts\nof the block atlas, instead of just recoloring the white one.")
 	public static boolean fixXycraftOreTextures = true;
 
-	@Key("fps-slider")
-	@Comment("Replace the \"Performance\" option with an FPS slider like modern\nversions.")
-	public static boolean fpsSlider = true;
-	
 	@Key("guis-in-portals")
 	@Comment("Allows opening GUIs in Nether portals. This was a fix for a\ndupe bug in Beta that is long gone.")
 	public static boolean guisInPortals = true;
@@ -166,6 +162,14 @@ public class UpsilonFixesConfig {
 	@Key("modern-durability-color")
 	@Comment("Backports the modern hue-based durability bar color - it's more legible.")
 	public static boolean modernDurabilityColor = true;
+	
+	@Key("modern-fps-slider")
+	@Comment("Replace the \"Performance\" option with an FPS slider like modern\nversions.")
+	public static boolean modernFpsSlider = true;
+	
+	@Key("modern-gui-scale")
+	@Comment("Backports the modern GUI Scale option that lets you set it to anything\nthat fits, instead of only Auto/Small/Normal/Large.")
+	public static boolean modernGuiScale = true;
 	
 	@Key("quantum-solar-helm-can-fix")
 	@Comment("Ultimate/Hybrid Solar Helmets will eat filled tin cans just like the quantum\nhelmet normally would.")

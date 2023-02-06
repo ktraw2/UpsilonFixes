@@ -13,7 +13,7 @@ public class MinecraftTransformer extends UpsilonMiniTransformer {
 	@Patch.Method("func_90020_K()I")
 	@Patch.Method.AffectsControlFlow
 	public void patchGetPerformance(PatchContext ctx) {
-		if (UpsilonFixesConfig.fpsSlider) {
+		if (UpsilonFixesConfig.modernFpsSlider) {
 			ctx.jumpToStart();
 			ctx.add(
 				INVOKESTATIC(hooks(), "replaceGetPerformance", "()I"),

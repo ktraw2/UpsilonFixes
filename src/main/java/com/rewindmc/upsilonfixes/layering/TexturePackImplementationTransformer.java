@@ -30,11 +30,12 @@ public class TexturePackImplementationTransformer extends UpsilonMiniTransformer
 			POP(),
 			
 			Lnotdefault,
-			// don't delegate to classloader for layer packs
+			// don't override pack.png in layer packs
 			LDC("/pack.png"),
 			ALOAD(1),
 			INVOKEVIRTUAL("java/lang/String", "equals", "(Ljava/lang/Object;)Z"),
 			IFNZ(Lcontinue),
+			// don't delegate to classloader for layer packs
 			ALOAD(0),
 			INVOKESTATIC("com/rewindmc/upsilonfixes/layering/Layering", "isLayerPack", "(Lnet/minecraft/src/ITexturePack;)Z"),
 			IFZ(Lcontinue),

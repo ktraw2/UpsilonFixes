@@ -79,11 +79,11 @@ public class UpsilonFixesPremain implements Runnable {
 		
 		register("vanilla.GuiChat", UpsilonFixesConfig.increaseChatLimit);
 
-		register("vanilla.Minecraft", UpsilonFixesConfig.fpsSlider);
-		register("vanilla.EntityRenderer", UpsilonFixesConfig.fpsSlider);
-		register("vanilla.GuiVideoSettings", UpsilonFixesConfig.fpsSlider);
+		register("vanilla.Minecraft", UpsilonFixesConfig.modernFpsSlider);
+		register("vanilla.EntityRenderer", UpsilonFixesConfig.modernFpsSlider);
+		register("vanilla.GuiVideoSettings", UpsilonFixesConfig.modernFpsSlider);
 		
-		register("vanilla.GameSettings", UpsilonFixesConfig.smearing);
+		register("vanilla.GameSettings", UpsilonFixesConfig.smearing || UpsilonFixesConfig.removeSnooper || UpsilonFixesConfig.modernFpsSlider || UpsilonFixesConfig.modernGuiScale);
 		register("vanilla.GuiOptions", UpsilonFixesConfig.smearing || UpsilonFixesConfig.removeSnooper);
 		
 		register("vanilla.NetClientHandler", UpsilonFixesConfig.attackerYawSyncing);
