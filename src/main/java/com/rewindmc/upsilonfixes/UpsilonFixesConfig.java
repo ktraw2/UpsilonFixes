@@ -103,6 +103,10 @@ public class UpsilonFixesConfig {
 	@Comment("Fixes an infinite loop with the Factorization mixer caused\nby a minor oversight.")
 	public static boolean fixFzMixerInfiniteLoop = true;
 	
+	@Key("fix-uncrafting-exploits")
+	@Comment("Fixes Twilight Forest uncrafting exploits.")
+	public static boolean fixUncraftingExploits = true;
+	
 	@Key("fix-gregtech-cell-remainder")
 	@Comment("Configures remainder items for GregTech cells.")
 	public static boolean fixGregTechCellRemainder = true;

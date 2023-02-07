@@ -64,6 +64,8 @@ dependencies {
 	mod 'libs:ThermalExpansion'
 	mod 'libs:BuildCraft'
 	mod 'libs:DartCraft'
+	mod 'libs:TwilightForest'
+	mod 'libs:GravityGun'
 }
 
 mappings {

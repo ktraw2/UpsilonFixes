@@ -12,12 +12,33 @@ public abstract class UpsilonMiniTransformer extends MiniTransformer implements 
 	protected final String hooks() {
 		return getClass().getName().replace('.', '/')+"$Hooks";
 	}
-	
+
+	/**
+	 * Alias for {@link #IFEQ} with an alternate mnemonic that reflects its actual behavior: IF Zero.
+	 */
 	protected final JumpInsnNode IFZ(LabelNode label) {
 		return IFEQ(label);
 	}
 	
+	/**
+	 * Alias for {@link #IFNE} with an alternate mnemonic that reflects its actual behavior: IF Not
+	 * Zero.
+	 */
 	protected final JumpInsnNode IFNZ(LabelNode label) {
+		return IFNE(label);
+	}
+
+	/**
+	 * Alias for {@link #IFEQ} with an alternate mnemonic for booleans.
+	 */
+	protected final JumpInsnNode IF_FALSE(LabelNode label) {
+		return IFEQ(label);
+	}
+	
+	/**
+	 * Alias for {@link #IFNE} with an alternate mnemonic for booleans.
+	 */
+	protected final JumpInsnNode IF_TRUE(LabelNode label) {
 		return IFNE(label);
 	}
 
