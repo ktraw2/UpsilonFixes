@@ -99,13 +99,13 @@ public class UpsilonFixesConfig {
 	@Comment("Prevents registering null-fluid recipes in the Forestry fermenter.")
 	public static boolean fixForestryFermenterNPE = true;
 	
+	@Key("fix-fz-barrel-lighting")
+	@Comment("Fixes lighting on Factorization barrels.")
+	public static boolean fixFzBarrelLighting = true;
+	
 	@Key("fix-fz-mixer-infinite-loop")
 	@Comment("Fixes an infinite loop with the Factorization mixer caused\nby a minor oversight.")
 	public static boolean fixFzMixerInfiniteLoop = true;
-	
-	@Key("fix-uncrafting-exploits")
-	@Comment("Fixes Twilight Forest uncrafting exploits.")
-	public static boolean fixUncraftingExploits = true;
 	
 	@Key("fix-gregtech-cell-remainder")
 	@Comment("Configures remainder items for GregTech cells.")
@@ -126,6 +126,10 @@ public class UpsilonFixesConfig {
 	@Key("fix-thermal-tesseract-cast")
 	@Comment("Fixes Thermal Expansion tesseract ClassCastException crashes when\ntile entity types are desynced - can be caused by frame machines,\nturtles, etc.")
 	public static boolean fixThermalTesseractCast = true;
+	
+	@Key("fix-uncrafting-exploits")
+	@Comment("Fixes Twilight Forest uncrafting exploits.")
+	public static boolean fixUncraftingExploits = true;
 
 	@Key("fix-xycraft-item-lighting")
 	@Comment("Fixes XyCraft ore items messing up the light state, making all\nitems rendered after them in the GUI draw with wrong lighting.")

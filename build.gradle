@@ -66,8 +66,9 @@ dependencies {
 	mod 'libs:DartCraft'
 	mod 'libs:TwilightForest'
 	mod 'libs:GravityGun'
+	mod 'libs:Factorization'
 }
 
 mappings {
-	work 'com.unascribed:unknownthingy:1.14@tsrg'
+	work 'com.unascribed:unknownthingy:1.19@tsrg'
 }

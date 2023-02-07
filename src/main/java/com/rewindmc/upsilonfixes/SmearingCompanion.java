@@ -7,7 +7,7 @@ import java.util.Set;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Screen;
-import net.minecraft.client.gui.handled.ScreenHandled;
+import net.minecraft.client.gui.handled.HandledScreen;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.inventory.Slot;
@@ -19,13 +19,13 @@ import static org.lwjgl.opengl.GL11.*;
  */
 public class SmearingCompanion {
 
-	private final ScreenHandled gui;
+	private final HandledScreen gui;
 	
 	private int buttonDown = -1;
 	private long lastLeftClick = -4000;
 	private final Set<Slot> smearedSlots = new LinkedHashSet<>();
 
-	public SmearingCompanion(ScreenHandled gui) {
+	public SmearingCompanion(HandledScreen gui) {
 		this.gui = gui;
 	}
 
