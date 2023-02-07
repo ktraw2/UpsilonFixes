@@ -30,6 +30,16 @@ public class UpsilonFixesForgePostInit implements Runnable {
 			classLoader.setAccessible(true);
 			ClassLoader loader = (ClassLoader)classLoader.get(relauncher);
 			Class.forName("com.rewindmc.upsilonfixes.UpsilonFixesForgePostInit$InRelauncher", true, loader).getMethod("run").invoke(null);
+			if (Boolean.getBoolean("upsilonfixes.loadAllTargets")) {
+				for (String s : UpsilonFixesPremain.transformerTargets) {
+					try {
+						Class.forName(s.replace('/', '.'), true, loader);
+						UpsilonFixesPremain.log.info("Loaded {} successfully!", s);
+					} catch (Throwable e) {
+						UpsilonFixesPremain.log.warn("Error while loading {}", s, e);
+					}
+				}
+			}
 		} catch (Exception e) {
 			UpsilonFixesPremain.log.warn("Failed to invoke Forge postinit handler inside relaunch class loader", e);
 		}

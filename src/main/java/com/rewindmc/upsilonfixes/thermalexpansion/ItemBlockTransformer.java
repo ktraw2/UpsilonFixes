@@ -1,5 +1,6 @@
 package com.rewindmc.upsilonfixes.thermalexpansion;
 
+import com.rewindmc.upsilonfixes.ConfigOptions;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -8,7 +9,8 @@ import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 import thermalexpansion.transport.tileentity.TileTeleportRoot;
 
-@Patch.Class("net.minecraft.src.ItemBlock")
+@Patch.Class("net.minecraft.item.ItemBlock")
+@ConfigOptions("keepTesseractFrequencyOnDismantle")
 public class ItemBlockTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("placeBlockAt(Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/world/World;IIIIFFFI)Z")
@@ -36,13 +38,13 @@ public class ItemBlockTransformer extends UpsilonMiniTransformer {
 	public static class Hooks {
 		public static void placeBlockAt(ItemStack stack, World world, int x, int y, int z) {
 			TileTeleportRoot tile = (TileTeleportRoot) world.getBlockTileEntity(x, y, z);
-			if (stack.stackTagCompound != null) {
+			if (stack.tag != null) {
 				tile.removeFromRegistry();
-				if (stack.stackTagCompound.hasKey("TeleMode")) {
-					tile.mode = stack.stackTagCompound.getByte("TeleMode");
+				if (stack.tag.contains("TeleMode")) {
+					tile.mode = stack.tag.getByte("TeleMode");
 				}
-				if (stack.stackTagCompound.hasKey("TeleFreq")) {
-					tile.frequency = stack.stackTagCompound.getInteger("TeleFreq");
+				if (stack.tag.contains("TeleFreq")) {
+					tile.frequency = stack.tag.getInteger("TeleFreq");
 					tile.isActive = true;
 				}
 				tile.addToRegistry();

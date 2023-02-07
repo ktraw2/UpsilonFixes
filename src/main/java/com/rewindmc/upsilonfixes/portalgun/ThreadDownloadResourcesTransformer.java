@@ -1,10 +1,12 @@
 package com.rewindmc.upsilonfixes.portalgun;
 
+import com.rewindmc.upsilonfixes.ConfigOptions;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("portalgun.client.thread.ThreadDownloadResources")
+@ConfigOptions("fixPortalGunResources")
 public class ThreadDownloadResourcesTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("run()V")

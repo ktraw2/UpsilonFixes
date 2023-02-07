@@ -1,13 +1,29 @@
 package com.rewindmc.upsilonfixes;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
+import java.util.function.Supplier;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+
 import org.lwjgl.LWJGLUtil;
+
+import com.rewindmc.upsilonfixes.UpsilonFixesConfig.Trilean;
 
 import nilloader.api.ClassTransformer;
 import nilloader.api.NilLogger;
+import nilloader.api.NilModList;
+import nilloader.api.lib.mini.MiniTransformer;
 
 public class UpsilonFixesPremain implements Runnable {
 	
 	public static final NilLogger log = NilLogger.get("UpsilonFixes");
+	
+	public static final List<String> transformerTargets = new ArrayList<>();
 	
 	@Override
 	public void run() {
@@ -15,98 +31,64 @@ public class UpsilonFixesPremain implements Runnable {
 			System.setProperty("LWJGL_DISABLE_XRANDR", "true");
 		}
 		
-		register("entrypoints.MinecraftForge", true);
-		register("entrypoints.FMLPostInitializationEvent", true);
-		register("branding.GuiMainMenu", true);
-		
-		register("layering.GuiMainMenuVoxelBox", UpsilonFixesConfig.layeredTexturePacks);
-		register("layering.GuiMainMenu", UpsilonFixesConfig.layeredTexturePacks);
-		register("layering.TexturePackCustom", UpsilonFixesConfig.layeredTexturePacks);
-		register("layering.TexturePackFolder", UpsilonFixesConfig.layeredTexturePacks);
-		register("layering.TexturePackImplementation", UpsilonFixesConfig.layeredTexturePacks);
-		register("layering.TexturePackList", UpsilonFixesConfig.layeredTexturePacks);
-		register("layering.GuiIngameMenuVoxelBox", UpsilonFixesConfig.layeredTexturePacks);
-		
-		register("appeng.VersionChecker", UpsilonFixesConfig.removeVersionCheckers);
-		register("cofh.VersionCheckThread", UpsilonFixesConfig.removeVersionCheckers);
-		register("mffs.Versioninfo", UpsilonFixesConfig.removeVersionCheckers);
-		register("neiplugins.VersionCheckThread", UpsilonFixesConfig.removeVersionCheckers);
-		
-		register("gregtech.GT_Mod", UpsilonFixesConfig.buffGregTechJackHammers);
-
-		register("advsolar.ItemHSolarHelmet", UpsilonFixesConfig.quantumSolarHelmCans);
-		register("gravisuite.ItemUltimateSolarHelmet", UpsilonFixesConfig.quantumSolarHelmCans);
-
-		register("ic2.PlatformClient", UpsilonFixesConfig.removeDeadCosmetics);
-		register("gregtech.GT_ClientAnon1", UpsilonFixesConfig.removeDeadCosmetics);
-		register("gregtech.GT_Renderer", UpsilonFixesConfig.removeDeadCosmetics);
-		register("stevescarts.CapeHandler", UpsilonFixesConfig.removeDeadCosmetics);
-		
-		register("miscperipherals.BlockTurtleTransformer", UpsilonFixesConfig.fixMiscPeripheralsASM);
-		register("miscperipherals.TileEntityTurtleTransformer", UpsilonFixesConfig.fixMiscPeripheralsASM);
-
-		register("ee3.ItemMiniumStone", UpsilonFixesConfig.fixEETransmuteRecipes);
-		register("ee3.ItemPhilosopherStone", UpsilonFixesConfig.fixEETransmuteRecipes);
-
-		register("vanilla.EntityLiving", UpsilonFixesConfig.attackerYawSyncing);
-
-		register("vanilla.FontRenderer", UpsilonFixesConfig.fixFontsInTexturePacks);
-		register("vanilla.RenderEngine", UpsilonFixesConfig.fixFontsInTexturePacks);
-		
-		register("rp2.BlockShapedLamp", UpsilonFixesConfig.fixRedPowerHitboxes);
-
-		register("rp2.MachineLib", UpsilonFixesConfig.redpowerBCCompat);
-
-		register("thermalexpansion.BlockTeleport", UpsilonFixesConfig.keepTesseractFrequencyOnDismantle || UpsilonFixesConfig.fixThermalTesseractCast);
-		register("thermalexpansion.ItemBlock", UpsilonFixesConfig.keepTesseractFrequencyOnDismantle);
-
-		register("thaumicbees.AlleleEffectAuraNodeFlux", UpsilonFixesConfig.aerFromFluxBee);
-		register("codechicken.ClassHeirachyManager", UpsilonFixesConfig.fixCodeChickenCoreHierarchyCheck);
-		register("portalgun.ThreadDownloadResources", UpsilonFixesConfig.fixPortalGunResources);
-		register("vanilla.BlockFlowing", UpsilonFixesConfig.whirlpoolFix);
-		register("vanilla.EntityPlayerSP", UpsilonFixesConfig.sprintKey || UpsilonFixesConfig.guisInPortals);
-		register("xycraft.WorldPopCrystal", UpsilonFixesConfig.disableXycraftQuartzCrystalWorldgen);
-		register("factorization.TileEntityMixer", UpsilonFixesConfig.fixFzMixerInfiniteLoop);
-		register("xycraft.BlockOres", UpsilonFixesConfig.fixXycraftOreTextures);
-		register("forestry.MachineFermenterRecipeManager", UpsilonFixesConfig.fixForestryFermenterNPE);
-		register("dartcraft.TileEntityForceEngine", UpsilonFixesConfig.fixDartCraftForceEngineLimit);
-		register("dartcraft.DartCraftCore", UpsilonFixesConfig.fixDartCraftForceDisablingGregTechTweaks);
-		register("gravisuite.ClientTickHandler", UpsilonFixesConfig.sprintKey);
-		register("xycraft.RenderBlockHelper", UpsilonFixesConfig.fixXycraftItemLighting);
-		register("vanilla.RenderItem", UpsilonFixesConfig.modernDurabilityColor);
-
-		register("vanilla.GuiContainer", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing);
-		
-		register("vanilla.GuiChat", UpsilonFixesConfig.increaseChatLimit);
-
-		register("vanilla.Minecraft", UpsilonFixesConfig.modernFpsSlider);
-		register("vanilla.EntityRenderer", UpsilonFixesConfig.modernFpsSlider);
-		register("vanilla.GuiVideoSettings", UpsilonFixesConfig.modernFpsSlider);
-		
-		register("vanilla.GameSettings", UpsilonFixesConfig.smearing || UpsilonFixesConfig.removeSnooper || UpsilonFixesConfig.modernFpsSlider || UpsilonFixesConfig.modernGuiScale);
-		register("vanilla.GuiOptions", UpsilonFixesConfig.smearing || UpsilonFixesConfig.removeSnooper);
-		
-		register("vanilla.NetClientHandler", UpsilonFixesConfig.attackerYawSyncing);
-		register("vanilla.NetServerHandler", UpsilonFixesConfig.dropKeyInInventories || UpsilonFixesConfig.smearing || UpsilonFixesConfig.increaseChatLimit);
-
-		register("java.DenyAfterConstraint", UpsilonFixesConfig.reenableSha1Signatures);
-
-		register("asm.ClassReader", UpsilonFixesConfig.asmWorkaround);
-		
+		boolean macOS = false;
 		try {
-			boolean macOS = LWJGLUtil.getPlatform() == LWJGLUtil.PLATFORM_MACOSX;
-			register("codechicken.FeatureHackTransformer", UpsilonFixesConfig.disableCodeChickenStencil.resolve(macOS));
+			macOS = LWJGLUtil.getPlatform() == LWJGLUtil.PLATFORM_MACOSX;
 		} catch (NoClassDefFoundError e) {}
+		
+		try (ZipFile zip = new ZipFile(NilModList.getById("upsilonfixes").get().source)) {
+			for (ZipEntry en : asIterable(zip::entries)) {
+				String name = en.getName();
+				if (name.endsWith("Transformer.class")) {
+					name = name.substring(0, name.length()-6).replace('/', '.');
+					Class<?> clazz = Class.forName(name);
+					if (ClassTransformer.class.isAssignableFrom(clazz) && !Modifier.isAbstract(clazz.getModifiers())) {
+						ConfigOptions options = clazz.getAnnotation(ConfigOptions.class);
+						boolean enabled = true;
+						if (options != null) {
+							enabled = false;
+							for (String o : options.value()) {
+								Field f = UpsilonFixesConfig.class.getField(o);
+								boolean v;
+								if (f.getType() == Trilean.class) {
+									// TODO currently all trileans are just macos checks, but this may change
+									v = ((Trilean)f.get(null)).resolve(macOS);
+								} else if (f.getType() == boolean.class || f.getType() == Boolean.class) {
+									v = (Boolean)f.get(null);
+								} else {
+									throw new ClassCastException(f.getType()+" is not boolean-convertible while looking up option "+o+" for "+name);
+								}
+								if (v) {
+									enabled = true;
+									break;
+								}
+							}
+						}
+						if (enabled) {
+							ClassTransformer ct = (ClassTransformer)clazz.newInstance();
+							if (ct instanceof MiniTransformer) {
+								transformerTargets.add(((MiniTransformer)ct).getClassTargetName());
+							}
+							ClassTransformer.register(ct);
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			log.error("Failed to discover transformers", e);
+		}
 	}
 	
-	private void register(String str, boolean doIt) {
-		if (doIt) {
-			try {
-				ClassTransformer.register((ClassTransformer)Class.forName("com.rewindmc.upsilonfixes."+str+"Transformer").newInstance());
-			} catch (Exception e) {
-				log.error("Failed to register class transformer {}", str, e);
-			}
-		}
+	private static <T> Iterable<T> asIterable(Supplier<Enumeration<T>> sup) {
+		return () -> {
+			Enumeration<T> e = sup.get();
+			return new Iterator<T>() {
+				@Override
+				public boolean hasNext() { return e.hasMoreElements(); }
+				@Override
+				public T next() { return e.nextElement(); }
+			};
+		};
 	}
 	
 }

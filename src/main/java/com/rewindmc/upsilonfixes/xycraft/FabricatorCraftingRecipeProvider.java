@@ -35,8 +35,8 @@ public class FabricatorCraftingRecipeProvider implements ICraftingRecipeProvider
 			ItemStack stackInSlot;
 			for (i = 0; i < matrix.getSizeInventory() && i < inventory.getSizeInventory() - 1; ++i) {
 				stackInSlot = matrix.getStackInSlot(i) == null ? null : matrix.getStackInSlot(i).copy();
-				if (stackInSlot != null && stackInSlot.stackSize > 1) {
-					stackInSlot.stackSize = 1;
+				if (stackInSlot != null && stackInSlot.count > 1) {
+					stackInSlot.count = 1;
 				}
 
 				inventory.setInventorySlotContents(i, stackInSlot);
@@ -50,7 +50,7 @@ public class FabricatorCraftingRecipeProvider implements ICraftingRecipeProvider
 					for (int j = i + 1; j < inventory.getSizeInventory() - 1; ++j) {
 						ItemStack stackInOtherSlot = inventory.getStackInSlot(j);
 						if (stackInOtherSlot != null && itemInSlot == ItemIdentifier.get(stackInOtherSlot)) {
-							stackInSlot.stackSize += stackInOtherSlot.stackSize;
+							stackInSlot.count += stackInOtherSlot.count;
 							inventory.setInventorySlotContents(j, null);
 						}
 					}

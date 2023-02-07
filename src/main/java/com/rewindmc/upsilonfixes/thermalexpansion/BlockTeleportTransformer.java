@@ -1,9 +1,10 @@
 package com.rewindmc.upsilonfixes.thermalexpansion;
 
+import com.rewindmc.upsilonfixes.ConfigOptions;
 import com.rewindmc.upsilonfixes.UpsilonFixesConfig;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
 import nilloader.api.lib.asm.tree.LabelNode;
 import nilloader.api.lib.mini.PatchContext;
@@ -11,6 +12,7 @@ import nilloader.api.lib.mini.annotation.Patch;
 import thermalexpansion.transport.tileentity.TileTeleportRoot;
 
 @Patch.Class("thermalexpansion.transport.block.BlockTeleport")
+@ConfigOptions({"keepTesseractFrequencyOnDismantle", "fixThermalTesseractCast"})
 public class BlockTeleportTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("dismantleBlock(Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/world/World;IIIZ)Lnet/minecraft/item/ItemStack;")
@@ -67,9 +69,9 @@ public class BlockTeleportTransformer extends UpsilonMiniTransformer {
 	public static class Hooks {
 		
 		public static ItemStack addFreq(ItemStack stack, TileTeleportRoot tile) {
-			if (stack.stackTagCompound == null) stack.stackTagCompound = new NBTTagCompound();
-			stack.stackTagCompound.setInteger("TeleFreq", tile.frequency);
-			stack.stackTagCompound.setByte("TeleMode", tile.mode);
+			if (stack.tag == null) stack.tag = new NbtCompound();
+			stack.tag.putInt("TeleFreq", tile.frequency);
+			stack.tag.putByte("TeleMode", tile.mode);
 			return stack;
 		}
 		

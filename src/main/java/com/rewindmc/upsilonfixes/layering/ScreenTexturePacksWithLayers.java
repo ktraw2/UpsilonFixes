@@ -9,31 +9,29 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiSlot;
-import net.minecraft.client.gui.GuiSmallButton;
+import net.minecraft.client.gui.Screen;
+import net.minecraft.client.gui.ScrollPane;
+import net.minecraft.client.gui.WidgetButton;
 import net.minecraft.client.texturepacks.ITexturePack;
-import net.minecraft.util.StringTranslate;
+import net.minecraft.util.Translate;
 import net.minecraft.client.renderer.Tessellator;
 
-public class GuiTexturePacksWithLayers extends GuiScreen {
-	protected GuiScreen parent;
+public class ScreenTexturePacksWithLayers extends Screen {
+	protected Screen parent;
 	private int refreshTimer = -1;
 	private String fileLocation = "";
 	private GuiTexturePackSlot texturePacks;
 	private GuiTexturePackLayerSlot layers;
 
-	public GuiTexturePacksWithLayers(GuiScreen parent) {
+	public ScreenTexturePacksWithLayers(Screen parent) {
 		this.parent = parent;
 	}
 	
 	@Override
 	public void initGui() {
-		StringTranslate tr = StringTranslate.getInstance();
-		controlList.add(new GuiSmallButton(5, width / 2 - 154, height - 48, tr.translateKey("texturePack.openFolder")));
-		controlList.add(new GuiSmallButton(6, width / 2 + 4, height - 48, tr.translateKey("gui.done")));
-		mc.texturePackList.updateAvaliableTexturePacks();
+		controlList.add(new WidgetButton(5, width / 2 - 154, height - 48, 150, 20, Translate.format("texturePack.openFolder")));
+		controlList.add(new WidgetButton(6, width / 2 + 4, height - 48, 150, 20, Translate.format("gui.done")));
+		mc.texturePacks.updateAvaliableTexturePacks();
 		fileLocation = new File(Minecraft.getMinecraftDir(), "texturepacks").getAbsolutePath();
 		texturePacks = new GuiTexturePackSlot();
 		texturePacks.registerScrollButtons(controlList, 7, 8);
@@ -42,7 +40,7 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 	}
 
 	@Override
-	public void actionPerformed(GuiButton btn) {
+	public void actionPerformed(WidgetButton btn) {
 		if (btn.enabled) {
 			if (btn.id == 5) {
 				try {
@@ -54,7 +52,7 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 				}
 			} else if (btn.id == 6) {
 				mc.renderEngine.refreshTextures();
-				mc.displayGuiScreen(parent);
+				mc.displayScreen(parent);
 			} else {
 				texturePacks.actionPerformed(btn);
 				layers.actionPerformed(btn);
@@ -71,13 +69,12 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 			layers.drawScreen(mouseX-(width*2/3), mouseY, tickDelta);
 		GL11.glPopMatrix();
 		if (refreshTimer <= 0) {
-			mc.texturePackList.updateAvaliableTexturePacks();
+			mc.texturePacks.updateAvaliableTexturePacks();
 			refreshTimer += 20;
 		}
 
-		StringTranslate tr = StringTranslate.getInstance();
-		drawCenteredString(fontRenderer, tr.translateKey("texturePack.title"), width / 3, 16, 0xFFFFFF);
-		drawCenteredString(fontRenderer, tr.translateKey("texturePack.folderInfo"), width / 2 - 77, height - 26, 0x808080);
+		drawCenteredString(fontRenderer, Translate.format("texturePack.title"), width / 3, 16, 0xFFFFFF);
+		drawCenteredString(fontRenderer, Translate.format("texturePack.folderInfo"), width / 2 - 77, height - 26, 0x808080);
 
 		drawCenteredString(fontRenderer, "Layers", width * 5 / 6, 16, 0xEB6E32);
 		
@@ -90,7 +87,7 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 		refreshTimer--;
 	}
 
-	public abstract class GuiTexturePackSlotBase extends GuiSlot {
+	public abstract class GuiTexturePackSlotBase extends ScrollPane {
 
 		protected final Minecraft mc;
 		
@@ -102,7 +99,7 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 		@Override
 		public int getSize() {
 			int i = 0;
-			for (ITexturePack pack : (List<ITexturePack>)mc.texturePackList.availableTexturePacks()) {
+			for (ITexturePack pack : (List<ITexturePack>)mc.texturePacks.availableTexturePacks()) {
 				if (Layering.isLayerPack(pack) == wantLayerPacks()) {
 					i++;
 				}
@@ -154,7 +151,7 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 		
 		protected ITexturePack get(int i) {
 			int j = 0;
-			for (ITexturePack pack : (List<ITexturePack>)mc.texturePackList.availableTexturePacks()) {
+			for (ITexturePack pack : (List<ITexturePack>)mc.texturePacks.availableTexturePacks()) {
 				if (Layering.isLayerPack(pack) == wantLayerPacks()) {
 					if (j == i) {
 						return pack;
@@ -170,7 +167,7 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 	public class GuiTexturePackSlot extends GuiTexturePackSlotBase {
 		
 		public GuiTexturePackSlot() {
-			super(GuiTexturePacksWithLayers.this.mc, (GuiTexturePacksWithLayers.this.width*2/3)-4, GuiTexturePacksWithLayers.this.height, 32, GuiTexturePacksWithLayers.this.height - 55 + 4, 36);
+			super(ScreenTexturePacksWithLayers.this.mc, (ScreenTexturePacksWithLayers.this.width*2/3)-4, ScreenTexturePacksWithLayers.this.height, 32, ScreenTexturePacksWithLayers.this.height - 55 + 4, 36);
 		}
 		
 		@Override
@@ -180,12 +177,12 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 
 		@Override
 		public void elementClicked(int i, boolean selected) {
-			List<ITexturePack> avail = mc.texturePackList.availableTexturePacks();
+			List<ITexturePack> avail = mc.texturePacks.availableTexturePacks();
 			try {
-				mc.texturePackList.setTexturePack(get(i));
+				mc.texturePacks.setTexturePack(get(i));
 				mc.renderEngine.refreshTextures();
 			} catch (Exception e) {
-				mc.texturePackList.setTexturePack(avail.get(0));
+				mc.texturePacks.setTexturePack(avail.get(0));
 				mc.renderEngine.refreshTextures();
 			}
 			fontRenderer = mc.fontRenderer;
@@ -193,7 +190,7 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 
 		@Override
 		public boolean isSelected(int i) {
-			return mc.texturePackList.getSelectedTexturePack() == get(i);
+			return mc.texturePacks.getSelectedTexturePack() == get(i);
 		}
 
 		@Override
@@ -206,7 +203,7 @@ public class GuiTexturePacksWithLayers extends GuiScreen {
 	public class GuiTexturePackLayerSlot extends GuiTexturePackSlotBase {
 		
 		public GuiTexturePackLayerSlot() {
-			super(GuiTexturePacksWithLayers.this.mc, GuiTexturePacksWithLayers.this.width/3, GuiTexturePacksWithLayers.this.height, 32, GuiTexturePacksWithLayers.this.height - 55 + 4, 36);
+			super(ScreenTexturePacksWithLayers.this.mc, ScreenTexturePacksWithLayers.this.width/3, ScreenTexturePacksWithLayers.this.height, 32, ScreenTexturePacksWithLayers.this.height - 55 + 4, 36);
 		}
 		
 		@Override

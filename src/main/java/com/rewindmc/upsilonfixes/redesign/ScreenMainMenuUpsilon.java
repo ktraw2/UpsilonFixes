@@ -1,8 +1,8 @@
 package com.rewindmc.upsilonfixes.redesign;
 
-import net.minecraft.client.gui.GuiMainMenu;
+import net.minecraft.client.gui.ScreenMainMenu;
 
-public class GuiMainMenuUpsilon extends GuiMainMenu {
+public class ScreenMainMenuUpsilon extends ScreenMainMenu {
 
 	@Override
 	public void initGui() {

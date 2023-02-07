@@ -1,10 +1,12 @@
 package com.rewindmc.upsilonfixes.gregtech;
 
+import com.rewindmc.upsilonfixes.ConfigOptions;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("gregtechmod.GT_Mod")
+@ConfigOptions("buffGregTechJackHammers")
 public class GT_ModTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("load(Lcpw/mods/fml/common/event/FMLInitializationEvent;)V")

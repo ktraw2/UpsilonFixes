@@ -3,13 +3,16 @@ package com.rewindmc.upsilonfixes.vanilla;
 import java.nio.ByteBuffer;
 
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.EntityServerPlayer;
 import net.minecraft.network.packet.Packet250CustomPayload;
+
+import com.rewindmc.upsilonfixes.ConfigOptions;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
-@Patch.Class("net.minecraft.src.EntityLiving")
+@Patch.Class("net.minecraft.entity.EntityLiving")
+@ConfigOptions("attackerYawSyncing")
 public class EntityLivingTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("attackEntityFrom(Lnet/minecraft/util/DamageSource;I)Z")
@@ -26,8 +29,8 @@ public class EntityLivingTransformer extends UpsilonMiniTransformer {
 	public static class Hooks {
 		
 		public static void sendPacket(EntityLiving entity) {
-			if (entity instanceof EntityPlayerMP) {
-				EntityPlayerMP p = (EntityPlayerMP)entity;
+			if (entity instanceof EntityServerPlayer) {
+				EntityServerPlayer p = (EntityServerPlayer)entity;
 				byte[] bys = new byte[4];
 				ByteBuffer.wrap(bys).putFloat(entity.attackedAtYaw);
 				p.playerNetServerHandler.sendPacket(new Packet250CustomPayload("υatkyaw", bys));

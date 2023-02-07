@@ -1,9 +1,12 @@
 package com.rewindmc.upsilonfixes.layering;
 
+import com.rewindmc.upsilonfixes.ConfigOptions;
+
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
-@Patch.Class("net.minecraft.src.TexturePackCustom")
+@Patch.Class("net.minecraft.client.texturepacks.TexturePackCustom")
+@ConfigOptions("layeredTexturePacks")
 public class TexturePackCustomTransformer extends TexturePackTransformer {
 	
 	@Override

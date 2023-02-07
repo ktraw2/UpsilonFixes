@@ -1,20 +1,23 @@
 package com.rewindmc.upsilonfixes.vanilla;
 
-import net.minecraft.inventory.Container;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.EntityServerPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.NetServerHandler;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.inventory.ScreenHandler;
 import net.minecraft.inventory.Slot;
 import nilloader.api.lib.asm.tree.LabelNode;
 
 import java.nio.ByteBuffer;
+
+import com.rewindmc.upsilonfixes.ConfigOptions;
 import com.rewindmc.upsilonfixes.UpsilonFixesConfig;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
-@Patch.Class("net.minecraft.src.NetServerHandler")
+@Patch.Class("net.minecraft.network.NetServerHandler")
+@ConfigOptions({"dropKeyInInventories", "smearing", "increaseChatLimit"})
 public class NetServerHandlerTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("handleCustomPayload(Lnet/minecraft/network/packet/Packet250CustomPayload;)V")
@@ -51,8 +54,8 @@ public class NetServerHandlerTransformer extends UpsilonMiniTransformer {
 		
 		public static boolean interceptPacket(NetServerHandler handler, Packet250CustomPayload pkt) {
 			if (pkt.channel.equals("υinvthrw") && UpsilonFixesConfig.dropKeyInInventories) {
-				EntityPlayerMP player = handler.playerEntity;
-				Container container = player.openContainer;
+				EntityServerPlayer player = handler.playerEntity;
+				ScreenHandler container = player.openContainer;
 				ByteBuffer buf = ByteBuffer.wrap(pkt.data);
 				int sid = buf.getInt();
 				boolean all = buf.get() != 0;
@@ -61,12 +64,12 @@ public class NetServerHandlerTransformer extends UpsilonMiniTransformer {
 					ItemStack stack = slot.getStack();
 					if (stack != null) {
 						if (!all) {
-							stack.stackSize--;
-							if (stack.stackSize <= 0) {
+							stack.count--;
+							if (stack.count <= 0) {
 								slot.putStack(null);
 							}
 							stack = stack.copy();
-							stack.stackSize = 1;
+							stack.count = 1;
 						} else {
 							slot.putStack(null);
 							stack = stack.copy(); // avoid taking ownership of crafting outputs
@@ -77,39 +80,7 @@ public class NetServerHandlerTransformer extends UpsilonMiniTransformer {
 				}
 				return true;
 			} else if (pkt.channel.equals("υcollect") && UpsilonFixesConfig.smearing) {
-//				EntityPlayerMP player = handler.playerEntity;
-//				Container container = player.openContainer;
-//				ByteBuffer buf = ByteBuffer.wrap(pkt.data);
-//				int sid = buf.getInt();
-//				if (container != null && sid >= 0 && sid < container.inventorySlots.size() && player.inventory.getItemStack() == null) {
-//					Slot slot = container.getSlot(sid);
-//					ItemStack stack = slot.getStack();
-//					if (stack != null) {
-//						stack = stack.copy();
-//						int amt = 0;
-//						for (Slot s : (List<Slot>)container.inventorySlots) {
-//							if (amt >= stack.getMaxStackSize()) break;
-//							if (s.getHasStack() && SmearingCompanion.canStack(s.getStack(), stack)) {
-//								ItemStack is = s.getStack();
-//								int toTake = Math.min(stack.getMaxStackSize()-amt, is.stackSize);
-//								if (toTake > 0) {
-//									amt += toTake;
-//									ItemStack decrd = s.getStack().copy();
-//									decrd.stackSize -= toTake;
-//									if (decrd.stackSize <= 0) {
-//										s.putStack(null);
-//									} else {
-//										s.putStack(decrd);
-//									}
-//								}
-//							}
-//						}
-//						if (amt > 0) {
-//							stack.stackSize = amt;
-//							player.inventory.setItemStack(stack);
-//						}
-//					}
-//				}
+				// TODO
 				return true;
 			}
 						

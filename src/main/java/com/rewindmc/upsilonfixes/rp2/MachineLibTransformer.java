@@ -2,6 +2,7 @@ package com.rewindmc.upsilonfixes.rp2;
 
 import buildcraft.api.transport.IPipeEntry;
 import com.eloraam.redpower.core.WorldCoord;
+import com.rewindmc.upsilonfixes.ConfigOptions;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -12,6 +13,7 @@ import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("com.eloraam.redpower.core.MachineLib")
+@ConfigOptions("redpowerBCCompat")
 public class MachineLibTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("addToInventoryCore(Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;Lcom/eloraam/redpower/core/WorldCoord;IZ)Z")

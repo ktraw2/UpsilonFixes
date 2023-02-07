@@ -1,5 +1,6 @@
 package com.rewindmc.upsilonfixes.forestry;
 
+import com.rewindmc.upsilonfixes.ConfigOptions;
 import com.rewindmc.upsilonfixes.UpsilonFixesPremain;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 
@@ -8,6 +9,7 @@ import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("forestry.factory.gadgets.MachineFermenter$RecipeManager")
+@ConfigOptions("fixForestryFermenterNPE")
 public class MachineFermenterRecipeManagerTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("addRecipe(Lnet/minecraft/item/ItemStack;IFLnet/minecraftforge/liquids/LiquidStack;Lnet/minecraftforge/liquids/LiquidStack;)V")

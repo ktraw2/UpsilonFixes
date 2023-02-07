@@ -1,5 +1,6 @@
 package com.rewindmc.upsilonfixes.asm;
 
+import com.rewindmc.upsilonfixes.ConfigOptions;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 
 import nilloader.api.lib.mini.PatchContext;
@@ -7,6 +8,7 @@ import nilloader.api.lib.mini.PatchContext.SearchResult;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("org.objectweb.asm.ClassReader")
+@ConfigOptions("asmWorkaround")
 public class ClassReaderTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("<init>([BII)V")

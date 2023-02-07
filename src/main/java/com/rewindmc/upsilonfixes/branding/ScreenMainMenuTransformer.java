@@ -4,14 +4,15 @@ import java.util.List;
 
 import com.rewindmc.upsilonfixes.UpsilonFixesConfig;
 
-import net.minecraft.client.gui.GuiMainMenu;
 import nilloader.api.lib.asm.tree.LabelNode;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
+
+import net.minecraft.client.gui.ScreenMainMenu;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
-@Patch.Class("net.minecraft.src.GuiMainMenu")
-public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
+@Patch.Class("net.minecraft.client.gui.ScreenMainMenu")
+public class ScreenMainMenuTransformer extends UpsilonMiniTransformer {
 
 	private static final String[] addSplashes = {
 		"Trans rights!",
@@ -113,13 +114,13 @@ public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 		ctx.search(
 			ALOAD(0),
 			ALOAD(2),
-			GETSTATIC("net/minecraft/client/gui/GuiMainMenu", "rand", "Ljava/util/Random;")
+			GETSTATIC("net/minecraft/client/gui/ScreenMainMenu", "rand", "Ljava/util/Random;")
 		).jumpBefore();
 		
 		ctx.add(
 			ALOAD(0),
 			ALOAD(2),
-			INVOKESTATIC(hooks(), "contributeSplashes", "(Lnet/minecraft/client/gui/GuiMainMenu;Ljava/util/List;)V")
+			INVOKESTATIC(hooks(), "contributeSplashes", "(Lnet/minecraft/client/gui/ScreenMainMenu;Ljava/util/List;)V")
 		);
 	}
 
@@ -131,7 +132,7 @@ public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 		ctx.add(
 			POP(),
 			ALOAD(0),
-			GETFIELD("net/minecraft/client/gui/GuiMainMenu", "splashText", "Ljava/lang/String;")
+			GETFIELD("net/minecraft/client/gui/ScreenMainMenu", "splashText", "Ljava/lang/String;")
 		);
 
 		ctx.search(
@@ -140,7 +141,7 @@ public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 		ctx.add(
 			POP(),
 			ALOAD(0),
-			GETFIELD("net/minecraft/client/gui/GuiMainMenu", "splashText", "Ljava/lang/String;")
+			GETFIELD("net/minecraft/client/gui/ScreenMainMenu", "splashText", "Ljava/lang/String;")
 		);
 	}
 	
@@ -156,7 +157,7 @@ public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 		ctx.add(
 			LDC("Vertical!"),
 			ALOAD(0),
-			GETFIELD("net/minecraft/client/gui/GuiMainMenu", "splashText", "Ljava/lang/String;"),
+			GETFIELD("net/minecraft/client/gui/ScreenMainMenu", "splashText", "Ljava/lang/String;"),
 			INVOKEVIRTUAL("java/lang/String", "equals", "(Ljava/lang/Object;)Z"),
 			IFZ(L1),
 			POP(),
@@ -168,7 +169,7 @@ public class GuiMainMenuTransformer extends UpsilonMiniTransformer {
 	public static final class Hooks {
 		private Hooks() {}
 		
-		public static void contributeSplashes(GuiMainMenu gui, List<String> splashes) {
+		public static void contributeSplashes(ScreenMainMenu gui, List<String> splashes) {
 			for (String s : addSplashes) {
 				splashes.add(s);
 			}

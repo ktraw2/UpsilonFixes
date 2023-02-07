@@ -1,10 +1,12 @@
 package com.rewindmc.upsilonfixes.vanilla;
 
+import com.rewindmc.upsilonfixes.ConfigOptions;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("net/minecraft/block/BlockFlowing")
+@ConfigOptions("whirlpoolFix")
 public class BlockFlowingTransformer extends UpsilonMiniTransformer {
 	
 	@Patch.Method("updateTick(Lnet/minecraft/world/World;IIILjava/util/Random;)V")

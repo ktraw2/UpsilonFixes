@@ -1,11 +1,13 @@
 package com.rewindmc.upsilonfixes.dartcraft;
 
+import com.rewindmc.upsilonfixes.ConfigOptions;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("bluedart.tile.TileEntityForceEngine")
+@ConfigOptions("fixDartCraftForceEngineLimit")
 public class TileEntityForceEngineTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("transferEnergy()V")

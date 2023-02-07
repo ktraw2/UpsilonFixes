@@ -1,11 +1,15 @@
 package com.rewindmc.upsilonfixes.layering;
 
 import nilloader.api.lib.asm.tree.LabelNode;
+
+import com.rewindmc.upsilonfixes.ConfigOptions;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
+
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
-@Patch.Class("net.minecraft.src.TexturePackImplementation")
+@Patch.Class("net.minecraft.client.texturepacks.TexturePackImplementation")
+@ConfigOptions("layeredTexturePacks")
 public class TexturePackImplementationTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream;")

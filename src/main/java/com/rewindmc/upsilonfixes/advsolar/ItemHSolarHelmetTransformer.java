@@ -1,5 +1,6 @@
 package com.rewindmc.upsilonfixes.advsolar;
 
+import com.rewindmc.upsilonfixes.ConfigOptions;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import com.rewindmc.upsilonfixes.gravisuite.ItemUltimateSolarHelmetTransformer;
 
@@ -9,6 +10,7 @@ import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("advsolar.ItemHSolarHelmet")
+@ConfigOptions("quantumSolarHelmCans")
 public class ItemHSolarHelmetTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("onArmorTickUpdate(Lnet/minecraft/world/World;Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/item/ItemStack;)V")

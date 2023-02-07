@@ -1,5 +1,6 @@
 package com.rewindmc.upsilonfixes.gravisuite;
 
+import com.rewindmc.upsilonfixes.ConfigOptions;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import ic2.core.IC2;
 import ic2.core.Ic2Items;
@@ -11,6 +12,7 @@ import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("gravisuite.ItemUltimateSolarHelmet")
+@ConfigOptions("quantumSolarHelmCans")
 public class ItemUltimateSolarHelmetTransformer extends UpsilonMiniTransformer {
 
 	@Patch.Method("onTick(Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/item/ItemStack;)Z")
@@ -41,7 +43,7 @@ public class ItemUltimateSolarHelmetTransformer extends UpsilonMiniTransformer {
 					player.getFoodStats().addStats(can.getHealAmount(), can.getSaturationModifier());
 					can.c(player.inventory.mainInventory[slot], player.worldObj, player);
 					can.onEaten(player);
-					if (--player.inventory.mainInventory[slot].stackSize <= 0) {
+					if (--player.inventory.mainInventory[slot].count <= 0) {
 						player.inventory.mainInventory[slot] = null;
 					}
 
