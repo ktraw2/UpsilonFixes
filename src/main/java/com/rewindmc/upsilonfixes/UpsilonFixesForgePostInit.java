@@ -47,9 +47,47 @@ public class UpsilonFixesForgePostInit implements Runnable {
 	
 	public static class InRelauncher {
 		
+		private static class IC2Indirection {
+			public static void init() {
+				if (IC2.keyboard.getClass().getSimpleName().equals("KeyboardClient")) {
+					Client.modifyKeyNames();
+				}
+			}
+		}
+
+		private static class ChiselIndirection {
+			public static void init() {
+				try {
+					GT_Jackhammer_Item.mineableBlocks.add(Chisel.blockLimestone);
+					GT_Jackhammer_Item.mineableBlocks.add(Chisel.blockMarble);
+				} catch (Throwable t) {}
+			}
+		}
+		
+		private static class GTIndirection {
+			public static void init() {
+				ChiselIndirection.init();
+				if (UpsilonFixesConfig.fixGregTechCellRemainder) {
+					try {
+						GT_MetaItem_Gas.instance.setContainerItem(Ic2Items.cell.getItem());
+						GT_MetaItem_Liquid.instance.setContainerItem(Ic2Items.cell.getItem());
+						GT_MetaItem_Cell.instance.setContainerItem(Ic2Items.cell.getItem());
+					} catch (Throwable t) {}
+				}
+			}
+		}
+		
+		private static class LPIndirection {
+			public static void init() {
+				try {
+					SimpleServiceLocator.addCraftingRecipeProvider(new FabricatorCraftingRecipeProvider());
+				} catch (Throwable t) {}
+			}
+		}
+		
 		public static void run() {
-			if (IC2.keyboard.getClass().getSimpleName().equals("KeyboardClient") && UpsilonFixesConfig.sprintKey) {
-				Client.modifyKeyNames();
+			if (UpsilonFixesConfig.sprintKey) {
+				IC2Indirection.init();
 			}
 			if (UpsilonFixesConfig.localizeRejuvenatingEffect) {
 				LanguageRegistry.instance().addStringLocalization("thaumicbees.effectNodeCharge", "Aura Charge");
@@ -58,30 +96,26 @@ public class UpsilonFixesForgePostInit implements Runnable {
 				LanguageRegistry.instance().addStringLocalization("container.personalTrader.stock", "Stock");
 			}
 			try {
-				GT_Jackhammer_Item.mineableBlocks.add(Chisel.blockLimestone);
-				GT_Jackhammer_Item.mineableBlocks.add(Chisel.blockMarble);
+				GTIndirection.init();
 			} catch (Throwable t) {}
-			if (UpsilonFixesConfig.fixGregTechCellRemainder) {
-				try {
-					GT_MetaItem_Gas.instance.setContainerItem(Ic2Items.cell.getItem());
-					GT_MetaItem_Liquid.instance.setContainerItem(Ic2Items.cell.getItem());
-					GT_MetaItem_Cell.instance.setContainerItem(Ic2Items.cell.getItem());
-				} catch (Throwable t) {}
-			}
 			if (UpsilonFixesConfig.increaseChatLimit) {
 				Packet3Chat.maxChatLength = 275;
 			}
 			if (UpsilonFixesConfig.logisticsPipesFabricatorImport) {
-				try {
-					SimpleServiceLocator.addCraftingRecipeProvider(new FabricatorCraftingRecipeProvider());
-				} catch (Throwable t) {}
+				LPIndirection.init();
 			}
 		}
 		
 		public static class Client {
 			
+			private static class IC2ClientIndirection {
+				public static void init() {
+					((KeyboardClient)IC2.keyboard).boostKey.keyDescription = "Sprint/Boost Key";
+				}
+			}
+			
 			public static void modifyKeyNames() {
-				((KeyboardClient)IC2.keyboard).boostKey.keyDescription = "Sprint/Boost Key";
+				IC2ClientIndirection.init();
 			}
 			
 		}

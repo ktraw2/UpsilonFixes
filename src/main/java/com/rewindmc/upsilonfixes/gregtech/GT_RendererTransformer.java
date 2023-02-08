@@ -12,7 +12,9 @@ public class GT_RendererTransformer extends UpsilonMiniTransformer {
 	@Patch.Method("a(Lqx;F)V")
 	public void patchRender(PatchContext ctx) {
 		// Uses multiple no longer working Dropbox public URLs.
-		ctx.jumpToStart();
+		ctx.search(
+			INVOKESPECIAL("net/minecraft/client/renderer/entity/RenderPlayer", "renderSpecials", "(Lnet/minecraft/entity/player/EntityPlayer;F)V")
+		).jumpAfter();
 		ctx.add(
 			RETURN()
 		);
