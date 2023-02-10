@@ -215,6 +215,10 @@ public class UpsilonFixesConfig {
 	@Comment("Enables holding the IC2 boost key causing you to sprint.")
 	public static boolean sprintKey = true;
 	
+	@Key("swap-red-blue")
+	@Comment("Swap the red and blue channels in the main framebuffer.\nFixes the game rendering with incorrect colors on Apple Silicon Macs.")
+	public static Trilean swapRedBlue = Trilean.AUTO;
+	
 	@Key("upsilon-branding")
 	@Comment("Enables the Rewind Upsilon modpack branding.")
 	public static boolean upsilonBranding = false;
