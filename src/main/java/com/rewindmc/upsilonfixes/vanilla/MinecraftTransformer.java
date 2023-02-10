@@ -2,6 +2,8 @@ package com.rewindmc.upsilonfixes.vanilla;
 
 import java.nio.ByteBuffer;
 
+import org.lwjgl.opengl.Display;
+
 import com.rewindmc.upsilonfixes.ConfigOptions;
 import com.rewindmc.upsilonfixes.UpsilonFixesConfig;
 import com.rewindmc.upsilonfixes.UpsilonFixesConfig.Trilean;
@@ -100,39 +102,41 @@ public class MinecraftTransformer extends UpsilonMiniTransformer {
 					
 					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, texWidth, texHeight, 0, GL_BGRA, GL_UNSIGNED_BYTE, (ByteBuffer)null);
 				}
-				glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 0, 0, texWidth, texHeight, 0);
-				glClear(GL_COLOR_BUFFER_BIT);
-				
-				glMatrixMode(GL_PROJECTION);
-				glLoadIdentity();
-				glOrtho(0, 1, 0, 1, 0, 1);
-				
-				glMatrixMode(GL_MODELVIEW);
-				glLoadIdentity();
-				
-				glDisable(GL_CULL_FACE);
-				glEnable(GL_TEXTURE_2D);
-				glDisable(GL_DEPTH_TEST);
-				glDisable(GL_BLEND);
-				glColor3f(1, 1, 1);
-				
-				glUseProgram(program);
-				
-				glBegin(GL_QUADS);
-					glTexCoord2f(0, 0);
-					glVertex2f(0, 0);
+				if (!Display.isFullscreen()) {
+					glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 0, 0, texWidth, texHeight, 0);
+					glClear(GL_COLOR_BUFFER_BIT);
 					
-					glTexCoord2f(1, 0);
-					glVertex2f(1, 0);
+					glMatrixMode(GL_PROJECTION);
+					glLoadIdentity();
+					glOrtho(0, 1, 0, 1, 0, 1);
 					
-					glTexCoord2f(1, 1);
-					glVertex2f(1, 1);
+					glMatrixMode(GL_MODELVIEW);
+					glLoadIdentity();
 					
-					glTexCoord2f(0, 1);
-					glVertex2f(0, 1);
-				glEnd();
-				
-				glUseProgram(0);
+					glDisable(GL_CULL_FACE);
+					glEnable(GL_TEXTURE_2D);
+					glDisable(GL_DEPTH_TEST);
+					glDisable(GL_BLEND);
+					glColor3f(1, 1, 1);
+					
+					glUseProgram(program);
+					
+					glBegin(GL_QUADS);
+						glTexCoord2f(0, 0);
+						glVertex2f(0, 0);
+						
+						glTexCoord2f(1, 0);
+						glVertex2f(1, 0);
+						
+						glTexCoord2f(1, 1);
+						glVertex2f(1, 1);
+						
+						glTexCoord2f(0, 1);
+						glVertex2f(0, 1);
+					glEnd();
+					
+					glUseProgram(0);
+				}
 			}
 		}
 		
