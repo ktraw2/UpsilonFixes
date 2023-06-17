@@ -4,7 +4,9 @@ import com.rewindmc.upsilonfixes.ConfigOptions;
 import com.rewindmc.upsilonfixes.UpsilonFixesConfig;
 import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Screen;
+import net.minecraft.client.gui.ScreenIngameMenu;
 import net.minecraft.client.gui.ScreenMainMenu;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
@@ -29,8 +31,11 @@ public class MinecraftTransformer extends UpsilonMiniTransformer {
 	public static class Hooks {
 		
 		public static Screen replaceScreen(Screen orig) {
-			if (orig instanceof ScreenMainMenu && !(orig instanceof ScreenMainMenuUpsilon)) {
+			if ((orig instanceof ScreenMainMenu || (orig == null && Minecraft.instance().world == null)) && !(orig instanceof ScreenMainMenuUpsilon)) {
 				return new ScreenMainMenuUpsilon();
+			}
+			if (orig instanceof ScreenIngameMenu && !(orig instanceof ScreenIngameMenuUpsilon)) {
+				return new ScreenIngameMenuUpsilon();
 			}
 			return orig;
 		}
