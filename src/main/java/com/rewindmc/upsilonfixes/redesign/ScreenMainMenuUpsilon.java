@@ -28,6 +28,7 @@ import net.minecraft.util.Translate;
 import paulscode.sound.SoundSystem;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.input.Keyboard;
 
 import com.rewindmc.upsilonfixes.UpsilonFixesConfig;
 import com.rewindmc.upsilonfixes.UpsilonFixesPremain;
@@ -124,6 +125,15 @@ public class ScreenMainMenuUpsilon extends ScreenMainMenu {
 			System.err.println("Failed to browse to "+url);
 		}
 	}
+	
+	@Override
+	public void keyTyped(char arg0, int arg1) {
+		if (arg1 == Keyboard.KEY_INSERT) {
+			mc.displayScreen(new ScreenMainMenuUpsilon());
+			return;
+		}
+		super.keyTyped(arg0, arg1);
+	}
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float tickDelta) {
@@ -178,7 +188,7 @@ public class ScreenMainMenuUpsilon extends ScreenMainMenu {
 		tess.setColorOpaque_I(-1);
 		glPushMatrix();
 		glTranslatef(width / 2 + 110, 75, 0.0F);
-		glRotatef(-20, 0, 0, 1);
+		glRotatef("Vertical!".equals(splashText) ? 70 : -20, 0, 0, 1);
 		float s = 1.8f - MathHelper.abs(MathHelper.sin(Minecraft.getSystemTime() % 1000L / 1000f * 3.1415927f * 2f) * 0.1f);
 		s = s * 100f / (fontRenderer.getStringWidth(splashText) + 32);
 		glScalef(s, s, s);

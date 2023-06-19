@@ -69,7 +69,7 @@ public class ScreenMainMenuTransformer extends UpsilonMiniTransformer {
 		"Official NilLoader proof of concept!",
 		"Here is there!",
 		"Inaccurately represents VHS!",
-		"Contains §mMPEG-1§r §oTheora!",
+		"§rContains §mMPEG-1§r §oTheora!§r", // reset spam is to avoid weird state leaks
 		"Not designed for OLED displays!",
 		"Toot toot sonic warrior!",
 		"Forever in your mind!",
@@ -84,6 +84,29 @@ public class ScreenMainMenuTransformer extends UpsilonMiniTransformer {
 		"Powered by Voldeloom!",
 		"Relatively fixed absolutely broken coordinates",
 		"Try the forum!",
+		"\"Stock up on your Tungsten, you’ll be glad you did.\" - Eloraam, 2012",
+		"Reminiscent of VoxelMenu!",
+		"Layerpacks!",
+		"Absolutely no endianness issues!",
+		"Mixels!",
+		"Poor Unicode support!",
+		"No antialiasing!",
+		"Now a valid LLVM target!",
+		"100% Fractureiser-free!",
+		"The magic and the mystery of potato knishes",
+		"There are many things that need to be erased",
+		"Weird psuedo-textures!",
+		"BlanketCon!",
+		"ModFest!",
+		"OverClocked ReMix!",
+		"Aurora borealis",
+		"Pre-glass ceiling",
+		"",
+		"If only!",
+		"The real Ultimate Anniversary Edition",
+		"I'm sorry that the menu music is only 64kbps Ogg Vorbis there's nothing I can do about it the author has been missing for years",
+		"Nostalgic!",
+		"We're finally landing!",
 
 		"Try the clones!",
 		"Also try Minetest!",
@@ -175,7 +198,10 @@ public class ScreenMainMenuTransformer extends UpsilonMiniTransformer {
 		private Hooks() {}
 		
 		public static void contributeSplashes(ScreenMainMenu gui, List<String> splashes) {
+			// add new splashes twice to make them more likely to be seen
+			// everyone's seen the vanilla splashes infinity times
 			for (String s : addSplashes) {
+				splashes.add(s);
 				splashes.add(s);
 			}
 			for (String s : rmSplashes) {
@@ -184,6 +210,7 @@ public class ScreenMainMenuTransformer extends UpsilonMiniTransformer {
 			
 			if (UpsilonFixesConfig.upsilonBranding) {
 				for (String s : addSplashesBrand) {
+					splashes.add(s);
 					splashes.add(s);
 				}
 				for (String s : rmSplashesBrand) {
