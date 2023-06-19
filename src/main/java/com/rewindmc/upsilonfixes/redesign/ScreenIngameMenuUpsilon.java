@@ -73,20 +73,21 @@ public class ScreenIngameMenuUpsilon extends ScreenIngameMenu {
 	public void drawScreen(int mouseX, int mouseY, float tickDelta) {
 		if (openedAt == 0) openedAt = System.nanoTime();
 		long openTime = System.nanoTime()-openedAt;
-		float a = MathHelper.clamp_float(openTime/400_000_000f, 0, 1);
+		float a = MathHelper.clamp_float(openTime/600_000_000f, 0, 1);
 		a = WidgetVoxButton.ease(0, 1, a);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		drawRect(0, 0, width, height, (((int)(a*64)&0xFF)<<24));
 		glEnable(GL_BLEND);
 		glPushMatrix();
-		glTranslatef(-100*(1-a), 0, 0);
+		glTranslatef(-100*(1-(a*a)), 0, 0);
 		glDisable(GL_ALPHA_TEST);
 		int ai = (((int)(a*255)&0xFF)<<24);
 		int white = 0x00FFFFFF | ai;
 		drawRect(20, 0, 21, height, white);
 		drawRect(21, 0, 180, height, (((int)(a*128)&0xFF)<<24));
 
+		glTranslatef(-40*(1-a), 0, 0);
 		glEnable(GL_BLEND);
 		// Characters are from June by dzuk
 		WidgetVoxButton.drawRle(36, 40, white,
@@ -105,7 +106,7 @@ public class ScreenIngameMenuUpsilon extends ScreenIngameMenu {
 				" 8          9                         7                            7                     8       ",
 				"  6          5     2                   6                            6                     4    2 "
 		);
-		
+
 		for (WidgetButton btn : (List<WidgetButton>)this.controlList) {
 			if (btn instanceof WidgetVoxButton) ((WidgetVoxButton)btn).alpha = a;
 			btn.drawButton(mc, mouseX, mouseY);

@@ -196,10 +196,14 @@ public class ScreenMainMenuUpsilon extends ScreenMainMenu {
 		}
 	}
 	
+	private boolean firstTime = true;
+	private int musicTime = 0;
+	
 	@Override
 	public void updateScreen() {
+		musicTime++;
 		SoundSystem sys = SoundManager.sndSystem;
-		if (mc.options.musicVolume > 0 && SoundSystem.initialized && !menuMusic.allSoundPoolEntries.isEmpty() && !sys.playing("BgMusic")) {
+		if (musicTime > 20 && mc.options.musicVolume > 0 && SoundSystem.initialized && !menuMusic.allSoundPoolEntries.isEmpty() && !sys.playing("BgMusic")) {
 			SoundPoolEntry en = null;
 			for (int i = 0; i < 3; i++) {
 				en = menuMusic.getRandomSound();
@@ -207,9 +211,18 @@ public class ScreenMainMenuUpsilon extends ScreenMainMenu {
 			}
 			if (en != null) {
 				lastEntry = en;
-				sys.backgroundMusic("BgMusic", en.soundUrl, en.soundName, false);
 				sys.setVolume("BgMusic", mc.options.musicVolume);
-				sys.play("BgMusic");
+				sys.backgroundMusic("BgMusic", en.soundUrl, en.soundName, false);
+				if (firstTime) {
+					// don't jumpscare new users :P
+					sys.fadeOutIn("BgMusic", en.soundUrl, en.soundName, 0, 5000);
+					firstTime = false;
+				} else {
+					sys.play("BgMusic");
+				}
+				// set it again for fade-in jank
+				sys.setVolume("BgMusic", mc.options.musicVolume);
+				musicTime = 0;
 			}
 		}
 		super.updateScreen();
