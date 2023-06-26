@@ -84,7 +84,7 @@ public class ScreenMainMenuTransformer extends UpsilonMiniTransformer {
 		"Powered by Voldeloom!",
 		"Relatively fixed absolutely broken coordinates",
 		"Try the forum!",
-		"\"Stock up on your Tungsten, you’ll be glad you did.\" - Eloraam, 2012",
+		"\"Stock up on your Tungsten, you'll be glad you did.\" - Eloraam, 2012",
 		"Reminiscent of VoxelMenu!",
 		"Layerpacks!",
 		"Absolutely no endianness issues!",

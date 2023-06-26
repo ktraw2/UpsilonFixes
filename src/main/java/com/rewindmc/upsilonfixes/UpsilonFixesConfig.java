@@ -191,10 +191,6 @@ public class UpsilonFixesConfig {
 	@Comment("RedPower2 can insert into BuildCraft pipes.")
 	public static boolean redpowerBCCompat = true;
 
-	@Key("reenable-sha1-signatures")
-	@Comment("Re-enables SHA-1 jar signing in Java itself. This is necessary for many 1.4\nmods to load on new Java 8 releases.")
-	public static boolean reenableSha1Signatures = true;
-
 	@Key("remove-dead-cosmetics")
 	@Comment("Some mods add cosmetics (usually capes) that try to contact dead servers.")
 	public static boolean removeDeadCosmetics = true;
