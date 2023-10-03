@@ -5,9 +5,11 @@ plugins {
 sourceCompatibility = 8
 targetCompatibility = 8
 
+compileJava.options.encoding = 'UTF-8'
+
 group = 'com.unascribed'
 archivesBaseName = 'UpsilonFixes'
-version = '1.4.1'
+version = '1.4.2'
 
 repositories {
 	mavenCentral {
@@ -67,6 +69,7 @@ dependencies {
 	mod 'libs:TwilightForest'
 	mod 'libs:GravityGun'
 	mod 'libs:Factorization'
+	mod 'libs:AppliedEnergistics'
 }
 
 mappings {

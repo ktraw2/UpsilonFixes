@@ -222,6 +222,10 @@ public class UpsilonFixesConfig {
 	@Key("whirlpool-fix")
 	@Comment("Backports the 1.5 'water source blocks fill in above water' fix.")
 	public static boolean whirlpoolFix = true;
+
+	@Key("appeng-qchest-fix")
+	@Comment("Prevents a crash when connecting a storage bus to GregTech machines as AppEng called a non-existent API endpoint.")
+	public static boolean appengQChestFix = true;
 	
 	static {
 		Class<?> me = UpsilonFixesConfig.class;
