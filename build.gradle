@@ -69,8 +69,6 @@ dependencies {
 	mod 'libs:TwilightForest'
 	mod 'libs:GravityGun'
 	mod 'libs:Factorization'
-	mod 'libs:AppliedEnergistics'
-	mod 'libs:XReliquary'
 }
 
 mappings {
