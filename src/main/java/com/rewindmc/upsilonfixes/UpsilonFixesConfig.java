@@ -226,7 +226,12 @@ public class UpsilonFixesConfig {
 	@Key("appeng-qchest-fix")
 	@Comment("Prevents a crash when connecting a storage bus to GregTech machines as AppEng called a non-existent API endpoint.")
 	public static boolean appengQChestFix = true;
-	
+
+	@Key("improve-xreliquary-coin-pickup")
+	@Comment("Improves the item pickup mechanic from XReliquary's Coin of Fortune.\n" +
+			"Prevents a bug where items would be floating at your feet but you can't pick them up.")
+	public static boolean improveXReliquaryCoinPickup = true;
+
 	static {
 		Class<?> me = UpsilonFixesConfig.class;
 		if (me.getClassLoader() != ClassLoader.getSystemClassLoader()) {

@@ -70,6 +70,7 @@ dependencies {
 	mod 'libs:GravityGun'
 	mod 'libs:Factorization'
 	mod 'libs:AppliedEnergistics'
+	mod 'libs:XReliquary'
 }
 
 mappings {
