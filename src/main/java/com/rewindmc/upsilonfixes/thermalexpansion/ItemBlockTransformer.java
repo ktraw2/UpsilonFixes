@@ -47,6 +47,9 @@ public class ItemBlockTransformer extends UpsilonMiniTransformer {
 					tile.frequency = stack.tag.getInteger("TeleFreq");
 					tile.isActive = true;
 				}
+				if (stack.tag.contains("TeleAccess")) {
+					tile.access = stack.tag.getByte("TeleAccess");
+				}
 				tile.addToRegistry();
 				//world.markBlockForUpdate(x, y, z);
 				//world.notifyBlocksOfNeighborChange(x, y, z, ThermalExpansionTransport.blockTeleport.blockID);
