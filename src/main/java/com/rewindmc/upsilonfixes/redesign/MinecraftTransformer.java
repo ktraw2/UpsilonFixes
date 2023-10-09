@@ -55,7 +55,7 @@ public class MinecraftTransformer extends UpsilonMiniTransformer {
 		
 		public static void tick() {
 			SoundSystem sys = SoundManager.sndSystem;
-			if (sys.playing("BgMusic")) {
+			if (sys != null && sys.playing("BgMusic")) {
 				if (Minecraft.instance.world != null && wasPlayingMusic) {
 					sys.stop("BgMusic");
 					wasPlayingMusic = false;

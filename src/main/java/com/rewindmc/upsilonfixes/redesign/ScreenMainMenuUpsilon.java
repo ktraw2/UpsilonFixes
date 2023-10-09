@@ -213,7 +213,7 @@ public class ScreenMainMenuUpsilon extends ScreenMainMenu {
 	public void updateScreen() {
 		musicTime++;
 		SoundSystem sys = SoundManager.sndSystem;
-		if (musicTime > 20 && mc.options.musicVolume > 0 && SoundSystem.initialized && !menuMusic.allSoundPoolEntries.isEmpty() && !sys.playing("BgMusic")) {
+		if (sys != null && musicTime > 20 && mc.options.musicVolume > 0 && SoundSystem.initialized && !menuMusic.allSoundPoolEntries.isEmpty() && !sys.playing("BgMusic")) {
 			SoundPoolEntry en = null;
 			for (int i = 0; i < 3; i++) {
 				en = menuMusic.getRandomSound();
