@@ -232,6 +232,13 @@ public class UpsilonFixesConfig {
 			"Prevents a bug where items would be floating at your feet but you can't pick them up.")
 	public static boolean improveXReliquaryCoinPickup = true;
 
+	@Key("better-projecttable-nei-overlay")
+	@Comment("Replaces the NEI overlay handler for shift-clicking recipes in\n" +
+			"Project Tables to allow the insertion from its inventory. Previously\n" +
+			"only items in your inventory were used, not the ProjectTable inventory.")
+	public static boolean betterProjectTableNEIOverlay = true;
+
+
 	static {
 		Class<?> me = UpsilonFixesConfig.class;
 		if (me.getClassLoader() != ClassLoader.getSystemClassLoader()) {

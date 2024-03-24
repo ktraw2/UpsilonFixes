@@ -69,6 +69,7 @@ dependencies {
 	mod 'libs:TwilightForest'
 	mod 'libs:GravityGun'
 	mod 'libs:Factorization'
+	mod 'libs:NEI'
 }
 
 mappings {
