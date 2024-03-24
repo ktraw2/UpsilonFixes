@@ -238,6 +238,9 @@ public class UpsilonFixesConfig {
 			"only items in your inventory were used, not the ProjectTable inventory.")
 	public static boolean betterProjectTableNEIOverlay = true;
 
+	@Key("buff-wrath-forge")
+	@Comment("Buffs the Factorization Wrath Forge by making the fire last forever.")
+	public static boolean buffWrathForge = true;
 
 	static {
 		Class<?> me = UpsilonFixesConfig.class;
