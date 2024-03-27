@@ -3,6 +3,7 @@ package com.rewindmc.upsilonfixes;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import com.rewindmc.upsilonfixes.tubestuff.AutoCraftingMk2CraftingRecipeProvider;
 import com.rewindmc.upsilonfixes.xycraft.FabricatorCraftingRecipeProvider;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -80,7 +81,14 @@ public class UpsilonFixesForgePostInit implements Runnable {
 		private static class LPIndirection {
 			public static void init() {
 				try {
-					SimpleServiceLocator.addCraftingRecipeProvider(new FabricatorCraftingRecipeProvider());
+					if (UpsilonFixesConfig.logisticsPipesFabricatorImport) {
+						SimpleServiceLocator.addCraftingRecipeProvider(new FabricatorCraftingRecipeProvider());
+					}
+				} catch (Throwable t) {}
+				try {
+					if (UpsilonFixesConfig.logisticsPipesAutocrafterMk2Import) {
+						SimpleServiceLocator.addCraftingRecipeProvider(new AutoCraftingMk2CraftingRecipeProvider());
+					}
 				} catch (Throwable t) {}
 			}
 		}
@@ -101,9 +109,7 @@ public class UpsilonFixesForgePostInit implements Runnable {
 			if (UpsilonFixesConfig.increaseChatLimit) {
 				Packet3Chat.maxChatLength = 275;
 			}
-			if (UpsilonFixesConfig.logisticsPipesFabricatorImport) {
-				LPIndirection.init();
-			}
+			LPIndirection.init();
 		}
 		
 		public static class Client {

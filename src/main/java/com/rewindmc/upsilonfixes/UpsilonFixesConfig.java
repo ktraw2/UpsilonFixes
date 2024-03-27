@@ -166,7 +166,12 @@ public class UpsilonFixesConfig {
 	@Key("logistics-pipes-fabricator-import")
 	@Comment("Adds XyCraft's Fabricator as an importable tile entity in crafting logistics pipes.")
 	public static boolean logisticsPipesFabricatorImport = true;
-	
+
+	@Key("logistics-pipes-autocrafter-mk2-import")
+	@Comment("Adds Tubestuff's Automatic Crafting Table MkII as an importable tile entity in\n" +
+			"crafting logistics pipes.")
+	public static boolean logisticsPipesAutocrafterMk2Import = true;
+
 	@Key("modern-durability-color")
 	@Comment("Backports the modern hue-based durability bar color - it's more legible.")
 	public static boolean modernDurabilityColor = true;

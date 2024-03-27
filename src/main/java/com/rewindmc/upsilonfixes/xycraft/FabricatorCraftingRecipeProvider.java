@@ -1,7 +1,6 @@
 package com.rewindmc.upsilonfixes.xycraft;
 
-import logisticspipes.proxy.interfaces.ICraftingRecipeProvider;
-import logisticspipes.utils.ItemIdentifier;
+import com.rewindmc.upsilonfixes.logisticspipes.UpsilonCraftingRecipeProvider;
 import logisticspipes.utils.SimpleInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;
@@ -9,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import soaryn.xycraft.machines.block.TileFabricator;
 
-public class FabricatorCraftingRecipeProvider implements ICraftingRecipeProvider {
+public class FabricatorCraftingRecipeProvider extends UpsilonCraftingRecipeProvider {
 
 	@Override
 	public boolean canOpenGui(TileEntity tile) {
@@ -42,32 +41,7 @@ public class FabricatorCraftingRecipeProvider implements ICraftingRecipeProvider
 				inventory.setInventorySlotContents(i, stackInSlot);
 			}
 
-			for (i = 0; i < inventory.getSizeInventory() - 1; ++i) {
-				stackInSlot = inventory.getStackInSlot(i);
-				if (stackInSlot != null) {
-					ItemIdentifier itemInSlot = ItemIdentifier.get(stackInSlot);
-
-					for (int j = i + 1; j < inventory.getSizeInventory() - 1; ++j) {
-						ItemStack stackInOtherSlot = inventory.getStackInSlot(j);
-						if (stackInOtherSlot != null && itemInSlot == ItemIdentifier.get(stackInOtherSlot)) {
-							stackInSlot.count += stackInOtherSlot.count;
-							inventory.setInventorySlotContents(j, null);
-						}
-					}
-				}
-			}
-
-			for (i = 0; i < inventory.getSizeInventory() - 1; ++i) {
-				if (inventory.getStackInSlot(i) == null) {
-					for (int j = i + 1; j < inventory.getSizeInventory() - 1; ++j) {
-						if (inventory.getStackInSlot(j) != null) {
-							inventory.setInventorySlotContents(i, inventory.getStackInSlot(j));
-							inventory.setInventorySlotContents(j, null);
-							break;
-						}
-					}
-				}
-			}
+			this.mergeStacks(sinventory);
 
 			return true;
 		}

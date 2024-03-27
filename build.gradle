@@ -70,6 +70,8 @@ dependencies {
 	mod 'libs:GravityGun'
 	mod 'libs:Factorization'
 	mod 'libs:NEI'
+	mod 'libs:ImmibisCore'
+	mod 'libs:Tubestuff'
 }
 
 mappings {
