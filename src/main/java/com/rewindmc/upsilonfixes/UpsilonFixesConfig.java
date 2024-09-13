@@ -86,6 +86,10 @@ public class UpsilonFixesConfig {
 	@Key("fix-dartcraft-force-engine-limit")
 	@Comment("Fixes the DartCraft Force Engine being effectively limited to 10MJ/t\ndue to an oversight. This is fixed in the 1.6 version of\nDartCraft.")
 	public static boolean fixDartCraftForceEngineLimit = true;
+
+	@Key("fix-dartcraft-mobspawn-registration")
+	@Comment("Prevents DartCraft mobs from spawning in wrong biomes. Moves the\nregistration from post init to init and prevents spawn in\nMushroom Island biomes.")
+	public static boolean fixDartCraftMobSpawnRegistration = true;
 	
 	@Key("fix-ee-transmute-recipes")
 	@Comment("Fixes transmutation crafting recipes in EE3 only working once, and being\nbroken by NEI.")
