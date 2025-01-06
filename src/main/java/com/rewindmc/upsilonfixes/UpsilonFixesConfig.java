@@ -251,6 +251,11 @@ public class UpsilonFixesConfig {
 	@Comment("Buffs the Factorization Wrath Forge by making the fire last forever.")
 	public static boolean buffWrathForge = true;
 
+	@Key("fix-anvil-peripheral")
+	@Comment("MiscPeripheral's Anvil repairs items even if the turtle doesn't\n" +
+			"have enough XP. It also voids the first item if the second slot is empty.")
+	public static boolean fixAnvilPeripheral = true;
+
 	static {
 		Class<?> me = UpsilonFixesConfig.class;
 		if (me.getClassLoader() != ClassLoader.getSystemClassLoader()) {
