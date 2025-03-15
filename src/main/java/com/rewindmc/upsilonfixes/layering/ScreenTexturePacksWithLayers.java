@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.util.List;
 
+import nilloader.api.NilLogger;
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.GL11;
 
@@ -65,8 +66,8 @@ public class ScreenTexturePacksWithLayers extends Screen {
 		drawDefaultBackground();
 		texturePacks.drawScreen(mouseX, mouseY, tickDelta);
 		GL11.glPushMatrix();
-			GL11.glTranslatef(width*2/3, 0, 0);
-			layers.drawScreen(mouseX-(width*2/3), mouseY, tickDelta);
+		GL11.glTranslatef(width*2/3, 0, 0);
+		layers.drawScreen(mouseX - (width*2/3), mouseY, tickDelta);
 		GL11.glPopMatrix();
 		if (refreshTimer <= 0) {
 			mc.texturePacks.updateAvaliableTexturePacks();
@@ -76,7 +77,7 @@ public class ScreenTexturePacksWithLayers extends Screen {
 		drawCenteredString(fontRenderer, Translate.format("texturePack.title"), width / 3, 16, 0xFFFFFF);
 		drawCenteredString(fontRenderer, Translate.format("texturePack.folderInfo"), width / 2 - 77, height - 26, 0x808080);
 
-		drawCenteredString(fontRenderer, "Layers", width * 5 / 6, 16, 0xEB6E32);
+		drawCenteredString(fontRenderer, "Layers", width * 5 / 6, 16, 0xFFFFFF);
 		
 		super.drawScreen(mouseX, mouseY, tickDelta);
 	}
@@ -108,9 +109,7 @@ public class ScreenTexturePacksWithLayers extends Screen {
 		}
 		
 		@Override
-		public void elementClicked(int var1, boolean var2) {
-			
-		}
+		public void elementClicked(int var1, boolean var2) {}
 		
 		@Override
 		public boolean isSelected(int var1) {
@@ -123,13 +122,11 @@ public class ScreenTexturePacksWithLayers extends Screen {
 		}
 		
 		@Override
-		public void drawBackground() {
-			
-		}
+		public void drawBackground() {}
 
 		@Override
 		public void drawSlot(int i, int x, int y, int cellSize, Tessellator tess) {
-			ITexturePack pack = get(i);
+			final ITexturePack pack = get(i);
 			mc.renderEngine.blurTexture = true;
 			pack.bindThumbnailTexture(mc.renderEngine);
 			mc.renderEngine.blurTexture = false;
@@ -220,7 +217,12 @@ public class ScreenTexturePacksWithLayers extends Screen {
 				Layering.enabledLayerPacks.add(pack);
 			}
 			Layering.saveEnabledLayers();
-			mc.renderEngine.refreshTextures();
+			try {
+				mc.renderEngine.refreshTextures();
+			} catch (Exception e) {
+				System.out.println("HELLO!!!");
+				NilLogger.get("UpsilonFixes").error("Error drawing layer " + i, e);
+			}
 			fontRenderer = mc.fontRenderer;
 		}
 
@@ -236,6 +238,8 @@ public class ScreenTexturePacksWithLayers extends Screen {
 		
 		@Override
 		public void drawSlot(int i, int x, int y, int cellSize, Tessellator tess) {
+			super.drawSlot(i, x+40, y, cellSize, tess);
+
 			if (Layering.enabledLayerPacks.contains(get(i))) {
 				int left = this.width / 2 - 70;
 				int right = this.width / 2 + 70;
@@ -255,9 +259,6 @@ public class ScreenTexturePacksWithLayers extends Screen {
 				tess.draw();
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 			}
-			super.drawSlot(i, x+40, y, cellSize, tess);
 		}
-		
 	}
-
 }

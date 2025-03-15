@@ -9,7 +9,7 @@ compileJava.options.encoding = 'UTF-8'
 
 group = 'com.unascribed'
 archivesBaseName = 'UpsilonFixes'
-version = '1.4.2'
+version = '1.4.2-MODIFIED'
 
 repositories {
 	mavenCentral {

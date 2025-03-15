@@ -32,16 +32,14 @@ public class ScreenTransformer extends UpsilonMiniTransformer {
 	}
 	
 	public static class Hooks {
-		
-		public static boolean drawBackground(Screen subject) {
+		public static boolean drawBackground(final Screen subject) {
 			if (Minecraft.instance().world == null) {
 				ScreenMainMenuUpsilon.drawPanorama(subject);
+				MenuMusicManager.updateMusic(subject.mc);
 				DrawableHelper.drawRect(0, 0, subject.width, subject.height, 0x44000000);
 				return true;
 			}
 			return false;
 		}
-		
 	}
-
 }

@@ -27,7 +27,7 @@ public class ScrollPaneTransformer extends UpsilonMiniTransformer {
 			);
 		}
 	}
-	
+
 	@Patch.Method("overlayBackground(IIII)V")
 	public void patchOverlayBackground(PatchContext ctx) {
 		if (UpsilonFixesConfig.redesignMenus) {

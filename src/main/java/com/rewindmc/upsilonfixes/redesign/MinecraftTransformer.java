@@ -7,8 +7,8 @@ import com.rewindmc.upsilonfixes.UpsilonMiniTransformer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundManager;
 import net.minecraft.client.gui.Screen;
-import net.minecraft.client.gui.ScreenIngameMenu;
 import net.minecraft.client.gui.ScreenMainMenu;
+import net.minecraft.client.gui.ScreenOptions;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 import paulscode.sound.SoundSystem;
@@ -41,16 +41,19 @@ public class MinecraftTransformer extends UpsilonMiniTransformer {
 	
 	public static class Hooks {
 		
-		private static boolean wasPlayingMusic = false;
+		private static boolean wasPlayingMusic = true;
 		
-		public static Screen replaceScreen(Screen orig) {
-			if ((orig instanceof ScreenMainMenu || (orig == null && Minecraft.instance().world == null)) && !(orig instanceof ScreenMainMenuUpsilon)) {
+		public static Screen replaceScreen(final Screen original) {
+			if ((original instanceof ScreenMainMenu || (original == null && Minecraft.instance().world == null)) && !(original instanceof ScreenMainMenuUpsilon)) {
 				return new ScreenMainMenuUpsilon();
+			} else if (original instanceof ScreenOptions && !(original instanceof ScreenOptionsMenuWithTexture)) {
+				final ScreenOptions casted = (ScreenOptions) original;
+				return new ScreenOptionsMenuWithTexture(
+						casted.parentScreen,
+						casted.options
+				);
 			}
-			if (orig instanceof ScreenIngameMenu && !(orig instanceof ScreenIngameMenuUpsilon)) {
-				return new ScreenIngameMenuUpsilon();
-			}
-			return orig;
+			return original;
 		}
 		
 		public static void tick() {
@@ -59,11 +62,9 @@ public class MinecraftTransformer extends UpsilonMiniTransformer {
 				if (Minecraft.instance.world != null && wasPlayingMusic) {
 					sys.stop("BgMusic");
 					wasPlayingMusic = false;
-				} else {
+				} else if (Minecraft.instance.world == null) {
 					wasPlayingMusic = true;
 				}
-			} else {
-				wasPlayingMusic = false;
 			}
 		}
 		
