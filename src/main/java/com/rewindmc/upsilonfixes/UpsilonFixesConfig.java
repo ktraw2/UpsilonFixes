@@ -47,6 +47,10 @@ public class UpsilonFixesConfig {
 	@Comment("Allows the Flux bee from Thaumic Bees to provide Aer-type flux. The Aer\neffect is often thought to be unused, but there are some obscure ways to\nget it in Thaumcraft, so the Flux bee should be able to provide it.")
 	public static boolean aerFromFluxBee = true;
 	
+	@Key("appeng-qchest-fix")
+	@Comment("Prevents a crash when connecting a storage bus to GregTech machines as AppEng called a non-existent API endpoint.")
+	public static boolean appengQChestFix = true;
+	
 	@Key("asm-workaround")
 	@Comment("Makes ASM 4.0 pretend to be able to understand Java 8 class files. Necessary\nwhen using NilLoader via hijacking.")
 	public static boolean asmWorkaround = true;
@@ -55,14 +59,24 @@ public class UpsilonFixesConfig {
 	@Comment("Fixes the attacker yaw not syncing from server to client, to restore the\nproper camera tilt animation when damaged.")
 	public static boolean attackerYawSyncing = true;
 	
+	@Key("better-projecttable-nei-overlay")
+	@Comment("Replaces the NEI overlay handler for shift-clicking recipes in\n" +
+			"Project Tables to allow the insertion from its inventory. Previously\n" +
+			"only items in your inventory were used, not the ProjectTable inventory.")
+	public static boolean betterProjectTableNEIOverlay = true;
+
 	@Key("buff-gregtech-jackhammers")
 	@Comment("Makes GregTech Jack Hammers a lot better.")
 	public static boolean buffGregTechJackHammers = true;
 	
+	@Key("buff-wrath-forge")
+	@Comment("Buffs the Factorization Wrath Forge by making the fire last forever.")
+	public static boolean buffWrathForge = true;
+
 	@Key("disable-codechicken-stencil")
 	@Comment("Prevents CodeChickenCore from allocating a stencil buffer. May\ncause rendering issues. Fixes the game not rendering at all on macOS.")
 	public static Trilean disableCodeChickenStencil = Trilean.AUTO;
-
+	
 	@Key("disable-xrandr")
 	@Comment("Linux-only. Disables buggy XRandR support in LWJGL2. Causes various\nweird issues like monitor flickering when closing the game or >60Hz getting\nmessed up.")
 	public static boolean disableXrandr = true;
@@ -75,6 +89,11 @@ public class UpsilonFixesConfig {
 	@Comment("Allows pressing the drop key over a slot in an inventory to drop the\ncontents of the slot on the ground. 1.5 backport.")
 	public static boolean dropKeyInInventories = true;
 	
+	@Key("fix-anvil-peripheral")
+	@Comment("MiscPeripheral's Anvil repairs items even if the turtle doesn't\n" +
+			"have enough XP. It also voids the first item if the second slot is empty.")
+	public static boolean fixAnvilPeripheral = true;
+
 	@Key("fix-codechickencore-hierarchy-check")
 	@Comment("Prevents CodeChickenCore from exploding when prematurely reading classes.")
 	public static boolean fixCodeChickenCoreHierarchyCheck = true;
@@ -82,7 +101,7 @@ public class UpsilonFixesConfig {
 	@Key("fix-dartcraft-force-disabling-gregtech-tweaks")
 	@Comment("Removes DartCraft forcefully undoing GregTech's recipe tweaks.\nThis is misguided in the first place as GregTech lets you\ndisable its changes in its config.")
 	public static boolean fixDartCraftForceDisablingGregTechTweaks = true;
-
+	
 	@Key("fix-dartcraft-force-engine-limit")
 	@Comment("Fixes the DartCraft Force Engine being effectively limited to 10MJ/t\ndue to an oversight. This is fixed in the 1.6 version of\nDartCraft.")
 	public static boolean fixDartCraftForceEngineLimit = true;
@@ -90,7 +109,7 @@ public class UpsilonFixesConfig {
 	@Key("fix-dartcraft-force-infuser-dimension")
 	@Comment("Fixes the DartCraft Force Infuser only working in the overworld.")
 	public static boolean fixDartCraftForceInfuserDimension = true;
-
+	
 	@Key("fix-dartcraft-mobspawn-registration")
 	@Comment("Prevents DartCraft mobs from spawning in wrong biomes. Moves the\nregistration from post init to init and prevents spawn in\nMushroom Island biomes.")
 	public static boolean fixDartCraftMobSpawnRegistration = true;
@@ -119,18 +138,22 @@ public class UpsilonFixesConfig {
 	@Comment("Configures remainder items for GregTech cells.")
 	public static boolean fixGregTechCellRemainder = true;
 	
+	@Key("fix-ic2-seasonal-crash")
+	@Comment("Fixes a crash when IC2 tries to apply seasonal easter eggs to\ncertain entities.")
+	public static boolean fixIC2SeasonalCrash = true;
+	
 	@Key("fix-miscperipherals-asm")
 	@Comment("Fixes misuse of the ASM API by MiscPeripherals breaking with newer ASM\nlibraries.")
 	public static boolean fixMiscPeripheralsASM = true;
-	
+
 	@Key("fix-portal-gun-resources")
 	@Comment("Fixes sounds and music for Portal Gun by replacing the asset index.")
 	public static boolean fixPortalGunResources = true;
-	
+
 	@Key("fix-redpower-hitboxes")
 	@Comment("Fixes RedPower2 non-full-block hitboxes.")
 	public static boolean fixRedPowerHitboxes = true;
-	
+
 	@Key("fix-thermal-tesseract-cast")
 	@Comment("Fixes Thermal Expansion tesseract ClassCastException crashes when\ntile entity types are desynced - can be caused by frame machines,\nturtles, etc.")
 	public static boolean fixThermalTesseractCast = true;
@@ -138,27 +161,32 @@ public class UpsilonFixesConfig {
 	@Key("fix-uncrafting-exploits")
 	@Comment("Fixes Twilight Forest uncrafting exploits.")
 	public static boolean fixUncraftingExploits = true;
-
+	
 	@Key("fix-xycraft-item-lighting")
 	@Comment("Fixes XyCraft ore items messing up the light state, making all\nitems rendered after them in the GUI draw with wrong lighting.")
 	public static boolean fixXycraftItemLighting = true;
-
+	
 	@Key("fix-xycraft-ore-textures")
 	@Comment("Fixes XyCraft ore textures to actually use the correct parts\nof the block atlas, instead of just recoloring the white one.")
 	public static boolean fixXycraftOreTextures = true;
-
+	
 	@Key("guis-in-portals")
 	@Comment("Allows opening GUIs in Nether portals. This was a fix for a\ndupe bug in Beta that is long gone.")
 	public static boolean guisInPortals = true;
 	
+	@Key("improve-xreliquary-coin-pickup")
+	@Comment("Improves the item pickup mechanic from XReliquary's Coin of Fortune.\n" +
+			"Prevents a bug where items would be floating at your feet but you can't pick them up.")
+	public static boolean improveXReliquaryCoinPickup = true;
+	
 	@Key("increase-chat-limit")
 	@Comment("Increase the chat length limit from 100 to 256 to match modern versions.")
 	public static boolean increaseChatLimit = true;
-	
+
 	@Key("keep-tesseract-frequency-on-dismantle")
 	@Comment("Stores the frequency of a dismantled Tesseract in the resulting\nitem, and restores it on place.")
 	public static boolean keepTesseractFrequencyOnDismantle = true;
-	
+
 	@Key("layered-texture-packs")
 	@Comment("Allows using multiple texture packs at once if they're marked as\nlayerable.")
 	public static boolean layeredTexturePacks = true;
@@ -171,14 +199,14 @@ public class UpsilonFixesConfig {
 	@Comment("Adds a missing lang entry for the Trade-O-Mat's stock.")
 	public static boolean localizeTradeOMatStock = true;
 	
-	@Key("logistics-pipes-fabricator-import")
-	@Comment("Adds XyCraft's Fabricator as an importable tile entity in crafting logistics pipes.")
-	public static boolean logisticsPipesFabricatorImport = true;
-
 	@Key("logistics-pipes-autocrafter-mk2-import")
 	@Comment("Adds Tubestuff's Automatic Crafting Table MkII as an importable tile entity in\n" +
 			"crafting logistics pipes.")
 	public static boolean logisticsPipesAutocrafterMk2Import = true;
+	
+	@Key("logistics-pipes-fabricator-import")
+	@Comment("Adds XyCraft's Fabricator as an importable tile entity in crafting logistics pipes.")
+	public static boolean logisticsPipesFabricatorImport = true;
 
 	@Key("modern-durability-color")
 	@Comment("Backports the modern hue-based durability bar color - it's more legible.")
@@ -187,7 +215,7 @@ public class UpsilonFixesConfig {
 	@Key("modern-fps-slider")
 	@Comment("Replace the \"Performance\" option with an FPS slider like modern\nversions.")
 	public static boolean modernFpsSlider = true;
-	
+
 	@Key("modern-gui-scale")
 	@Comment("Backports the modern GUI Scale option that lets you set it to anything\nthat fits, instead of only Auto/Small/Normal/Large.")
 	public static boolean modernGuiScale = true;
@@ -199,7 +227,7 @@ public class UpsilonFixesConfig {
 	@Key("quantum-solar-helm-can-fix")
 	@Comment("Ultimate/Hybrid Solar Helmets will eat filled tin cans just like the quantum\nhelmet normally would.")
 	public static boolean quantumSolarHelmCans = true;
-
+	
 	@Key("redesign-menus")
 	@Comment("Redesign the main menu, pause menu, etc in a way very similar to VoxelMenu.")
 	public static boolean redesignMenus = false;
@@ -207,7 +235,7 @@ public class UpsilonFixesConfig {
 	@Key("redpower-pipe-integration")
 	@Comment("RedPower2 can insert into BuildCraft pipes.")
 	public static boolean redpowerBCCompat = true;
-
+	
 	@Key("remove-dead-cosmetics")
 	@Comment("Some mods add cosmetics (usually capes) that try to contact dead servers.")
 	public static boolean removeDeadCosmetics = true;
@@ -219,50 +247,26 @@ public class UpsilonFixesConfig {
 	@Key("remove-version-checkers")
 	@Comment("1.4.7 mods don't really get updates anymore, and many version checkers\ntry to contact dead servers.")
 	public static boolean removeVersionCheckers = true;
-	
+
 	@Key("smearing")
 	@Comment("Allows holding left/right click and dragging with an item on your cursor\nto spread it between all the passed slots. 1.5 backport.")
 	public static boolean smearing = true;
-	
+
 	@Key("sprint-key")
 	@Comment("Enables holding the IC2 boost key causing you to sprint.")
 	public static boolean sprintKey = true;
-	
+
 	@Key("swap-red-blue")
 	@Comment("Swap the red and blue channels in the main framebuffer.\nFixes the game rendering with incorrect colors on Apple Silicon Macs.")
 	public static Trilean swapRedBlue = Trilean.AUTO;
-	
+
 	@Key("upsilon-branding")
 	@Comment("Enables the Rewind Upsilon modpack branding.")
 	public static boolean upsilonBranding = false;
-	
+
 	@Key("whirlpool-fix")
 	@Comment("Backports the 1.5 'water source blocks fill in above water' fix.")
 	public static boolean whirlpoolFix = true;
-
-	@Key("appeng-qchest-fix")
-	@Comment("Prevents a crash when connecting a storage bus to GregTech machines as AppEng called a non-existent API endpoint.")
-	public static boolean appengQChestFix = true;
-
-	@Key("improve-xreliquary-coin-pickup")
-	@Comment("Improves the item pickup mechanic from XReliquary's Coin of Fortune.\n" +
-			"Prevents a bug where items would be floating at your feet but you can't pick them up.")
-	public static boolean improveXReliquaryCoinPickup = true;
-
-	@Key("better-projecttable-nei-overlay")
-	@Comment("Replaces the NEI overlay handler for shift-clicking recipes in\n" +
-			"Project Tables to allow the insertion from its inventory. Previously\n" +
-			"only items in your inventory were used, not the ProjectTable inventory.")
-	public static boolean betterProjectTableNEIOverlay = true;
-
-	@Key("buff-wrath-forge")
-	@Comment("Buffs the Factorization Wrath Forge by making the fire last forever.")
-	public static boolean buffWrathForge = true;
-
-	@Key("fix-anvil-peripheral")
-	@Comment("MiscPeripheral's Anvil repairs items even if the turtle doesn't\n" +
-			"have enough XP. It also voids the first item if the second slot is empty.")
-	public static boolean fixAnvilPeripheral = true;
 
 	static {
 		Class<?> me = UpsilonFixesConfig.class;
