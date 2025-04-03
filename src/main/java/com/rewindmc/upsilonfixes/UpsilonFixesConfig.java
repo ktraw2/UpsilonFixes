@@ -188,6 +188,10 @@ public class UpsilonFixesConfig {
 	@Comment("Backports the modern GUI Scale option that lets you set it to anything\nthat fits, instead of only Auto/Small/Normal/Large.")
 	public static boolean modernGuiScale = true;
 	
+	@Key("modern-hotbar-binds")
+	@Comment("Backports the modern individual configuration for hotbar keybinds.")
+	public static boolean modernHotbarBinds = true;
+	
 	@Key("quantum-solar-helm-can-fix")
 	@Comment("Ultimate/Hybrid Solar Helmets will eat filled tin cans just like the quantum\nhelmet normally would.")
 	public static boolean quantumSolarHelmCans = true;

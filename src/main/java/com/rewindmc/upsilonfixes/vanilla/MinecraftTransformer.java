@@ -18,7 +18,7 @@ import static org.lwjgl.opengl.GL12.*;
 import static org.lwjgl.opengl.GL20.*;
 
 @Patch.Class("net.minecraft.client.Minecraft")
-@ConfigOptions({"modernFpsSlider", "swapRedBlue"})
+@ConfigOptions({"modernFpsSlider", "swapRedBlue", "modernHotbarBinds"})
 public class MinecraftTransformer extends UpsilonMiniTransformer {
 	
 	@Patch.Method("getEffectiveFramerateLimit()I")
@@ -41,6 +41,19 @@ public class MinecraftTransformer extends UpsilonMiniTransformer {
 			).jumpBefore();
 			ctx.add(
 				INVOKESTATIC(hooks(), "postFrame", "()V")
+			);
+		}
+	}
+	
+	@Patch.Method("runTick()V")
+	public void patchRunTick(PatchContext ctx) {
+		if (UpsilonFixesConfig.modernHotbarBinds) {
+			ctx.search(PUTFIELD("net/minecraft/entity/player/InventoryPlayer", "currentItem", "I")).jumpBefore();
+			ctx.searchBackward(ICONST_2()).jumpAfter();
+			
+			ctx.add(
+				POP(),
+				LDC(999999)
 			);
 		}
 	}

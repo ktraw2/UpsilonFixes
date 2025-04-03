@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import com.rewindmc.upsilonfixes.tubestuff.AutoCraftingMk2CraftingRecipeProvider;
+import com.rewindmc.upsilonfixes.vanilla.ModernHotbarBinds;
 import com.rewindmc.upsilonfixes.xycraft.FabricatorCraftingRecipeProvider;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -95,7 +96,9 @@ public class UpsilonFixesForgePostInit implements Runnable {
 		
 		public static void run() {
 			if (UpsilonFixesConfig.sprintKey) {
-				IC2Indirection.init();
+				try {
+					IC2Indirection.init();
+				} catch (Throwable t) {}
 			}
 			if (UpsilonFixesConfig.localizeRejuvenatingEffect) {
 				LanguageRegistry.instance().addStringLocalization("thaumicbees.effectNodeCharge", "Aura Charge");
@@ -109,7 +112,13 @@ public class UpsilonFixesForgePostInit implements Runnable {
 			if (UpsilonFixesConfig.increaseChatLimit) {
 				Packet3Chat.maxChatLength = 275;
 			}
-			LPIndirection.init();
+			try {
+				LPIndirection.init();
+			} catch (Throwable t) {}
+			
+			if (UpsilonFixesConfig.modernHotbarBinds) {
+				ModernHotbarBinds.init();
+			}
 		}
 		
 		public static class Client {
