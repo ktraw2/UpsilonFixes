@@ -21,7 +21,7 @@ import nilloader.api.lib.mini.annotation.Patch;
 import static nilloader.api.lib.asm.Opcodes.*;
 
 @Patch.Class("net.minecraft.client.gui.handled.HandledScreen")
-@ConfigOptions({"smearing", "dropKeyInInventories"})
+@ConfigOptions({"smearing", "dropKeyInInventories", "modernHotbarBinds"})
 public class HandledScreenTransformer extends UpsilonMiniTransformer {
 	
 	@Override
@@ -183,6 +183,19 @@ public class HandledScreenTransformer extends UpsilonMiniTransformer {
 			);
 		}
 	}
+	
+	@Patch.Method("checkHotbarKeys(I)Z")
+	public void patchCheckHotbarKeys(PatchContext ctx) {
+		if (UpsilonFixesConfig.modernHotbarBinds) {
+			ctx.jumpToStart();
+			ctx.add(
+				ALOAD(0),
+				ILOAD(1),
+				INVOKESTATIC(hooks(), "checkHotbarKeys", "(Lnet/minecraft/client/gui/handled/HandledScreen;I)Z"),
+				IRETURN()
+			);
+		}
+	}
 
 	public static class Hooks {
 		
@@ -196,6 +209,19 @@ public class HandledScreenTransformer extends UpsilonMiniTransformer {
 					Minecraft.instance().getSendQueue().addToSendQueue(new Packet250CustomPayload("υinvthrw", bys));
 				}
 			}
+		}
+		
+		public static boolean checkHotbarKeys(HandledScreen gui, int key) {
+			if (gui.mc.player.inventory.getItemStack() == null && gui.theSlot != null) {
+				for (int i = 0; i < 9; i++) {
+					if (ModernHotbarBinds.binds[i].keyCode == key) {
+						gui.handleMouseClick(gui.theSlot, gui.theSlot.slotNumber, i, 2);
+						return true;
+					}
+				}
+			}
+
+			return false;
 		}
 		
 	}
