@@ -82,10 +82,14 @@ public class UpsilonFixesConfig {
 	@Key("fix-dartcraft-force-disabling-gregtech-tweaks")
 	@Comment("Removes DartCraft forcefully undoing GregTech's recipe tweaks.\nThis is misguided in the first place as GregTech lets you\ndisable its changes in its config.")
 	public static boolean fixDartCraftForceDisablingGregTechTweaks = true;
-	
+
 	@Key("fix-dartcraft-force-engine-limit")
 	@Comment("Fixes the DartCraft Force Engine being effectively limited to 10MJ/t\ndue to an oversight. This is fixed in the 1.6 version of\nDartCraft.")
 	public static boolean fixDartCraftForceEngineLimit = true;
+	
+	@Key("fix-dartcraft-force-infuser-dimension")
+	@Comment("Fixes the DartCraft Force Infuser only working in the overworld.")
+	public static boolean fixDartCraftForceInfuserDimension = true;
 
 	@Key("fix-dartcraft-mobspawn-registration")
 	@Comment("Prevents DartCraft mobs from spawning in wrong biomes. Moves the\nregistration from post init to init and prevents spawn in\nMushroom Island biomes.")
