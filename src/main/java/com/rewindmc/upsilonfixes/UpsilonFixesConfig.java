@@ -102,7 +102,7 @@ public class UpsilonFixesConfig {
 			+ "also voids the first item if the second slot is empty.")
 	public static boolean fixAnvilPeripheral = true;
 
-	@Key("fix-chickenchunks-awayTimeout")
+	@Key("fix-chickenchunks-away-timeout")
 	@Comment("Fixes ChickenChunks awayTimeout feature. If enabled in the config it should keep " +
 			"chunkloaders running for a specified time after the player logged off. This never " +
 			"worked, deactivating all chunk loaders of offline players instantly.")
