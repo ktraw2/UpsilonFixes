@@ -7,7 +7,9 @@ import com.rewindmc.upsilonfixes.tubestuff.AutoCraftingMk2CraftingRecipeProvider
 import com.rewindmc.upsilonfixes.vanilla.ModernHotbarBinds;
 import com.rewindmc.upsilonfixes.xycraft.FabricatorCraftingRecipeProvider;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
 import gregtechmod.common.items.GT_Jackhammer_Item;
 import gregtechmod.common.items.GT_MetaItem_Cell;
 import gregtechmod.common.items.GT_MetaItem_Gas;
@@ -49,14 +51,6 @@ public class UpsilonFixesForgePostInit implements Runnable {
 	
 	public static class InRelauncher {
 		
-		private static class IC2Indirection {
-			public static void init() {
-				if (IC2.keyboard.getClass().getSimpleName().equals("KeyboardClient")) {
-					Client.modifyKeyNames();
-				}
-			}
-		}
-
 		private static class ChiselIndirection {
 			public static void init() {
 				try {
@@ -95,11 +89,6 @@ public class UpsilonFixesForgePostInit implements Runnable {
 		}
 		
 		public static void run() {
-			if (UpsilonFixesConfig.sprintKey) {
-				try {
-					IC2Indirection.init();
-				} catch (Throwable t) {}
-			}
 			if (UpsilonFixesConfig.localizeRejuvenatingEffect) {
 				LanguageRegistry.instance().addStringLocalization("thaumicbees.effectNodeCharge", "Aura Charge");
 			}
@@ -115,9 +104,10 @@ public class UpsilonFixesForgePostInit implements Runnable {
 			try {
 				LPIndirection.init();
 			} catch (Throwable t) {}
-			
-			if (UpsilonFixesConfig.modernHotbarBinds) {
-				ModernHotbarBinds.init();
+			if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+				try {
+					Client.init();
+				} catch (Throwable t) {}
 			}
 		}
 		
@@ -129,8 +119,14 @@ public class UpsilonFixesForgePostInit implements Runnable {
 				}
 			}
 			
-			public static void modifyKeyNames() {
-				IC2ClientIndirection.init();
+			public static void init() {
+				try {
+					IC2ClientIndirection.init();
+				} catch (Throwable t) {}
+				
+				if (UpsilonFixesConfig.modernHotbarBinds) {
+					ModernHotbarBinds.init();
+				}
 			}
 			
 		}
